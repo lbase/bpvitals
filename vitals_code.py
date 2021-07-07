@@ -11,9 +11,11 @@ import numpy as np
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
-    def __init__(self):
+    def __init__(self, object, mytable="vsigns_bp"):
+        ic(mytable)
         super(Main, self).__init__()
         # build ui
+        self.mytable = mytable
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.conn_name = "vcode"
@@ -22,10 +24,9 @@ class Main(QtWidgets.QWidget, Ui_Form):
         ok = self.db.open()
         if ok:
             self.model = QSqlTableModel(db=self.db)
-            ic(self.model)
-            self.model.setTable("vsigns_bp")
+            self.model.setTable(mytable)
             self.model.setSort(0, Qt.AscendingOrder)
-            # self.model.setFilter()
+            ic(self.model.tableName())
             self.model.select()
             # self.db.close()   # going to open close in  recinsert
         else:
@@ -92,6 +93,11 @@ class Main(QtWidgets.QWidget, Ui_Form):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    main = Main()
-    main.show()
-    sys.exit(app.exec_())
+    if sys.argv.__len__() == 2:
+        main = Main(sys.argv[0],sys.argv[1])
+        main.show()
+        sys.exit(app.exec_())
+    else:
+        main = Main(sys.argv[0])
+        main.show()
+        sys.exit(app.exec_())
