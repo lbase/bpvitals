@@ -23,7 +23,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.model.setSort(0, Qt.DescendingOrder)
         # self.model.setFilter()
         self.model.select()
-        self.ui.btnVform.clicked.connect(self.show_vmain)
+        self.ui.btnVform.clicked.connect(self.add_new)
         self.ui.btnRefresh.clicked.connect(self.refreshrecs)
         self.ui.actionExit.triggered.connect(self.exitFunc)
         self.ui.btnGraphbp.clicked.connect(self.bpgraph)
@@ -39,6 +39,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.vform = VMain()
             self.vform.show()
             self.showSbar("Vitals form open")
+    def add_new(self):
+        self.model.insertRow(0)
+        
+
     def refreshrecs(self):
         self.model.select()
         self.ui.tb1.reset()
