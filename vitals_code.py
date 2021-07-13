@@ -36,7 +36,10 @@ class Main(QtWidgets.QWidget, Ui_Form):
                           self.db.driverName() + " \n" + self.db.lastError().text())
             dbDlg.exec()
             sys.exit()
-
+        # ---------------------------------------------------------------------------- #
+        #                                start of setup                                #
+        # ---------------------------------------------------------------------------- #
+        self.setWindowTitle(mytable)
         sysnp = np.arange(120, 149, 1)
         for i in sysnp:
             self.ui.cmbsystolic.addItem(str(i))
@@ -60,11 +63,11 @@ class Main(QtWidgets.QWidget, Ui_Form):
         # self.ui.btnInsert.clicked.connect(self.mapper.submit)
 
     def recinsert(self):
-        
+
         #r.setValue("bpid", myrow)
         # r.setValue("bpid", "DEFAULT")
         # r.setValue("bpdate" , QDateTime.currentDateTime())
-        r = self.model.record() 
+        r = self.model.record()
         r.setValue("bpdate", self.ui.dateTimeEdit.dateTime())
         r.setValue("bpsys", self.ui.cmbsystolic.currentText())
         r.setValue("bpdia", self.ui.cmbdiastolic.currentText())
