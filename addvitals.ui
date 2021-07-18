@@ -199,6 +199,19 @@
     <string>E&amp;xit</string>
    </property>
   </widget>
+  <widget class="QLabel" name="lblInsert">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>380</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Insert Only</string>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>dateTimeEdit</tabstop>

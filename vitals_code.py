@@ -32,8 +32,12 @@ class Main(QtWidgets.QWidget, Ui_Form):
         else:
             dbDlg = QMessageBox(self)
             dbDlg.setWindowTitle("Database error")
-            dbDlg.setText("Database did not connect \n" +
-                          self.db.driverName() + " \n" + self.db.lastError().text())
+            dbDlg.setText(
+                "Database did not connect \n"
+                + self.db.driverName()
+                + " \n"
+                + self.db.lastError().text()
+            )
             dbDlg.exec()
             sys.exit()
         # ---------------------------------------------------------------------------- #
@@ -64,7 +68,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
 
     def recinsert(self):
 
-        #r.setValue("bpid", myrow)
+        # r.setValue("bpid", myrow)
         # r.setValue("bpid", "DEFAULT")
         # r.setValue("bpdate" , QDateTime.currentDateTime())
         r = self.model.record()
@@ -78,8 +82,11 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.model.insertRecord(-1, r)
         self.model.submit()
         ic(self.model.lastError().text())
-        self.model.select()
+        self.submit_OK = self.model.select()
         ic(self.model.submit())
+        if self.submit_OK:
+            self.ui.lblInsert.setText("Rec Inserted")
+
         # self.db.close()
 
     def refresh(self):
@@ -97,7 +104,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     if sys.argv.__len__() == 2:
-        main = Main(sys.argv[0],sys.argv[1])
+        main = Main(sys.argv[0], sys.argv[1])
         main.show()
         sys.exit(app.exec_())
     else:
