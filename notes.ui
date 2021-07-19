@@ -19,6 +19,41 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetNoConstraint</enum>
      </property>
+     <item row="1" column="0">
+      <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QSplitter" name="splitter">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QTableView" name="tblPrevRec">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>25</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="textEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>75</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </widget>
+     </item>
      <item row="0" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -57,51 +92,6 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
-      <widget class="QDateTimeEdit" name="dateTimeEdit"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Last record from &lt;span style=&quot; font-weight:600;&quot;&gt;vsigns_bp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="buddy">
-        <cstring>tblPrevRec</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QSplitter" name="splitter">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <widget class="QTableView" name="tblPrevRec">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>25</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustToContents</enum>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>75</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </widget>
-     </item>
      <item row="4" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
@@ -126,6 +116,16 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblLastRecord">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Last record from &lt;span style=&quot; font-weight:600;&quot;&gt;vsigns_bp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="buddy">
+        <cstring>tblPrevRec</cstring>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
