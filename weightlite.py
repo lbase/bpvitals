@@ -1,22 +1,21 @@
 #!/usr/bin/python3
 # rfile
-# from file:///home/rfile/python3/notebooks/bpinfo/weight.ipynb
+# from file:///home/rfile/python3/bpvitals/bpstat09sqlite.ipynb sort of...
 import logging
 import sys
 import pandas as pd
 from datetime import *
 import re
-from sqlalchemy import create_engine
-from sqlalchemy.dialects.sqlite import DATETIME
+import sqlite3
 from icecream import ic
 
 
 def main(filename):
     try:
 
-        engstr = "sqlite:////home/rfile/python3/bpvitals/vitals.db"
-        eng = create_engine(engstr)
-        myconn = eng.connect()
+        engstr = "/home/rfile/python3/bpvitals/vitals.db"
+        con = sqlite3.connect(engstr)
+        mycurs = con.cursor()
         # log
         logger = logging.getLogger("dev")
         logger.setLevel(logging.INFO)
@@ -30,34 +29,13 @@ def main(filename):
         # log
         # read file
         wtdata = pd.read_csv(filename)
-        # ic(wtdata)
-        # wtdata.Time = wtdata.rename({"Time": "ftime"})
-        # wtdata = change_column_names(wtdata, "Time", "ftime")
         wtdata.rename(columns={"Time": "ftime"}, inplace=True)
-        # wtdata.ftime = pd.to_datetime(wtdata.ftime)
-        # wtdata.ftime = pd.to_datetime(wtdata.ftime).strftime("%m/%d/%Y %H:%M")
-        # pd.to_datetime(t).strftime("%m/%d/%Y %H:%M")
-
         wtdata["ftime"] = pd.to_datetime(wtdata["ftime"])
-
-        # wtdata.ftime = pd.to_datetime(wtdata.ftime).datetime.strftime(
-        #    wtdata.ftime, "%Y-%mT%h:%m")
-        # wtdata.ftime = wtdata.ftime.date.strftime("YYYY-MM-DD HH:MM")
-        # for t in wtdata.ftime:
-        #    t = date.strftime(t, "%Y-%mT%h:%m")
-
-        # listtime = wtdata.ftime
         ic(wtdata.ftime)
         # ALTER SEQUENCE fatty_wtid_seq RESTART WITH 10
         wtdata.columns = wtdata.columns.str.lower()
         wtdata.columns = wtdata.columns.str.replace(" ", "_")
         wtdata.columns = wtdata.columns.str.replace("-", "_")
-        # this one working
-        # store time data in var to put it back after replace statement below - easier than iterate through the columns
-        # which had to be done to get the float data
-        # listtime = DATETIME(wtdata.time)
-        # listtime = wtdata.time = pd.to_datetime(wtdata.time)
-
         wtdata = wtdata.replace(to_replace="\s\D*", value="", regex=True)
         # wtdata.ftime = listtime  # time back in proper format for sql import
         wtdata[
@@ -94,18 +72,17 @@ def main(filename):
             pd.to_numeric
         )
         wtdata = wtdata.sort_values("ftime")
-        wtdata.to_sql("fatty", myconn, if_exists="append", index=False)
+        wtdata.to_sql("fatty", con, if_exists="append", index=False)
         logger.info("query ran on sqlite : %s ", filename)
     except Exception as e:
         print("sorry, an error occurred  ", e)
         logger.error("sqlite error:  %s", filename)
 
 
-def change_column_names(as_pandas, old_name, new_name):
-    as_pandas.rename(columns={old_name: new_name}, inplace=True)
-    return as_pandas
-
-
 if __name__ == "__main__":
-    filename = "file:///home/rfile/motog3/Bob - Export Data 7-11-2021 ~ 7-17-2021.csv"
-    main(filename)
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+        main(filename)
+    else:
+        main("file:///home/rfile/motog3/Bob - Export Data 7-17-2021 ~ 7-18-2021.csv")
+

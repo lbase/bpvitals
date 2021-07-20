@@ -60,6 +60,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.ui.cmboxy.addItems(oxyitems)
         now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(now)
+        self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
@@ -71,8 +72,11 @@ class Main(QtWidgets.QWidget, Ui_Form):
         # r.setValue("bpid", myrow)
         # r.setValue("bpid", "DEFAULT")
         # r.setValue("bpdate" , QDateTime.currentDateTime())
+        # add to dateime .toString("yyyy-MM-dd" + "T" + "hh:mm"),
         r = self.model.record()
-        r.setValue("bpdate", self.ui.dateTimeEdit.dateTime())
+        r.setValue(
+            "bpdate", self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
+        )
         r.setValue("bpsys", self.ui.cmbsystolic.currentText())
         r.setValue("bpdia", self.ui.cmbdiastolic.currentText())
         r.setValue("bphr", self.ui.cmbheartrate.currentText())
