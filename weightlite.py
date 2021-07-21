@@ -19,7 +19,7 @@ def main(filename):
         # log
         logger = logging.getLogger("dev")
         logger.setLevel(logging.INFO)
-        fileHandler = logging.FileHandler("/home/rfile/python3/bin/log/weight.log")
+        fileHandler = logging.FileHandler("/home/rfile/python3/bin/log/weightlite.log")
         fileHandler.setLevel(logging.INFO)
         logger.addHandler(fileHandler)
         formatter = logging.Formatter(
@@ -30,14 +30,20 @@ def main(filename):
         # read file
         wtdata = pd.read_csv(filename)
         wtdata.rename(columns={"Time": "ftime"}, inplace=True)
+        # wtdata["ftime"] = pd.to_datetime(wtdata["ftime"], format="%Y/%M/%d %H:%m")
         wtdata["ftime"] = pd.to_datetime(wtdata["ftime"])
+        listdate = wtdata["ftime"]
+        #  strip off seconds and store to put back after other conversions  #
+        # for l in listdate:
+        listdate = [datetime.strftime(l, "%Y-%m-%d %H:%M") for l in listdate]
         ic(wtdata.ftime)
+        ic(listdate)
         # ALTER SEQUENCE fatty_wtid_seq RESTART WITH 10
         wtdata.columns = wtdata.columns.str.lower()
         wtdata.columns = wtdata.columns.str.replace(" ", "_")
         wtdata.columns = wtdata.columns.str.replace("-", "_")
         wtdata = wtdata.replace(to_replace="\s\D*", value="", regex=True)
-        # wtdata.ftime = listtime  # time back in proper format for sql import
+        wtdata.ftime = listdate
         wtdata[
             [
                 "weight",
@@ -72,7 +78,7 @@ def main(filename):
             pd.to_numeric
         )
         wtdata = wtdata.sort_values("ftime")
-        wtdata.to_sql("fatty", con, if_exists="append", index=False)
+        wtdata.to_sql("qfatty", con, if_exists="append", index=False)
         logger.info("query ran on sqlite : %s ", filename)
     except Exception as e:
         print("sorry, an error occurred  ", e)
@@ -84,5 +90,6 @@ if __name__ == "__main__":
         filename = sys.argv[1]
         main(filename)
     else:
+        # main("file:///home/rfile/motog3/Bob - Export Data 5-30-2021 ~ 7-19-2021.csv")
         main("file:///home/rfile/motog3/Bob - Export Data 7-17-2021 ~ 7-18-2021.csv")
 
