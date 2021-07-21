@@ -46,6 +46,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.sugarnp = np.arange(50, 200, 1)
         for i in self.sugarnp:
             self.ui.sugarCombo.addItem(str(i))
+        self.ui.sugarCombo.setCurrentIndex(50)
         self.now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(self.now)
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
@@ -54,14 +55,15 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
 
     def recinsert(self):
         self.r = self.model.record()
+
         self.r.setValue(
             "bsdate", self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm")
         ),
         self.r.setValue("bsugar", self.ui.sugarCombo.currentText())
         self.r.setValue("comment", self.ui.txtComment.toPlainText())
-        self.model.insertRecord(-1, self.r)
+        self.submit_OK = self.model.insertRecord(-1, self.r)
         self.model.submit()
-        self.submit_OK = self.model.select()
+        self.model.select()
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
 

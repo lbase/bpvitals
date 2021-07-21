@@ -47,6 +47,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # buttons
         self.ui.btnAdd.clicked.connect(self.add_rec)
         self.ui.btnUpdate.clicked.connect(self.update_rec)
+        self.ui.btnExit.clicked.connect(self.exitfunc)
         self.populate_boxes()
         # ---------------------------------------------------------------------------- #
         #                      get numbers and one previous record                     #
@@ -108,7 +109,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         )
         self.ins = self.my_table.insert().values(
             {
-                "fdate": self.ui.dateTimeEdit.dateTime().toString(),
+                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
                 "fnotes": self.ui.textEdit.toPlainText(),
                 "sugarid": self.ui.spinBsid.value(),
                 "bpid": self.ui.spinBpid.value(),
@@ -118,6 +119,14 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.mysess.commit()
         if self.result:
             self.ui.lblLastRecord.setText("Record Added " + self.table_name)
+
+    def exitfunc(self):
+        self.db.close()
+        self.model.database().close()
+        if self.db.isOpen():
+            self.db.removeDatabase(self.conn_name)
+        ic(self.model.lastError().text())
+        self.close()
 
 
 if __name__ == "__main__":
