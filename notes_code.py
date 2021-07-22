@@ -61,7 +61,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.spin_bp = self.bpid.fetchone()
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
         self.texbx = self.mysess.execute(
-            "select fnotes from mynotes where foodid = (select max(foodid) from mynotes)"
+            "select fnotes, foodid from mynotes where foodid = (select max(foodid) from mynotes)"
         )
         self.texbx_txt = self.texbx.fetchone()
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
@@ -91,13 +91,15 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             + " '"
             + self.note
             + "' "
-            + "where bpid = 681"
+            + "where foodid = "
+            + str(self.texbx_txt.foodid)
         )
         ic(self.stmt)
         self.rec_ins = self.mysess.execute(self.stmt)
         self.mysess.commit()
         if self.rec_ins:
             self.ui.lblLastRecord.setText("Record Update " + self.table_name)
+            ic(self.model.lastError().text())
 
     def add_rec(self):
         self.my_table = dbsql.table(
