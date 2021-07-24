@@ -31,19 +31,21 @@ def main(filename):
         wtdata = pd.read_csv(filename)
         wtdata.rename(columns={"Time": "ftime"}, inplace=True)
         # wtdata["ftime"] = pd.to_datetime(wtdata["ftime"], format="%Y/%M/%d %H:%m")
-        wtdata["ftime"] = pd.to_datetime(wtdata["ftime"])
-        listdate = wtdata["ftime"]
+        # wtdata.ftime = pd.to_datetime(wtdata.ftime)
         #  strip off seconds and store to put back after other conversions  #
-        # for l in listdate:
-        listdate = [datetime.strftime(l, "%Y-%m-%d %H:%M") for l in listdate]
-        ic(wtdata.ftime)
-        ic(listdate)
+        wtdata.ftime = pd.to_datetime(wtdata.ftime)
+        wtdata.ftime = wtdata.ftime.dt.strftime("%Y-%m-%d %H:%M")
+        listdate = wtdata.ftime
+        # listdate = [datetime.strftime(l, "%Y-%m-%d %H:%M") for l in listdate]
+        # ic(wtdata.ftime)
+        # ic(listdate)
         # ALTER SEQUENCE fatty_wtid_seq RESTART WITH 10
         wtdata.columns = wtdata.columns.str.lower()
         wtdata.columns = wtdata.columns.str.replace(" ", "_")
         wtdata.columns = wtdata.columns.str.replace("-", "_")
         wtdata = wtdata.replace(to_replace="\s\D*", value="", regex=True)
         wtdata.ftime = listdate
+
         wtdata[
             [
                 "weight",
@@ -79,7 +81,7 @@ def main(filename):
         )
         wtdata = wtdata.sort_values("ftime")
         wtdata.to_sql("qfatty", con, if_exists="append", index=False)
-        logger.info("query ran on sqlite : %s ", filename)
+        logger.info("query ran on sqlite qfatty table : %s ", filename)
     except Exception as e:
         print("sorry, an error occurred  ", e)
         logger.error("sqlite error:  %s", filename)

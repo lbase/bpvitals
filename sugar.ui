@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>466</width>
+    <width>474</width>
     <height>445</height>
    </rect>
   </property>
@@ -67,7 +67,11 @@
     </widget>
    </item>
    <item row="5" column="2">
-    <widget class="QComboBox" name="sugarCombo"/>
+    <widget class="QComboBox" name="sugarCombo">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="5" column="3">
     <widget class="QDateTimeEdit" name="dateTimeEdit"/>

@@ -17,6 +17,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
+    ic.disable()
+
     def __init__(self, table_name="mynotes"):
         super(Main, self).__init__()
         self.table_name = table_name
