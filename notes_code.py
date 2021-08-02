@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import datetime
 
 from icecream.icecream import IceCreamDebugger
@@ -17,7 +18,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    ic.disable()
+    # ic.disable()
 
     def __init__(self, table_name="mynotes"):
         super(Main, self).__init__()
@@ -29,13 +30,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # ---------------------------------------------------------------------------- #
         #           make sqlalchemy session and database connection                    #
         # ---------------------------------------------------------------------------- #
-        self.eng = dbsql.create_engine(
-            "sqlite:////home/rfile/python3/bpvitals/vitals.db"
-        )
+        self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
         self.db = QSqlDatabase.addDatabase("QSQLITE")
-        self.db.setDatabaseName("/home/rfile/python3/bpvitals/vitals.db")
+        self.db.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.db.open()
         ic(self.ok, self.db.driverName())
 

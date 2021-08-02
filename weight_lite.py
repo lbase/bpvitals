@@ -14,13 +14,13 @@ from icecream import ic
 def main(filename):
     try:
 
-        engstr = "sqlite:////home/rfile/python3/bpvitals/vitals.db"
+        engstr = "sqlite:////data/sqlite/vitals.db"
         eng = create_engine(engstr)
         myconn = eng.connect()
         # log
         logger = logging.getLogger("dev")
         logger.setLevel(logging.INFO)
-        fileHandler = logging.FileHandler("/home/rfile/python3/bin/log/weight.log")
+        fileHandler = logging.FileHandler("/data/sqlite/weight.log")
         fileHandler.setLevel(logging.INFO)
         logger.addHandler(fileHandler)
         formatter = logging.Formatter(

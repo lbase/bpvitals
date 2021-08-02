@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
@@ -20,7 +21,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.ui.setupUi(self)
         self.conn_name = "vcode"
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
-        self.db.setDatabaseName("/home/rfile/python3/bpvitals/vitals.db")
+        self.db.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.db.open()
         if ok:
             self.model = QSqlTableModel(db=self.db)
@@ -44,18 +45,13 @@ class Main(QtWidgets.QWidget, Ui_Form):
         #                                start of setup                                #
         # ---------------------------------------------------------------------------- #
         self.setWindowTitle(mytable)
-        sysnp = np.arange(120, 149, 1)
-        for i in sysnp:
-            self.ui.cmbsystolic.addItem(str(i))
-        dianp = np.arange(75, 100, 1)
-        for j in dianp:
-            self.ui.cmbdiastolic.addItem(str(j))
-        pulsenp = np.arange(60, 90, 1)
-        for k in pulsenp:
-            self.ui.cmbheartrate.addItem(str(k))
-        sugarnp = np.arange(75, 140, 1)
-        for l in sugarnp:
-            self.ui.cmbsugar.addItem(str(l))
+
+        self.ui.cmbsystolic.addItems(str(i) for i in range(120, 141, 1))
+        self.ui.cmbdiastolic.addItems(str(j) for j in range(75, 101, 1))
+        self.ui.cmbheartrate.addItems(str(k) for k in range(60, 91, 1))
+        self.ui.cmbheartrate.setCurrentIndex(20)
+        self.ui.cmbsugar.addItems(str(l) for l in range(75, 141, 1))
+        self.ui.cmbsugar.setCurrentIndex(10)
         oxyitems = ["96", "97"]
         self.ui.cmboxy.addItems(oxyitems)
         now = QDateTime.currentDateTime()
@@ -64,15 +60,8 @@ class Main(QtWidgets.QWidget, Ui_Form):
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
-        # self.ui.btnRefresh.clicked.connect(self.setupdb)
-        # self.ui.btnInsert.clicked.connect(self.mapper.submit)
 
     def recinsert(self):
-
-        # r.setValue("bpid", myrow)
-        # r.setValue("bpid", "DEFAULT")
-        # r.setValue("bpdate" , QDateTime.currentDateTime())
-        # add to dateime .toString("yyyy-MM-dd" + "T" + "hh:mm"),
         r = self.model.record()
         r.setValue(
             "bpdate", self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),

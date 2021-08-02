@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
@@ -17,7 +18,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.setupUi(self)
         self.conn_name = "sugcode"
         self.sdb = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
-        self.sdb.setDatabaseName("/home/rfile/python3/bpvitals/vitals.db")
+        self.sdb.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.sdb.open()
         if ok:
             self.model = QSqlTableModel(db=self.sdb)
@@ -43,9 +44,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
             # ======================= ui setup ======================= #
             # ======================================================== #
         self.setWindowTitle(self.mytable)
-        self.sugarnp = np.arange(50, 200, 1)
-        for i in self.sugarnp:
-            self.ui.sugarCombo.addItem(str(i))
+        self.ui.sugarCombo.addItems(str(i) for i in range(50, 201, 1))
         self.ui.sugarCombo.setCurrentIndex(50)
         self.now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(self.now)
