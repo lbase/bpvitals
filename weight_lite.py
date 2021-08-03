@@ -14,7 +14,7 @@ from icecream import ic
 def main(filename):
     try:
 
-        engstr = "sqlite:////home/rfile/python3/bpvitals/vitals.db"
+        engstr = "sqlite:////data/sqlite/vitals.db"
         eng = create_engine(engstr)
         myconn = eng.connect()
         # log

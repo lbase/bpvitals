@@ -15,7 +15,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.setupUi(self)
         self.conn_name = "dbshowqry"
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
-        self.db.setDatabaseName("/home/rfile/python3/bpvitals/vitals.db")
+        self.db.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.db.open()
         self.model = QSqlTableModel(db=self.db)
         self.model.setTable(table_name)

@@ -13,7 +13,7 @@ from icecream import ic
 def main(filename):
     try:
 
-        engstr = "/home/rfile/python3/bpvitals/vitals.db"
+        engstr = "/data/sqlite/vitals.db"
         con = sqlite3.connect(engstr)
         mycurs = con.cursor()
         # log
@@ -92,6 +92,6 @@ if __name__ == "__main__":
         filename = sys.argv[1]
         main(filename)
     else:
-        # main("file:///home/rfile/motog3/Bob - Export Data 5-30-2021 ~ 7-19-2021.csv")
+        # main("file:///home/rfile/motog3/Bob - Export Data 7-20-2021 ~ 7-24-2021.csv")
         main("file:///home/rfile/motog3/Bob - Export Data 7-17-2021 ~ 7-18-2021.csv")
 
