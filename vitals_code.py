@@ -8,7 +8,7 @@ from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
 from icecream import ic
 from addvitals import Ui_Form
 
-import numpy as np
+
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
