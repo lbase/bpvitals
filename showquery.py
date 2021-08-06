@@ -8,6 +8,8 @@ from icecream import ic
 from icecream.icecream import IceCreamDebugger
 from showquerywin import Ui_MainWindow
 from vitals_code import Main as VMain
+
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, table_name="vsigns_bp"):
         super().__init__()
@@ -30,8 +32,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.btnDelete.clicked.connect(self.delrows)
         self.setWindowTitle(table_name)
         self.showSbar("Setup Complete")
+
     def show_vmain(self):
-        if  'vform' in self.__dict__:
+        if "vform" in self.__dict__:
             self.vform.window.close()
             self.vform = None
             self.showSbar("Vitals form closed")
@@ -40,25 +43,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.vform = VMain()
             self.vform.show()
             self.showSbar("Vitals form open")
+
     def add_new(self):
         self.model.insertRow(0)
-
 
     def refreshrecs(self):
         self.model.select()
         self.ui.tb1.reset()
+
     def bpgraph(self):
         self.showSbar("showing graphs")
         os.system("/home/rfile/python3/bin/bpstats.py")
+
     def showSbar(self, msg):
         self.ui.statusbar.showMessage(msg)
+
     def delrows(self):
         self.showSbar("remove highlighted rows")
         l = self.ui.tb1.selectedIndexes()
         if not len(l):
             return
         else:
-            self.showSbar(str(len(l)/8) + " rows selected")
+            self.showSbar(str(len(l) / 8) + " rows selected")
         rows = set([i.row() for i in l])
         rows = list(rows)
         rows.sort()
@@ -71,7 +77,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.db.close()
         ic(self.model.lastError().text())
         self.close()
-
 
 
 app = QApplication(sys.argv)

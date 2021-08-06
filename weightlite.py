@@ -19,7 +19,7 @@ def main(filename):
         # log
         logger = logging.getLogger("dev")
         logger.setLevel(logging.INFO)
-        fileHandler = logging.FileHandler("/home/rfile/python3/bin/log/weightlite.log")
+        fileHandler = logging.FileHandler("/data/sqlite/weightlite.log")
         fileHandler.setLevel(logging.INFO)
         logger.addHandler(fileHandler)
         formatter = logging.Formatter(

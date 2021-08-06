@@ -44,9 +44,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
             # ======================= ui setup ======================= #
             # ======================================================== #
         self.setWindowTitle(self.mytable)
-        self.sugarnp = np.arange(50, 200, 1)
-        for i in self.sugarnp:
-            self.ui.sugarCombo.addItem(str(i))
+        self.ui.sugarCombo.addItems(str(i) for i in range(50, 201, 1))
         self.ui.sugarCombo.setCurrentIndex(50)
         self.now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(self.now)
