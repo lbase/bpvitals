@@ -64,7 +64,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.spin_bp = self.bpid.fetchone()
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
         self.texbx = self.mysess.execute(
-            "select fnotes, foodid from mynotes where foodid = (select max(foodid) from mynotes)"
+            "select fdate, fnotes from mynotes where fdate > (select date('now', '-15 day' ) from mynotes) ORDER by fdate desc"
         )
         self.texbx_txt = self.texbx.fetchone()
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
