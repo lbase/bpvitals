@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # rfile
 # from file:///home/rfile/python3/notebooks/bpinfo/bpstat09pg.ipynb
