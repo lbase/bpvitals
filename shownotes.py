@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import sys
 import os
 from PyQt5.QtCore import QSize, Qt
@@ -20,7 +21,7 @@ class MainWindow(QMainWindow, Ui_NotesWin):
         ok = self.db.open()
         self.query = QSqlQuery(self.db)
         self.query.prepare(
-            "select fdate, fnotes from mynotes where fdate > (select date((select max(fdate)), '-15 day' ) from mynotes) ORDER by fdate desc"
+            "select fdate, fnotes from mynotes where fdate > (select date((select max(fdate)), '-30 day' ) from mynotes) ORDER by fdate desc"
         )
         self.query.exec_()
         self.model = QSqlQueryModel()
@@ -53,7 +54,7 @@ class MainWindow(QMainWindow, Ui_NotesWin):
 
     def bpgraph(self):
         self.showSbar("showing graphs")
-        os.system("/home/rfile/python3/bin/bpstats.py")
+        os.system("/home/rfile/python3/bpvitals/bpstats.py")
 
     def showSbar(self, msg):
         self.ui.statusbar.showMessage(msg)
