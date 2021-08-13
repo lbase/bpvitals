@@ -1,8 +1,7 @@
 #! /usr/bin/env python3
 import datetime
 
-from icecream.icecream import IceCreamDebugger
-from notes import Ui_Comment
+
 from notes import Ui_Comment
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime, QModelIndex, QSize, QSizeF
@@ -30,9 +29,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # ---------------------------------------------------------------------------- #
         #           make sqlalchemy session and database connection                    #
         # ---------------------------------------------------------------------------- #
-        self.eng = dbsql.create_engine(
-            "sqlite:////data/sqlite/vitals.db"
-        )
+        self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
         self.db = QSqlDatabase.addDatabase("QSQLITE")
@@ -64,9 +61,10 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.spin_bp = self.bpid.fetchone()
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
         self.texbx = self.mysess.execute(
-            "select fdate, fnotes from mynotes where fdate > (select date('now', '-15 day' ) from mynotes) ORDER by fdate desc"
+            "select foodid, fdate, fnotes from mynotes where fdate > (select date('now', '-15 day' ) from mynotes) ORDER by fdate desc"
         )
         self.texbx_txt = self.texbx.fetchone()
+        ic(self.texbx_txt.foodid)
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
 
         self.model = QSqlTableModel(db=self.db)
