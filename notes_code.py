@@ -19,7 +19,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
     # ic.disable()
 
-    def __init__(self, table_name="mynotes"):
+    def __init__(self, object, table_name="mynotes"):
         super(Main, self).__init__()
         self.table_name = table_name
         self.ui = Ui_Comment()
@@ -61,7 +61,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.spin_bp = self.bpid.fetchone()
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
         self.texbx = self.mysess.execute(
-            "select foodid, fdate, fnotes from mynotes where fdate > (select date('now', '-15 day' ) from mynotes) ORDER by fdate desc"
+            "select foodid, fdate, fnotes from "
+            + self.table_name
+            + " where fdate > (select date('now', '-15 day' ) from "
+            + self.table_name
+            + ") ORDER by fdate desc"
         )
         self.texbx_txt = self.texbx.fetchone()
         ic(self.texbx_txt.foodid)
@@ -88,7 +92,9 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.note = self.ui.textEdit.toPlainText()
         self.id = str(self.ui.spinBpid.value())
         self.stmt = (
-            "update mynotes set fnotes  = "
+            "update "
+            + self.table_name
+            + " set fnotes  = "
             + " '"
             + self.note
             + "' "
@@ -134,6 +140,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    main = Main()
-    main.show()
-    sys.exit(app.exec_())
+    if sys.argv.__len__() == 2:
+        main = Main(sys.argv[0], sys.argv[1])
+        main.show()
+        sys.exit(app.exec_())
+    else:
+        main = Main(sys.argv[0])
+        main.show()
+        sys.exit(app.exec_())
