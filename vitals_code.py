@@ -7,8 +7,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
 from icecream import ic
 from addvitals import Ui_Form
-
-
+import sqlalchemy as dbsql
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
@@ -22,6 +21,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.conn_name = "vcode"
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
+
         ok = self.db.open()
         if ok:
             self.model = QSqlTableModel(db=self.db)
@@ -60,6 +60,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
+        self.ui.chkPG.stateChanged.connect(self.setup_pg)
 
     def recinsert(self):
         r = self.model.record()
@@ -79,8 +80,48 @@ class Main(QtWidgets.QWidget, Ui_Form):
         ic(self.model.submit())
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
+        if self.ui.chkPG.isChecked:
+            # self.pg_table_name = self.table_name
+            self.postgres_recinsert(self.mytable)
 
         # self.db.close()
+
+    def setup_pg(self):
+        if self.ui.chkPG.isChecked:
+            self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
+            self.conn = self.eng.connect()  # use this as connection for insert query
+
+    def postgres_recinsert(self, pg_table_name):
+        """[inserts record postgresql]
+           {{tbname}}
+        """
+        # self.tbname = "vsigns_bp"  # vsigns_bp or vsigns_bloodpressure because columns match
+        self.pg_table_name = pg_table_name
+        self.pg_table_name = dbsql.table(
+            self.pg_table_name,
+            dbsql.column("bpdate"),
+            dbsql.column("bpsys"),
+            dbsql.column("bpdia"),
+            dbsql.column("bphr"),
+            dbsql.column("bpsugar"),
+            dbsql.column("bpoxy"),
+            dbsql.column("bpcomment"),
+        )
+        self.ins = self.pg_table_name.insert().values(
+            {
+                "bpdate": self.ui.dateTimeEdit.dateTime().toString(),  # "bpdate" : self.dt,\
+                "bpsys": self.ui.cmbsystolic.currentText(),
+                "bpdia": self.ui.cmbdiastolic.currentText(),
+                "bphr": self.ui.cmbheartrate.currentText(),
+                "bpsugar": self.ui.cmbsugar.currentText(),
+                "bpoxy": self.ui.cmboxy.currentText(),
+                "bpcomment": self.ui.lncomment.toPlainText(),
+            }
+        )
+        self.result = self.conn.execute(self.ins)
+        if self.result:
+            self.ui.lblInsert.setText("Rec Inserted:\n %s" % (self.pg_table_name))
+        # TODO: fix triggers in postgresql
 
     def refresh(self):
         self.model.select()
