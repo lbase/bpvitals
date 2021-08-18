@@ -120,7 +120,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
         )
         self.result = self.conn.execute(self.ins)
         if self.result:
-            self.ui.lblInsert.setText("Rec Inserted:\n %s" % (self.pg_table_name))
+            self.ui.lblInsert.setText("Rec Inserted PG:\n %s" % (self.pg_table_name))
         # TODO: fix triggers in postgresql
 
     def refresh(self):

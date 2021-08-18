@@ -127,7 +127,9 @@ vitals.sqbpro
 exbak/
 
 vitals/
-/.py~
+*.py~
+*.*~
 .kdev4/
 .vscode/
 /vsigns.db
+/.py~
