@@ -76,6 +76,13 @@
    <item row="5" column="3">
     <widget class="QDateTimeEdit" name="dateTimeEdit"/>
    </item>
+   <item row="2" column="3">
+    <widget class="QCheckBox" name="chkPG">
+     <property name="text">
+      <string>Postgres</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

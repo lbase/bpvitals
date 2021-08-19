@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
 from icecream import ic
 from sugar import Ui_Sugar
-import numpy as np
+import sqlalchemy as dbsql
 
 
 class Main(QtWidgets.QWidget, Ui_Sugar):
@@ -51,6 +51,9 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
+        self.ui.chkPG.setChecked(1)
+        # self.ui.chkPG.stateChanged.connect(self.setup_pg)
+        self.setup_pg()
 
     def recinsert(self):
         self.r = self.model.record()
@@ -65,6 +68,53 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.model.select()
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
+
+        if self.ui.chkPG.isChecked():
+            self.postgres_recinsert(self.mytable)
+        else:
+            return
+
+    def setup_pg(self):
+        if self.ui.chkPG.isChecked():
+            self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
+            self.conn = self.eng.connect()
+
+            if not self.conn:
+                dbDlg = QMessageBox(self)
+                dbDlg.setWindowTitle("Database error")
+                dbDlg.setText(
+                    "Database did not connect \n"
+                    + self.eng.driver()
+                    + " \n"
+                    + self.eng.lastError().text()
+                )
+                dbDlg.exec()
+
+    def postgres_recinsert(self, pg_table_name):
+        """[inserts record postgresql]
+           {{tbname}}
+        """
+        if self.ui.chkPG.isChecked():
+            # self.tbname = "vsigns_bp"  # vsigns_bp or vsigns_bloodpressure because columns match
+            self.pg_table_name = pg_table_name
+            self.pg_table_name = dbsql.table(
+                self.pg_table_name,
+                dbsql.column("bsdate"),
+                dbsql.column("bsugar"),
+                dbsql.column("comment"),
+            )
+            self.ins = self.pg_table_name.insert().values(
+                {
+                    "bsdate": self.ui.dateTimeEdit.dateTime().toString(),  # "bpdate" : self.dt,\
+                    "bsugar": self.ui.sugarCombo.currentText(),
+                    "comment": self.ui.txtComment.toPlainText(),
+                }
+            )
+            self.result = self.conn.execute(self.ins)
+            if self.result:
+                self.ui.lblInsert.setText(
+                    "Rec Inserted PG:\n %s" % (self.pg_table_name)
+                )
 
     def exitfunc(self):
         self.sdb.close()

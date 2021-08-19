@@ -80,7 +80,7 @@ class Ui_Form(object):
         self.btnExit.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.btnExit.setObjectName("btnExit")
         self.lblInsert = QtWidgets.QLabel(Form)
-        self.lblInsert.setGeometry(QtCore.QRect(10, 380, 101, 23))
+        self.lblInsert.setGeometry(QtCore.QRect(0, 342, 111, 61))
         self.lblInsert.setObjectName("lblInsert")
         self.chkPG = QtWidgets.QCheckBox(Form)
         self.chkPG.setGeometry(QtCore.QRect(500, 380, 111, 28))
