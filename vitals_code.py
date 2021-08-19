@@ -8,6 +8,7 @@ from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
 from icecream import ic
 from addvitals import Ui_Form
 import sqlalchemy as dbsql
+from lclutils import sqlpg
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
@@ -84,14 +85,16 @@ class Main(QtWidgets.QWidget, Ui_Form):
             self.ui.lblInsert.setText("Rec Inserted")
         if self.ui.chkPG.isChecked():
             # self.pg_table_name = self.table_name
-            self.postgres_recinsert(self.mytable)
+            self.postgres_recinsert2(self.mytable)
 
         # self.db.close()
 
     def setup_pg(self):
         if self.ui.chkPG.isChecked():
-            self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
-            self.conn = self.eng.connect()  # use this as connection for insert query
+            self.pg = sqlpg()
+            self.conn = sqlpg.pg_sql_connect(self)
+            # self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
+            # self.conn = self.eng.connect()  # use this as connection for insert query
 
     def postgres_recinsert(self, pg_table_name):
         """[inserts record postgresql]
@@ -126,6 +129,27 @@ class Main(QtWidgets.QWidget, Ui_Form):
                 self.ui.lblInsert.setText(
                     "Rec Inserted PG:\n %s" % (self.pg_table_name)
                 )
+
+    def postgres_recinsert2(self, pg_table_name):
+        """[inserts record postgresql]
+           {{tbname}}
+        """
+        # self.tbname = "vsigns_bp"  # vsigns_bp or vsigns_bloodpressure because columns match
+        if self.ui.chkPG.isChecked():
+            # self.pg = sqlpg()
+            self.vitals_dict = {
+                "bpdate": self.ui.dateTimeEdit.dateTime().toString(),
+                "bpsys": self.ui.cmbsystolic.currentText(),
+                "bpdia": self.ui.cmbdiastolic.currentText(),
+                "bphr": self.ui.cmbheartrate.currentText(),
+                "bpsugar": self.ui.cmbsugar.currentText(),
+                "bpoxy": self.ui.cmboxy.currentText(),
+                "bpcomment": self.ui.lncomment.toPlainText(),
+            }
+            self.pg_result_txt = self.pg.pgsql_insert_rec_vitals(
+                self.conn, self.mytable, self.vitals_dict
+            )
+            self.ui.lblInsert.setText(self.pg_result_txt)
 
     def refresh(self):
         self.model.select()
