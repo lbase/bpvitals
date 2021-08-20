@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
 import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from icecream import ic
-from lclutils import sqlpg
+from lclutils import Sqlpg
 import sys
 
 
@@ -30,7 +30,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # ---------------------------------------------------------------------------- #
         #           make sqlalchemy session and database connection                    #
         # ---------------------------------------------------------------------------- #
-        self.pg = sqlpg()
+        self.pg = Sqlpg()
         self.pg_conn = self.pg.pg_sql_connect()
         self.pg_sess = self.pg.pg_sql_session()
         self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
@@ -44,7 +44,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # ---------------------------------------------------------------------------- #
         #              table name in window title so I can tell what table              #
         # ---------------------------------------------------------------------------- #
-        self.setWindowTitle(table_name)
+        self.setWindowTitle(self.table_name)
         # current date
         now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(now)
@@ -137,9 +137,15 @@ class Main(QtWidgets.QWidget, Ui_Comment):
                 "sugarid": self.pg_maxbsid,
                 "bpid": self.pg_maxbpid,
             }
-
+            # check which table
+            if self.table_name == "mynotes":
+                self.pg_table_name = "foodnotes"
+            elif self.table_name == "fastnotes":
+                self.pg_table_name = "mynotes"
+            else:
+                self.pg_table_name = "mynotes"
             self.pg.pg_sql_notes_update(
-                self.pg_conn, self.pg_notes_dict, "foodnotes", self.pg_maxid
+                self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
             )
 
     def add_rec(self):
