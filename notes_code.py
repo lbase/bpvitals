@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
 import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from icecream import ic
+from lclutils import sqlpg
 import sys
 
 
@@ -29,6 +30,9 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # ---------------------------------------------------------------------------- #
         #           make sqlalchemy session and database connection                    #
         # ---------------------------------------------------------------------------- #
+        self.pg = sqlpg()
+        self.pg_conn = self.pg.pg_sql_connect()
+        self.pg_sess = self.pg.pg_sql_session()
         self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
@@ -48,6 +52,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.btnAdd.clicked.connect(self.add_rec)
         self.ui.btnUpdate.clicked.connect(self.update_rec)
         self.ui.btnExit.clicked.connect(self.exitfunc)
+        self.ui.chkPG.setCheckState(1)
         self.populate_boxes()
         # ---------------------------------------------------------------------------- #
         #                      get numbers and one previous record                     #
@@ -70,7 +75,12 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.texbx_txt = self.texbx.fetchone()
         ic(self.texbx_txt.foodid)
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
-
+        # not a widget - used to get maxid from postgresql
+        self.pg_max_foodid = self.pg_sess.execute(
+            "select max(foodid) as maxid from foodnotes"
+        )
+        self.pg_foodid = self.pg_max_foodid.fetchone()
+        self.pg_maxid = self.pg_foodid.maxid
         self.model = QSqlTableModel(db=self.db)
         self.model.setTable("vsigns_bp")
         self.model.setFilter("bpid = (select max(bpid) from vsigns_bp)")
@@ -107,6 +117,16 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         if self.rec_ins:
             self.ui.lblLastRecord.setText("Record Update " + self.table_name)
             ic(self.model.lastError().text())
+        if self.ui.chkPG.isChecked():
+            self.notes_update_dict = {
+                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
+                "fnotes": self.ui.textEdit.toPlainText(),
+                "sugarid": self.ui.spinBsid.value(),
+                "bpid": self.ui.spinBpid.value(),
+            }
+        self.pg.pg_sql_notes_update(
+            self.pg_conn, self.notes_update_dict, "foodnotes", self.pg_maxid
+        )
 
     def add_rec(self):
         self.my_table = dbsql.table(
@@ -116,18 +136,20 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             dbsql.column("bpid"),
             dbsql.column("fnotes"),
         )
-        self.ins = self.my_table.insert().values(
-            {
-                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-                "fnotes": self.ui.textEdit.toPlainText(),
-                "sugarid": self.ui.spinBsid.value(),
-                "bpid": self.ui.spinBpid.value(),
-            }
-        )
+        self.notes_dict = {
+            "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
+            "fnotes": self.ui.textEdit.toPlainText(),
+            "sugarid": self.ui.spinBsid.value(),
+            "bpid": self.ui.spinBpid.value(),
+        }
+        self.ins = self.my_table.insert().values(self.notes_dict)
+
         self.result = self.mysess.execute(self.ins)
         self.mysess.commit()
         if self.result:
             self.ui.lblLastRecord.setText("Record Added " + self.table_name)
+        if self.ui.chkPG.isChecked():
+            self.pg.pg_sql_notes_insert(self.pg_conn, self.notes_dict, "foodnotes")
 
     def exitfunc(self):
         self.db.close()
