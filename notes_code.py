@@ -75,12 +75,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.texbx_txt = self.texbx.fetchone()
         ic(self.texbx_txt.foodid)
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
-        # not a widget - used to get maxid from postgresql
-        self.pg_max_foodid = self.pg_sess.execute(
-            "select max(foodid) as maxid from foodnotes"
-        )
-        self.pg_foodid = self.pg_max_foodid.fetchone()
-        self.pg_maxid = self.pg_foodid.maxid
+
         self.model = QSqlTableModel(db=self.db)
         self.model.setTable("vsigns_bp")
         self.model.setFilter("bpid = (select max(bpid) from vsigns_bp)")
@@ -111,22 +106,41 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             + "where foodid = "
             + str(self.texbx_txt.foodid)
         )
-        ic(self.stmt)
+        # ic(self.stmt)
         self.rec_ins = self.mysess.execute(self.stmt)
         self.mysess.commit()
         if self.rec_ins:
             self.ui.lblLastRecord.setText("Record Update " + self.table_name)
             ic(self.model.lastError().text())
         if self.ui.chkPG.isChecked():
-            self.notes_update_dict = {
+            # get maxes from postgresql foodid
+            self.pg_max_foodid = self.pg_sess.execute(
+                "select max(foodid) as maxid from foodnotes"
+            )
+            self.pg_foodid = self.pg_max_foodid.fetchone()
+            self.pg_maxid = self.pg_foodid.maxid
+            # bpid
+            self.pg_max_bpid = self.pg_sess.execute(
+                "select max(bpid) as maxbpid from vsigns_bp"
+            )
+            self.pg_bpid = self.pg_max_bpid.fetchone()
+            self.pg_maxbpid = self.pg_bpid.maxbpid
+            # bsid
+            self.pg_max_bsid = self.pg_sess.execute(
+                "select max(bsid) as maxbsid from qtsugar"
+            )
+            self.pg_bsid = self.pg_max_bsid.fetchone()
+            self.pg_maxbsid = self.pg_bsid.maxbsid
+            self.pg_notes_dict = {
                 "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
                 "fnotes": self.ui.textEdit.toPlainText(),
-                "sugarid": self.ui.spinBsid.value(),
-                "bpid": self.ui.spinBpid.value(),
+                "sugarid": self.pg_maxbsid,
+                "bpid": self.pg_maxbpid,
             }
-        self.pg.pg_sql_notes_update(
-            self.pg_conn, self.notes_update_dict, "foodnotes", self.pg_maxid
-        )
+
+            self.pg.pg_sql_notes_update(
+                self.pg_conn, self.pg_notes_dict, "foodnotes", self.pg_maxid
+            )
 
     def add_rec(self):
         self.my_table = dbsql.table(
@@ -149,7 +163,26 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         if self.result:
             self.ui.lblLastRecord.setText("Record Added " + self.table_name)
         if self.ui.chkPG.isChecked():
-            self.pg.pg_sql_notes_insert(self.pg_conn, self.notes_dict, "foodnotes")
+            # bpid
+            self.pg_max_bpid = self.pg_sess.execute(
+                "select max(bpid) as maxbpid from vsigns_bp"
+            )
+            self.pg_bpid = self.pg_max_bpid.fetchone()
+            self.pg_maxbpid = self.pg_bpid.maxbpid
+            # bsid
+            self.pg_max_bsid = self.pg_sess.execute(
+                "select max(bsid) as maxbsid from qtsugar"
+            )
+            self.pg_bsid = self.pg_max_bsid.fetchone()
+            self.pg_maxbsid = self.pg_bsid.maxbsid
+            # make the dictionary
+            self.pg_notes_dict = {
+                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
+                "fnotes": self.ui.textEdit.toPlainText(),
+                "sugarid": self.pg_maxbsid,
+                "bpid": self.pg_maxbpid,
+            }
+            self.pg.pg_sql_notes_insert(self.pg_conn, self.pg_notes_dict, "foodnotes")
 
     def exitfunc(self):
         self.db.close()
