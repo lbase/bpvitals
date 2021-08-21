@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
 from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
+from PyQt5.QtCore import QModelIndex, QDateTime, QSettings, Qt, QVariant, QSettings
 from icecream import ic
 from addvitals import Ui_Form
 import sqlalchemy as dbsql
@@ -120,7 +120,13 @@ class Main(QtWidgets.QWidget, Ui_Form):
     def refresh(self):
         self.model.select()
 
+    def write_settings(self):
+        settings = QSettings("bpvitals", "vitals")
+        settings.setValue("tablename", self.mytable)
+        settings.setValue("databasename", self.db.databaseName())
+
     def exitfunc(self):
+        self.write_settings()
         self.db.close()
         self.model.database().close()
         if self.db.isOpen():

@@ -3,7 +3,7 @@ from icecream import ic
 import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
-
+from PyQt5.QtCore import QSettings
 
 class Sqlpg:
     """
@@ -133,3 +133,9 @@ class Lite_Sql:
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
         return self.mysess
+
+
+class BP_Settings():
+    def __init__(self) -> None:
+        super(BP_Settings , self).__init__()
+        
