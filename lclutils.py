@@ -4,23 +4,38 @@ import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
 from PyQt5.QtCore import QSettings
+from sqlalchemy.pool import StaticPool
+
 
 class Sqlpg:
     """
-    connect to posgres on flatboy database rfile
+    connect to posgresql on flatboy database rfile
     """
 
     def __init__(self) -> None:
         super(Sqlpg, self).__init__()
+        ic.disable()
 
     def pg_sql_connect(self):
         """
-        create connection
+        create connection posgresql
         """
         self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
         self.conn = self.eng.connect()  # use this as connection for insert query
         if self.conn:
             return self.conn
+
+    def sl_sql_connect(self):
+        """
+        create connection sqlite
+        """
+        self.sl_eng = dbsql.create_engine(
+            "sqlite:///file:///data/sqlite/vitals.db?check_same_thread=true&timeout=10&mode=rw&nolock=1&uri=true"
+        )
+        self.sl_conn = self.sl_eng.connect()  # use this as connection for insert query
+        if self.sl_conn:
+            ic(self.sl_conn)
+            return self.sl_conn
 
     def pg_sql_session(self):
         self.pg_eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
@@ -42,7 +57,7 @@ class Sqlpg:
         return self.mynotes
 
     def sqlal_table_vsigns(self, notes_table_name):
-        """basic sqlalchemy table to use for update insert in 
+        """basic sqlalchemy table to use for update insert in
            vsigns_bp table in both databases
         """
         self.notes_table_name = notes_table_name
@@ -135,7 +150,6 @@ class Lite_Sql:
         return self.mysess
 
 
-class BP_Settings():
+class BP_Settings:
     def __init__(self) -> None:
-        super(BP_Settings , self).__init__()
-        
+        super(BP_Settings, self).__init__()
