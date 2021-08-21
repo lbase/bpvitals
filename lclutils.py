@@ -42,7 +42,9 @@ class Sqlpg:
         return self.mynotes
 
     def sqlal_table_vsigns(self, notes_table_name):
-        """basic sqlalchemy table to use for update insert in vsigns_bp table"""
+        """basic sqlalchemy table to use for update insert in 
+           vsigns_bp table in both databases
+        """
         self.notes_table_name = notes_table_name
         self.vsigns = dbsql.table(
             self.notes_table_name,
@@ -56,6 +58,20 @@ class Sqlpg:
             dbsql.column("bpcomment"),
         )
         return self.vsigns
+
+    def sqlal_table_qtsugar(self, notes_table_name):
+        """basic sqlalchemy table structure for sugar tables
+           both postgresql and sqlite
+        """
+        self.notes_table_name = notes_table_name
+        self.mysugar = dbsql.table(
+            self.notes_table_name,
+            dbsql.column("bsid"),
+            dbsql.column("bsdate"),
+            dbsql.column("bsugar"),
+            dbsql.column("comment"),
+        )
+        return self.mysugar
 
     def pgsql_insert_rec_vitals(self, connection, pg_table_name, txt_dict):
         """
@@ -97,6 +113,15 @@ class Sqlpg:
         self.notes_table = self.sqlal_table_mynotes(self.notes_table_name)
         self.notes_ins = self.notes_table.insert().values(self.notes_txt_dict)
         self.notes_result = self.conn.execute(self.notes_ins)
+
+    def pg_sql_qtsugar_insert(self, connect, txt_dict, sugar_tablename):
+        """takes connect dict of values to insert and tablename"""
+        self.table_sugar = sugar_tablename
+        self.sugar_conn = connect
+        self.sugar_dict = txt_dict
+        self.tbsugar = self.sqlal_table_qtsugar(self.table_sugar)
+        self.sugar_ins = self.tbsugar.insert().values(self.sugar_dict)
+        self.sugar_result = self.sugar_conn.execute(self.sugar_ins)
 
 
 class Lite_Sql:
