@@ -18,7 +18,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    # ic.disable()
+    ic.disable()
 
     def __init__(self, object, table_name="mynotes"):
         super(Main, self).__init__()
@@ -52,7 +52,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.dateTimeEdit.setDateTime(now)
         # buttons
         self.ui.btnAdd.clicked.connect(self.add_rec)
-        self.ui.btnUpdate.clicked.connect(self.update_rec2)
+        self.ui.btnUpdate.clicked.connect(self.update_rec)
         self.ui.btnExit.clicked.connect(self.exitfunc)
         self.ui.chkPG.setCheckState(1)
         self.populate_boxes()
@@ -96,61 +96,6 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         # ic(self.db.tables())
 
     def update_rec(self):
-        self.note = self.ui.textEdit.toPlainText()
-        self.id = str(self.ui.spinBpid.value())
-        self.stmt = (
-            "update "
-            + self.table_name
-            + " set fnotes  = "
-            + " '"
-            + self.note
-            + "' "
-            + "where foodid = "
-            + str(self.texbx_txt.foodid)
-        )
-        # ic(self.stmt)
-        self.rec_ins = self.mysess.execute(self.stmt)
-        self.mysess.commit()
-        if self.rec_ins:
-            self.ui.lblLastRecord.setText("Record Update " + self.table_name)
-            ic(self.model.lastError().text())
-        if self.ui.chkPG.isChecked():
-            # get maxes from postgresql foodid
-            self.pg_max_foodid = self.pg_sess.execute(
-                "select max(foodid) as maxid from foodnotes"
-            )
-            self.pg_foodid = self.pg_max_foodid.fetchone()
-            self.pg_maxid = self.pg_foodid.maxid
-            # bpid
-            self.pg_max_bpid = self.pg_sess.execute(
-                "select max(bpid) as maxbpid from vsigns_bp"
-            )
-            self.pg_bpid = self.pg_max_bpid.fetchone()
-            self.pg_maxbpid = self.pg_bpid.maxbpid
-            # bsid
-            self.pg_max_bsid = self.pg_sess.execute(
-                "select max(bsid) as maxbsid from qtsugar"
-            )
-            self.pg_bsid = self.pg_max_bsid.fetchone()
-            self.pg_maxbsid = self.pg_bsid.maxbsid
-            self.pg_notes_dict = {
-                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-                "fnotes": self.ui.textEdit.toPlainText(),
-                "sugarid": self.pg_maxbsid,
-                "bpid": self.pg_maxbpid,
-            }
-            # check which table
-            if self.table_name == "mynotes":
-                self.pg_table_name = "foodnotes"
-            elif self.table_name == "fastnotes":
-                self.pg_table_name = "mynotes"
-            else:
-                self.pg_table_name = "mynotes"
-            self.pg.pg_sql_notes_update(
-                self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
-            )
-
-    def update_rec2(self):
         self.notes_dict = {
             "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
             "fnotes": self.ui.textEdit.toPlainText(),
