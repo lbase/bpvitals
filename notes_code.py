@@ -18,9 +18,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    ic.disable()
+    # ic.disable()
 
-    def __init__(self, object, table_name="mynotes"):
+    def __init__(
+        self, object, table_name="foodnotes"
+    ):  # foodnotes default table alternate is fastnotes
         super(Main, self).__init__()
         self.table_name = table_name
         self.ui = Ui_Comment()
@@ -108,11 +110,23 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
         if self.ui.chkPG.isChecked():
             # get maxes from postgresql foodid
+            # check which table
+            if self.table_name == "foodnotes":
+                self.pg_table_name = "foodnotes"
+            elif self.table_name == "fastnotes":
+                self.pg_table_name = "fastnotes"
+            else:
+                self.pg_table_name = "foodnotes"
+            ic(self.pg_table_name)
             self.pg_max_foodid = self.pg_sess.execute(
-                "select max(foodid) as maxid from foodnotes"
+                "select foodid from "
+                + self.pg_table_name
+                + " where fdate = (select max(fdate) from "
+                + self.pg_table_name
+                + ")"
             )
             self.pg_foodid = self.pg_max_foodid.fetchone()
-            self.pg_maxid = self.pg_foodid.maxid
+            self.pg_maxid = self.pg_foodid.foodid
             # bpid
             self.pg_max_bpid = self.pg_sess.execute(
                 "select max(bpid) as maxbpid from vsigns_bp"
@@ -125,19 +139,14 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             )
             self.pg_bsid = self.pg_max_bsid.fetchone()
             self.pg_maxbsid = self.pg_bsid.maxbsid
+
             self.pg_notes_dict = {
                 "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
                 "fnotes": self.ui.textEdit.toPlainText(),
                 "sugarid": self.pg_maxbsid,
                 "bpid": self.pg_maxbpid,
             }
-            # check which table
-            if self.table_name == "mynotes":
-                self.pg_table_name = "foodnotes"
-            elif self.table_name == "fastnotes":
-                self.pg_table_name = "mynotes"
-            else:
-                self.pg_table_name = "mynotes"
+
             self.pg.pg_sql_notes_update(
                 self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
             )
@@ -164,6 +173,16 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             self.ui.lblLastRecord.setText("Record Added " + self.table_name)
         if self.ui.chkPG.isChecked():
             # bpid
+            # get maxes from postgresql foodid
+            # check which table
+            if self.table_name == "foodnotes":
+                self.pg_table_name = "foodnotes"
+            elif self.table_name == "fastnotes":
+                self.pg_table_name = "fastnotes"
+            else:
+                self.pg_table_name = "foodnotes"
+            ic(self.pg_table_name)
+
             self.pg_max_bpid = self.pg_sess.execute(
                 "select max(bpid) as maxbpid from vsigns_bp"
             )
@@ -182,7 +201,9 @@ class Main(QtWidgets.QWidget, Ui_Comment):
                 "sugarid": self.pg_maxbsid,
                 "bpid": self.pg_maxbpid,
             }
-            self.pg.pg_sql_notes_insert(self.pg_conn, self.pg_notes_dict, "foodnotes")
+            self.pg.pg_sql_notes_insert(
+                self.pg_conn, self.pg_notes_dict, self.pg_table_name
+            )
 
     def exitfunc(self):
         self.db.close()
