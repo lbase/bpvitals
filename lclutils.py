@@ -116,6 +116,7 @@ class Sqlpg:
         )
 
         self.notes_result = self.notes_conn.execute(self.notes_update)
+        return self.notes_result
 
     def pg_sql_notes_insert(self, connect, txt_dict, notes_table_name):
         """
@@ -128,6 +129,7 @@ class Sqlpg:
         self.notes_table = self.sqlal_table_mynotes(self.notes_table_name)
         self.notes_ins = self.notes_table.insert().values(self.notes_txt_dict)
         self.notes_result = self.conn.execute(self.notes_ins)
+        return self.notes_result
 
     def pg_sql_qtsugar_insert(self, connect, txt_dict, sugar_tablename):
         """takes connect dict of values to insert and tablename"""

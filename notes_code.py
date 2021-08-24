@@ -104,10 +104,13 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             "sugarid": self.ui.spinBsid.value(),
             "bpid": self.ui.spinBpid.value(),
         }
-        self.pg.pg_sql_notes_update(
+        self.note_result = self.pg.pg_sql_notes_update(
             self.sqlite_conn, self.notes_dict, self.table_name, self.texbx_txt.foodid
         )
-
+        if self.note_result:
+            self.ui.lblRecord1.setText(
+                f"SL up {self.table_name} {self.texbx_txt.foodid}"
+            )
         if self.ui.chkPG.isChecked():
             # get maxes from postgresql foodid
             # check which table
@@ -147,9 +150,13 @@ class Main(QtWidgets.QWidget, Ui_Comment):
                 "bpid": self.pg_maxbpid,
             }
 
-            self.pg.pg_sql_notes_update(
+            self.pg_result = self.pg.pg_sql_notes_update(
                 self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
             )
+            if self.pg_result:
+                self.ui.lblRecord2.setText(
+                    f"PG up {self.pg_table_name} {self.pg_maxid}"
+                )
 
     def add_rec(self):
         self.my_table = dbsql.table(
@@ -170,7 +177,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.result = self.mysess.execute(self.ins)
         self.mysess.commit()
         if self.result:
-            self.ui.lblLastRecord.setText("Record Added " + self.table_name)
+            self.ui.lblRecord1.setText(f"SL Rec Add {self.table_name}")
         if self.ui.chkPG.isChecked():
             # bpid
             # get maxes from postgresql foodid
@@ -201,9 +208,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
                 "sugarid": self.pg_maxbsid,
                 "bpid": self.pg_maxbpid,
             }
-            self.pg.pg_sql_notes_insert(
+            self.pg_result = self.pg.pg_sql_notes_insert(
                 self.pg_conn, self.pg_notes_dict, self.pg_table_name
             )
+            if self.pg_result:
+                self.ui.lblRecord2.setText(f"PG add {self.pg_table_name}")
 
     def exitfunc(self):
         self.db.close()
