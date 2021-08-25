@@ -18,7 +18,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    # ic.disable()
+    ic.disable()
 
     def __init__(
         self, object, table_name="foodnotes"
@@ -157,6 +157,9 @@ class Main(QtWidgets.QWidget, Ui_Comment):
                 self.ui.lblRecord2.setText(
                     f"PG up {self.pg_table_name} {self.pg_maxid}"
                 )
+                self.populate_boxes()
+        else:
+            self.populate_boxes()
 
     def add_rec(self):
         self.my_table = dbsql.table(
@@ -213,6 +216,9 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             )
             if self.pg_result:
                 self.ui.lblRecord2.setText(f"PG add {self.pg_table_name}")
+                self.populate_boxes
+        else:
+            self.populate_boxes()
 
     def exitfunc(self):
         self.db.close()

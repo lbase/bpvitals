@@ -11,7 +11,7 @@ from vitals_code import Main as VMain
 
 
 class MainWindow(QMainWindow, Ui_NotesWin):
-    def __init__(self, table_name="mynotes"):
+    def __init__(self, table_name="foodnotes"):
         super().__init__()
         self.ui = Ui_NotesWin()
         self.ui.setupUi(self)
@@ -21,7 +21,7 @@ class MainWindow(QMainWindow, Ui_NotesWin):
         ok = self.db.open()
         self.query = QSqlQuery(self.db)
         self.query.prepare(
-            "select fdate, fnotes from mynotes where fdate > (select date((select max(fdate)), '-30 day' ) from mynotes) ORDER by fdate desc"
+            "select fdate, fnotes from foodnotes where fdate > (select date((select max(fdate)), '-30 day' ) from foodnotes) ORDER by fdate desc"
         )
         self.query.exec_()
         self.model = QSqlQueryModel()
