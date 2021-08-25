@@ -7,3 +7,10 @@ These forms now use both databases:
 and sqlite:
 
 [sqlite file](file:///data/sqlite/vitals.db)
+
+Stashing forms and execution code in ~/python3/bpvitals/forms
+
+For use in desktop shortcuts. Will try and keep up to date but unbroken.
+
+Script in bpvitals called rsync_forms
+
