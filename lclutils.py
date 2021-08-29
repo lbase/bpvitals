@@ -1,6 +1,10 @@
 import sys
 from icecream import ic
-import sqlalchemy as dbsql
+
+# import sqlalchemy as dbsql
+from sqlalchemy import table
+from sqlalchemy import column
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
 from PyQt5.QtCore import QSettings
@@ -20,7 +24,7 @@ class Sqlpg:
         """
         create connection posgresql
         """
-        self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
+        self.eng = create_engine("postgresql://rfile:simple@flatboy/rfile")
         self.conn = self.eng.connect()  # use this as connection for insert query
         if self.conn:
             return self.conn
@@ -29,7 +33,7 @@ class Sqlpg:
         """
         create connection sqlite
         """
-        self.sl_eng = dbsql.create_engine(
+        self.sl_eng = create_engine(
             "sqlite:///file:///data/sqlite/vitals.db?check_same_thread=true&timeout=10&mode=rw&nolock=1&uri=true"
         )
         self.sl_conn = self.sl_eng.connect()  # use this as connection for insert query
@@ -38,7 +42,7 @@ class Sqlpg:
             return self.sl_conn
 
     def pg_sql_session(self):
-        self.pg_eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
+        self.pg_eng = create_engine("postgresql://rfile:simple@flatboy/rfile")
         self.pg_mysession = sessionmaker(bind=self.eng)
         self.pg_mysess = self.pg_mysession()
         return self.pg_mysess
@@ -46,13 +50,13 @@ class Sqlpg:
     def sqlal_table_mynotes(self, notes_table_name):
         self.notes_table_name = notes_table_name
 
-        self.mynotes = dbsql.table(
+        self.mynotes = table(
             self.notes_table_name,
-            dbsql.column("foodid"),
-            dbsql.column("fdate"),
-            dbsql.column("sugarid"),
-            dbsql.column("bpid"),
-            dbsql.column("fnotes"),
+            column("foodid"),
+            column("fdate"),
+            column("sugarid"),
+            column("bpid"),
+            column("fnotes"),
         )
         return self.mynotes
 
@@ -61,16 +65,16 @@ class Sqlpg:
            vsigns_bp table in both databases
         """
         self.notes_table_name = notes_table_name
-        self.vsigns = dbsql.table(
+        self.vsigns = table(
             self.notes_table_name,
-            dbsql.column("bpid"),
-            dbsql.column("bpdate"),
-            dbsql.column("bpsys"),
-            dbsql.column("bpdia"),
-            dbsql.column("bphr"),
-            dbsql.column("bpsugar"),
-            dbsql.column("bpoxy"),
-            dbsql.column("bpcomment"),
+            column("bpid"),
+            column("bpdate"),
+            column("bpsys"),
+            column("bpdia"),
+            column("bphr"),
+            column("bpsugar"),
+            column("bpoxy"),
+            column("bpcomment"),
         )
         return self.vsigns
 
@@ -79,12 +83,12 @@ class Sqlpg:
            both postgresql and sqlite
         """
         self.notes_table_name = notes_table_name
-        self.mysugar = dbsql.table(
+        self.mysugar = table(
             self.notes_table_name,
-            dbsql.column("bsid"),
-            dbsql.column("bsdate"),
-            dbsql.column("bsugar"),
-            dbsql.column("comment"),
+            column("bsid"),
+            column("bsdate"),
+            column("bsugar"),
+            column("comment"),
         )
         return self.mysugar
 
@@ -146,7 +150,7 @@ class Lite_Sql:
         super(Lite_Sql, self).__init__()
 
     def sqlite_sql_session(self):
-        self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
+        self.eng = create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
         return self.mysess

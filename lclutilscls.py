@@ -19,6 +19,7 @@ from sqlalchemy import Integer
 from sqlalchemy import MetaData
 from sqlalchemy import String
 from sqlalchemy import Table
+from sqlalchemy import table
 from sqlalchemy.orm import registry
 from sqlalchemy.orm import relationship
 
@@ -65,7 +66,7 @@ class Sqlpg:
     def sqlal_table_mynotes(self, notes_table_name):
         self.notes_table_name = notes_table_name
 
-        self.mynotes = Table(
+        self.mynotes = table(
             self.notes_table_name,
             column("foodid"),
             column("fdate"),
@@ -80,7 +81,7 @@ class Sqlpg:
            vsigns_bp table in both databases
         """
         self.notes_table_name = notes_table_name
-        self.vsigns = Table(
+        self.vsigns = table(
             self.notes_table_name,
             column("bpid"),
             column("bpdate"),
@@ -98,7 +99,7 @@ class Sqlpg:
            both postgresql and sqlite
         """
         self.notes_table_name = notes_table_name
-        self.mysugar = Table(
+        self.mysugar = table(
             self.notes_table_name,
             column("bsid"),
             column("bsdate"),
