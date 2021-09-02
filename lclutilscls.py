@@ -176,3 +176,10 @@ class BP_Settings:
     def __init__(self) -> None:
         super(BP_Settings, self).__init__()
 
+
+@dataclass
+class foodnotes:
+    fdate: str
+    fnotes: str
+    sugarid: int
+    bpid: int
