@@ -72,9 +72,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.texbx = self.mysess.execute(
             "select foodid, fdate, fnotes from "
             + self.table_name
-            + " where fdate > (select date('now', '-15 day' ) from "
-            + self.table_name
-            + ") ORDER by fdate desc"
+            + " where fdate > (select date('now', '-5 days' ) "
+            + ") ORDER by fdate desc limit 1"
         )
         self.texbx_txt = self.texbx.fetchone()
         ic(self.texbx_txt.foodid)
