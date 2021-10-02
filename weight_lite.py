@@ -107,5 +107,5 @@ def change_column_names(as_pandas, old_name, new_name):
 
 
 if __name__ == "__main__":
-    filename = "file:///home/rfile/motog3/Bob - Export Data 7-11-2021 ~ 7-17-2021.csv"
+    filename = "file:///home/rfile/motog3/Bob_export_data_dummy.csv"
     main(filename)

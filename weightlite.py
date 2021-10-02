@@ -93,5 +93,5 @@ if __name__ == "__main__":
         main(filename)
     else:
         # main("file:///home/rfile/motog3/Bob - Export Data 7-20-2021 ~ 7-24-2021.csv")
-        main("file:///home/rfile/motog3/Bob - Export Data 7-17-2021 ~ 7-18-2021.csv")
+        main("file:///home/rfile/motog3/Bob_export_data_dummy.csv")
 
