@@ -54,7 +54,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def bpgraph(self):
         self.showSbar("showing graphs")
-        os.system("/home/rfile/python3/bin/bpstats.py")
+        os.system("/home/rfile/python3/bpvitals/bpstats.py")
 
     def showSbar(self, msg):
         self.ui.statusbar.showMessage(msg)
