@@ -14,3 +14,5 @@ For use in desktop shortcuts. Will try and keep up to date but unbroken.
 
 Script in bpvitals called rsync_forms
 
+Wednesday, November 24, 2021 9:04:47 PM EST
+should be able to pull/clone datautil from here (flatboy) to suse and have current setup
