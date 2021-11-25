@@ -1,0 +1,1 @@
+rsync -av /home/rfile/python3/bpvitals --files-from=./rsync_files.txt /home/rfile/python3/bpvitals/forms
