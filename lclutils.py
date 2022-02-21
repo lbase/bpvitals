@@ -23,7 +23,8 @@ class Sqlpg:
         """
         create connection posgresql
         """
-        self.eng = create_engine("postgresql://rfile:simple@flatboy/rfile")
+        # self.eng = create_engine("postgresql://rfile:simple@flatboy/rfile")
+        self.eng = create_engine("postgresql://rfile@192.168.11.10/rfile")
         self.conn = self.eng.connect()  # use this as connection for insert query
         if self.conn:
             return self.conn
