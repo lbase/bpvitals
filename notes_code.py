@@ -69,10 +69,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.bpid = self.mysess.execute("select max(bpid) as 'bpmax' from vsigns_bp")
         self.spin_bp = self.bpid.fetchone()
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
+        # started with 15 days but moving to 30 2-21-22
         self.texbx = self.mysess.execute(
             "select foodid, fdate, fnotes from "
             + self.table_name
-            + " where fdate > (select date('now', '-15 days' ) "
+            + " where fdate > (select date('now', '-30 days' ) "
             + ") ORDER by fdate desc limit 1"
         )
         self.texbx_txt = self.texbx.fetchone()
