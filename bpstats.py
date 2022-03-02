@@ -2,7 +2,7 @@
 
 # rfile
 # from file:///home/rfile/python3/notebooks/bpinfo/bpstat09pg.ipynb
-import dateutil.parser
+# import dateutil.parser
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine

@@ -70,6 +70,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.spin_bp = self.bpid.fetchone()
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
         # started with 15 days but moving to 30 2-21-22
+        # note to see if backuppc is working 2-27-22 8:31
         self.texbx = self.mysess.execute(
             "select foodid, fdate, fnotes from "
             + self.table_name
