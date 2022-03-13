@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#! /usr/bin/env python3
 # rfile
 # from file:///home/rfile/python3/notebooks/bpinfo/weight.ipynb
 import logging
@@ -107,5 +107,9 @@ def change_column_names(as_pandas, old_name, new_name):
 
 
 if __name__ == "__main__":
-    filename = "file:///home/rfile/motog3/Bob_export_data_dummy.csv"
-    main(filename)
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+        main(filename)
+    else:
+        # main("file:///home/rfile/motog3/Bob - Export Data 7-20-2021 ~ 7-24-2021.csv")
+        main("file:///home/rfile/motog5/Bob_export_data_dummy.csv")
