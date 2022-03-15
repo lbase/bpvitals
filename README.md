@@ -16,3 +16,7 @@ Script in bpvitals called rsync_forms
 
 Wednesday, November 24, 2021 9:04:47 PM EST
 should be able to pull/clone datautil from here (flatboy) to suse and have current setup
+
+Tuesday, March 15, 2022 11:32:11 AM EDT
+Starting to use pycharm to do some cleanup on sqlsimple branch before trying to simplify sql stuff
+
