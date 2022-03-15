@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import sys
+# TODO  Qt libs below not in use - want to try them again insted of sqlalchemY? -
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
 from PyQt5.QtWidgets import QDataWidgetMapper, QTableView

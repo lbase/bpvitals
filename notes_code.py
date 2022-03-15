@@ -1,10 +1,9 @@
 #! /usr/bin/env python3
-import datetime
 
 
 from notes import Ui_Comment
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QDateTime, QModelIndex, QSize, QSizeF
+from PyQt5.QtCore import QDateTime
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
 import sqlalchemy as dbsql
