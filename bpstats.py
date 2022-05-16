@@ -26,7 +26,7 @@ fig3, ax3, = plt.subplots(1, 2)
 plt.subplot(1, 2, 1)
 # start setting up figure
 mylegend = "7 days stats "
-mystats = sugar8days.describe(include="int")
+mystats = sugar8days.describe(datetime_is_numeric=True , include="int")
 plt.ylim(60, 150)
 ax3[0].set_xlabel("Date")
 plt.title("blood sugar last 8 days")
