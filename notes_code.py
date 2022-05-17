@@ -70,12 +70,13 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.spinBpid.setValue(self.spin_bp.bpmax)
         # started with 15 days but moving to 30 2-21-22
         # note to see if backuppc is working 2-27-22 8:31
+        # 
         self.texbx = self.mysess.execute(
             "select foodid, fdate, fnotes from "
             + self.table_name
-            + " where fdate > (select date('now', '-30 days' ) "
-            + ") ORDER by fdate desc limit 1"
-        )
+            + " where foodid = (select max(foodid) from "
+            + self.table_name
+            + " ) " )
         self.texbx_txt = self.texbx.fetchone()
         # ic(self.texbx_txt.foodid)
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
