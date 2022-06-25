@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import sys
+import os
 # TODO  Qt libs below not in use - want to try them again insted of sqlalchemY? -
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
@@ -25,9 +26,13 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         if ok:
             self.model = QSqlTableModel(db=self.sdb)
             self.model.setTable(mytable)
-            self.model.setSort(0, Qt.AscendingOrder)
-            self.model.setFilter("bsid = (select max(bsid) from qtsugar)")
+            self.model.setSort(0, Qt.DescendingOrder)
+            
+            # self.model.setFilter("bsid = (select max(bsid) from qtsugar)")
             self.ui.tblViewRec.setModel(self.model)
+            self.ui.tblViewRec.maximumViewportSize()
+            self.ui.tblViewRec.resizeColumnsToContents()
+            self.ui.tblViewRec.setColumnWidth(1,160)
             ic(self.model.tableName())
             self.model.select()
 
@@ -53,6 +58,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
+        self.ui.btnGraph.clicked.connect(self.bpgraph)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -118,7 +124,8 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
             self.sdb.removeDatabase(self.conn_name)
         ic(self.model.lastError().text())
         self.close()
-
+    def bpgraph(self):
+        os.system("/home/rfile/python3/bpvitals/bpstats.py")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
