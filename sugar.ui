@@ -139,7 +139,7 @@
     <rect>
      <x>310</x>
      <y>10</y>
-     <width>84</width>
+     <width>121</width>
      <height>21</height>
     </rect>
    </property>
@@ -183,13 +183,13 @@
     </rect>
    </property>
   </widget>
-  <widget class="QToolButton" name="btnGraph">
+  <widget class="QPushButton" name="btnGraph">
    <property name="geometry">
     <rect>
      <x>550</x>
      <y>100</y>
-     <width>81</width>
-     <height>30</height>
+     <width>101</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
