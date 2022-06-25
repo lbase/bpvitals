@@ -10,6 +10,7 @@ from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
 from icecream import ic
 from sugar import Ui_Sugar
 import sqlalchemy as dbsql
+from sqlalchemy.orm import sessionmaker
 from lclutils import Sqlpg
 
 
@@ -24,16 +25,28 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.sdb.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.sdb.open()
         if ok:
+            # get number for max(bsid)
+            self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
+            self.mysession = sessionmaker(bind=self.eng)
+            self.mysess = self.mysession()
+            self.bsid = self.mysess.execute("select max(bsid) as 'bsmax' from qtsugar")
+            self.bsidval = self.bsid.fetchone()
+            self.bsidint = str(self.bsidval)
+            self.bsidint = self.bsidint.strip("\(\)\,")
+            self.bsidint = int(self.bsidint)
+            self.bsid_20 = (self.bsidint - 20)
+            
+            # end get number
             self.model = QSqlTableModel(db=self.sdb)
             self.model.setTable(mytable)
             self.model.setSort(0, Qt.DescendingOrder)
-            
+            self.model.setFilter("bsid >= " + str(self.bsid_20) )
             # self.model.setFilter("bsid = (select max(bsid) from qtsugar)")
             self.ui.tblViewRec.setModel(self.model)
             self.ui.tblViewRec.maximumViewportSize()
             self.ui.tblViewRec.resizeColumnsToContents()
             self.ui.tblViewRec.setColumnWidth(1,160)
-            ic(self.model.tableName())
+            # ic(self.model.tableName())
             self.model.select()
 
         else:
