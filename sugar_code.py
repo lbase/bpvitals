@@ -1,17 +1,18 @@
 #! /usr/bin/env python3
 
-import sys
 import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
-from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import QModelIndex, QDateTime, Qt, QVariant
-from icecream import ic
-from sugar import Ui_Sugar
+import sys
+
 import sqlalchemy as dbsql
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import QDateTime, Qt
+from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
+from PyQt5.QtWidgets import QMessageBox
+from icecream import ic
 from sqlalchemy.orm import sessionmaker
+
 from lclutils import Sqlpg
+from sugar import Ui_Sugar
 
 
 class Main(QtWidgets.QWidget, Ui_Sugar):
@@ -32,7 +33,8 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
             self.bsid = self.mysess.execute("select max(bsid) as 'bsmax' from qtsugar")
             self.bsidval = self.bsid.fetchone()
             self.bsidint = str(self.bsidval)
-            self.bsidint = self.bsidint.strip("\(\)\,")
+            self.bsidint = self.bsidint.strip("(),")
+            # print(self.bsidint)
             self.bsidint = int(self.bsidint)
             self.bsid_20 = (self.bsidint - 20)
 
