@@ -140,7 +140,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         ic(self.model.lastError().text())
         self.close()
     def bpgraph(self):
-        os.system("/home/rfile/python3/bpvitals/bpstats.py")
+       os.system("/home/rfile/python3/bpvitals/bpstats.py")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

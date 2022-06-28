@@ -9,3 +9,4 @@ shownotes.py
 shownoteswin.py
 showquery.py
 showquerywin.py
+bpstats.py
