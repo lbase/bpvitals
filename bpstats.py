@@ -92,6 +92,6 @@ mplcursors.cursor(rects2)
 
 sugonedays = "SELECT bsdate,bsugar FROM qtsugar WHERE bsdate >= (SELECT date('now', '-24 hours'))" 
 sugar1days = pd.read_sql_query(sugonedays, myconn, parse_dates = "bsdate")
-plot = sugar1days.plot.bar(x="bsdate", y="bsugar",  title="sugar 24 hours")
+plot = sugar1days.plot.line(x="bsdate", y="bsugar",  title="sugar 24 hours")
 plt.tight_layout()
 plt.show()
