@@ -20,3 +20,7 @@ should be able to pull/clone datautil from here (flatboy) to suse and have curre
 Tuesday, March 15, 2022 11:32:11 AM EDT
 Starting to use pycharm to do some cleanup on sqlsimple branch before trying to simplify sql stuff
 
+Thursday, July 7, 2022 8:22:14 PM EDT
+merged sqlsimple into master
+
+
