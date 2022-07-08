@@ -23,4 +23,9 @@ Starting to use pycharm to do some cleanup on sqlsimple branch before trying to 
 Thursday, July 7, 2022 8:22:14 PM EDT
 merged sqlsimple into master
 
+**Friday, July 8, 2022 1:20:41 PM EDT**
+
+had branches in this remote that I had deleted but still showed up in local (remote ref does not exist error)
+renamed bpvitals to bpvitals.orig and did new clone under python3
+
 
