@@ -10,9 +10,11 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
 from sqlalchemy.orm import sessionmaker
-
 from lclutils import Sqlpg
 from sugar import Ui_Sugar
+# for graph
+import sugarstats48
+import sugarstats8days
 
 
 class Main(QtWidgets.QWidget, Ui_Sugar):
@@ -74,6 +76,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
         self.ui.btnGraph.clicked.connect(self.bpgraph)
+        self.ui.btnGraph_2.clicked.connect(self.bpgraph2)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -138,9 +141,13 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         if self.sdb.isOpen():
             self.sdb.removeDatabase(self.conn_name)
         ic(self.model.lastError().text())
+        
         self.close()
     def bpgraph(self):
-       os.system("/home/rfile/python3/bpvitals/bpstats.py")
+       #os.system("/home/rfile/python3/bpvitals/bpstats.py")
+       sugarstats48.displaysugar()
+    def bpgraph2(self):
+       sugarstats8days.sug8days()    
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
