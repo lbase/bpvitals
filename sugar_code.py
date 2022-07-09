@@ -13,8 +13,9 @@ from sqlalchemy.orm import sessionmaker
 from lclutils import Sqlpg
 from sugar import Ui_Sugar
 # for graph
-import sugarstats48
-import sugarstats8days
+# import sugarstats48
+#import sugarstats8days
+import modbpstats
 
 
 class Main(QtWidgets.QWidget, Ui_Sugar):
@@ -145,9 +146,9 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.close()
     def bpgraph(self):
        #os.system("/home/rfile/python3/bpvitals/bpstats.py")
-       sugarstats48.displaysugar()
+       modbpstats.sugar48()
     def bpgraph2(self):
-       sugarstats8days.sug8days()    
+       modbpstats.days7()    
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

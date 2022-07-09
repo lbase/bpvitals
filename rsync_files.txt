@@ -10,3 +10,4 @@ shownoteswin.py
 showquery.py
 showquerywin.py
 bpstats.py
+modbpstats.py
