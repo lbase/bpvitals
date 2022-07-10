@@ -9,7 +9,7 @@ from icecream import ic
 from icecream.icecream import IceCreamDebugger
 from showquerywin import Ui_MainWindow
 from vitals_code import Main as VMain
-
+import modbpstats
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, table_name="vsigns_bp"):
@@ -54,7 +54,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def bpgraph(self):
         self.showSbar("showing graphs")
-        os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        # os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        modbpstats.bp7days()
 
     def showSbar(self, msg):
         self.ui.statusbar.showMessage(msg)

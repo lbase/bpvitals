@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
 import matplotlib.pyplot as plt
-#import mplcursors
+import mplcursors
 
 eng = create_engine("sqlite:////data/sqlite/vitals.db")
 myconn = eng.connect()
@@ -34,7 +34,7 @@ def days7():
     fig3.set_figwidth(18)
     fig3.set_figheight(9)
     lines = ax3.plot(sugar8days.bsdate , sugar8days.bsugar, marker='o', linestyle='dashed' )
-    #mplcursors.cursor(lines) # or just mplcursors.cursor()
+    mplcursors.cursor(lines) # or just mplcursors.cursor()
     plt.show()
     # myconn.close()
 
@@ -69,7 +69,7 @@ def bp7days():
     fig.set_figheight(10)
     mplcursors.cursor(rects3)
     mplcursors.cursor(rects2)
-    plot.show()
+    plt.show()
 
 #plt.show()
 def sugar48():
