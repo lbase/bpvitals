@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 
 # rfile
 # from file:///home/rfile/python3/notebooks/bpinfo/bpstat09pg.ipynb
@@ -11,6 +11,7 @@ import mplcursors
 
 eng = create_engine("sqlite:////data/sqlite/vitals.db")
 myconn = eng.connect()
+
 def days7():
     # get data for sugar
     #  this one working and showing the variable mystats n
@@ -35,9 +36,9 @@ def days7():
     fig3.set_figheight(9)
     lines = ax3.plot(sugar8days.bsdate , sugar8days.bsugar, marker='o', linestyle='dashed' )
     mplcursors.cursor(lines) # or just mplcursors.cursor()
-    plt.show()
+    #plt.draw()
     # myconn.close()
-
+    plt.show()
 def bp7days():
     # blood pressure data 7 days
     bpsevendays = "SELECT bpdate ,bpsys AS systolic, bpdia AS diastolic, bphr AS pulse from  vsigns_bp where bpdate > (SELECT date('now','-7 day'))"
@@ -61,7 +62,7 @@ def bp7days():
     ax.set_xticks(x)
     ax.set_xticklabels(bp7days.bpdate, rotation=90, fontsize=6)
     ax.legend()
-    
+
     ax.bar_label(rects1, label_type="center", color="#EEEED0")
     ax.bar_label(rects2, label_type="center")
     ax.bar_label(rects3, label_type="center")
@@ -69,12 +70,20 @@ def bp7days():
     fig.set_figheight(10)
     mplcursors.cursor(rects3)
     mplcursors.cursor(rects2)
-    plt.show()
+    plt.show()  # draw?
+    #fig.canvas.draw()
+    
 
-#plt.show()
+
 def sugar48():
     sugonedays = "SELECT bsdate,bsugar FROM qtsugar WHERE bsdate >= (SELECT date('now', '-48 hours'))"
     sugar1days = pd.read_sql_query(sugonedays, myconn, parse_dates="bsdate")
     plot = sugar1days.plot.line(x="bsdate", y="bsugar",  title="sugar 48 hours")
     plt.tight_layout()
     plt.show()
+
+
+    
+   
+        
+        

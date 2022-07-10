@@ -81,6 +81,8 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
+        # Sunday, July 10, 2022 2:18:43 PM EDT rfile add for graphs
+        
 
     def recinsert(self):
         self.r = self.model.record()
@@ -147,8 +149,11 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
     def bpgraph(self):
        #os.system("/home/rfile/python3/bpvitals/bpstats.py")
        modbpstats.sugar48()
+       
+       
     def bpgraph2(self):
-       modbpstats.days7()    
+       modbpstats.days7()
+       
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
