@@ -29,4 +29,9 @@ had branches in this remote that I had deleted but still showed up in local (rem
 Note that problem above can be resolved with a **git pull --prune**
 renamed bpvitals to bpvitals.orig and did new clone under python3
 
+use git pull --prune to get branches synced between local remote
+
+[youtube git prune](https://youtu.be/8aV5AxJrHDg?t=6817)
+
+ https://youtu.be/8aV5AxJrHDg
 
