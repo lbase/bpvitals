@@ -26,6 +26,7 @@ merged sqlsimple into master
 **Friday, July 8, 2022 1:20:41 PM EDT**
 
 had branches in this remote that I had deleted but still showed up in local (remote ref does not exist error)
+Note that problem above can be resolved with a **git pull --prune**
 renamed bpvitals to bpvitals.orig and did new clone under python3
 
 

@@ -16,7 +16,6 @@ def days7():
     # get data for sugar
     #  this one working and showing the variable mystats n
     # never got cursor to work so added mplcursors lib
-    # Sunday, July 10, 2022 11:54:27 AM EDT mplcursors commented out
     # get data
     sugeightdays = "SELECT bsdate,bsugar FROM qtsugar WHERE bsdate > (SELECT date('now','-8 day'))"
     sugar8days = pd.read_sql_query(sugeightdays, myconn, parse_dates = "bsdate")
