@@ -1,13 +1,11 @@
 #! /usr/bin/env python3
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
-from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QModelIndex, QDateTime, QSettings, Qt, QVariant, QSettings
+from PyQt5.QtCore import  QDateTime, Qt, QSettings
 from icecream import ic
 from addvitals import Ui_Form
-import sqlalchemy as dbsql
 from lclutils import Sqlpg
 import modbpstats
 
@@ -15,7 +13,6 @@ import modbpstats
 
 class Main(QtWidgets.QWidget, Ui_Form):
     def __init__(self, object, mytable="vsigns_bp"):
-        ic(mytable)
         super(Main, self).__init__()
         # build ui
         self.mytable = mytable

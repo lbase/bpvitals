@@ -1,14 +1,8 @@
-import sys
 from icecream import ic
 from sqlalchemy import table
 from sqlalchemy import column
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
-# from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
-from PyQt5.QtCore import QSettings
-from sqlalchemy.pool import StaticPool
-
 
 class Sqlpg:
     """
