@@ -24,7 +24,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.model.setTable(table_name)
         self.ui.tb1.setModel(self.model)
         self.model.setSort(0, Qt.DescendingOrder)
-        # self.model.setFilter("bpcomment like '%fast%'")
+        # table sizing
+        #self.ui.tb1.maximumViewportSize()
+        self.ui.tb1.resizeColumnsToContents()
+        self.ui.tb1.setColumnWidth(1,160)
+        
+        
         self.model.select()
         self.ui.btnVform.clicked.connect(self.add_new)
         self.ui.btnRefresh.clicked.connect(self.refreshrecs)

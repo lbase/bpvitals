@@ -27,7 +27,6 @@ class Main(QtWidgets.QWidget, Ui_Form):
             self.model = QSqlTableModel(db=self.db)
             self.model.setTable(self.mytable)
             self.model.setSort(0, Qt.AscendingOrder)
-            ic(self.model.tableName())
             self.model.select()
             # self.db.close()   # going to open close in  recinsert
         else:
