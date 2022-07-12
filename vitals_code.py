@@ -9,6 +9,8 @@ from icecream import ic
 from addvitals import Ui_Form
 import sqlalchemy as dbsql
 from lclutils import Sqlpg
+import modbpstats
+
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
@@ -61,6 +63,9 @@ class Main(QtWidgets.QWidget, Ui_Form):
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
+        self.ui.btnbpgraph.clicked.connect(self.bpgraph)
+        self.ui.btnsugar8.clicked.connect(self.sug8graph)
+        self.ui.btnsugar48.clicked.connect(self.sug48graph)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -88,6 +93,14 @@ class Main(QtWidgets.QWidget, Ui_Form):
             self.postgres_recinsert(self.mytable)
 
         # self.db.close()
+    def bpgraph(self):
+        modbpstats.bp7days()
+
+    def sug8graph(self):
+        modbpstats.days7()
+
+    def sug48graph(self):
+        modbpstats.sugar48()
 
     def setup_pg(self):
         if self.ui.chkPG.isChecked():
