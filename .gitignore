@@ -134,3 +134,9 @@ vitals/
 .vscode/
 /vsigns.db
 /.py~
+# Tuesday, July 12, 2022 4:33:29 PM EDT
+.idea
+*.kdev4
+*_orig*.*
+.ipynb_checkpoints
+.settings/
