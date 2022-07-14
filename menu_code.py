@@ -11,18 +11,18 @@ from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
 from sqlalchemy.orm import sessionmaker
 from lclutils import Sqlpg
-from sugar import Ui_Sugar
+from menu import Ui_Menu
 # for graph
 # import sugarstats48
 #import sugarstats8days
 import modbpstats
 
 
-class Main(QtWidgets.QWidget, Ui_Sugar):
+class Main(QtWidgets.QWidget, Ui_Menu):
     def __init__(self, object, mytable="qtsugar"):
         super(Main, self).__init__()
         self.mytable = mytable
-        self.ui = Ui_Sugar()
+        self.ui = Ui_Menu()
         self.ui.setupUi(self)
         self.conn_name = "sugcode"
         self.sdb = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
@@ -76,8 +76,10 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
-        self.ui.btnGraph.clicked.connect(self.bpgraph)
-        self.ui.btnGraph_2.clicked.connect(self.bpgraph2)
+        self.ui.btnGraph48.clicked.connect(self.bpgraph)
+        self.ui.btnGraph8.clicked.connect(self.bpgraph2)
+        self.ui.btnVitals.clicked.connect(self.vitals)
+        self.ui.btnShowBP.clicked.connect(self.showbp)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -147,15 +149,28 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         
         self.close()
     def bpgraph(self):
-       #os.system("/home/rfile/python3/bpvitals/bpstats.py")
-       modbpstats.sugar48()
+        #os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        modbpstats.sugar48()
        
        
     def bpgraph2(self):
-       modbpstats.days7()
+        modbpstats.days7()
        
+    def vitals(self):
+        self.p = QProcess()
+        #self.p.readyReadStandardOutput.connect(self.handle_stdout)
+        #p.readyReadStandardError.connect(self.handle_stderr)
+        #p.stateChanged.connect(self.handle_state)
+        #p.finished.connect(self.cleanup)
+        self.p.start("python",["/home/rfile/python3/bpvitals/forms/vitals_code.py"])
     
-       
+    def showbp(self):
+        self.sv = QProcess()
+        #self.p.readyReadStandardOutput.connect(self.handle_stdout)
+        #p.readyReadStandardError.connect(self.handle_stderr)
+        #p.stateChanged.connect(self.handle_state)
+        #p.finished.connect(self.cleanup)
+        self.sv.start("python",["/home/rfile/python3/bpvitals/forms/showquery.py"])   
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
