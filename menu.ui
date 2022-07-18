@@ -204,6 +204,16 @@
     <string>Show BP</string>
    </property>
   </widget>
+  <widget class="QPlainTextEdit" name="txtMsgs">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>220</y>
+     <width>701</width>
+     <height>94</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

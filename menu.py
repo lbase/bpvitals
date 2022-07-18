@@ -66,6 +66,9 @@ class Ui_Menu(object):
         self.btnShowBP = QtWidgets.QPushButton(Menu)
         self.btnShowBP.setGeometry(QtCore.QRect(140, 190, 102, 31))
         self.btnShowBP.setObjectName("btnShowBP")
+        self.txtMsgs = QtWidgets.QPlainTextEdit(Menu)
+        self.txtMsgs.setGeometry(QtCore.QRect(530, 220, 701, 94))
+        self.txtMsgs.setObjectName("txtMsgs")
 
         self.retranslateUi(Menu)
         QtCore.QMetaObject.connectSlotsByName(Menu)

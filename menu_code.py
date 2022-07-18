@@ -148,6 +148,34 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         ic(self.model.lastError().text())
         
         self.close()
+    #############################################################################    
+    def message(self, s):
+        self.ui.txtMsgs.appendPlainText(s)
+    def handle_stderr(self):
+        data = self.p.readAllStandardError()
+        stderr = bytes(data).decode("utf8")
+        self.message(stderr)
+
+    def handle_stdout(self):
+        data = self.p.readAllStandardOutput()
+        stdout = bytes(data).decode("utf8")
+        self.message(stdout)
+
+    def handle_state(self, state):
+        states = {
+            QProcess.NotRunning: 'Not running',
+            QProcess.Starting: 'Starting',
+            QProcess.Running: 'Running',
+        }
+        state_name = states[state]
+        self.message(f"State changed: {state_name}")
+
+    def process_finished(self):
+        self.message("Process finished.")
+        self.p = None        
+        
+        
+    ##############################################################################     
     def bpgraph(self):
         #os.system("/home/rfile/python3/bpvitals/bpstats.py")
         modbpstats.sugar48()
@@ -157,11 +185,13 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         modbpstats.days7()
        
     def vitals(self):
+        #if self.p is None: # not running
+        self.message("vitals is running")
         self.p = QProcess()
-        #self.p.readyReadStandardOutput.connect(self.handle_stdout)
-        #p.readyReadStandardError.connect(self.handle_stderr)
-        #p.stateChanged.connect(self.handle_state)
-        #p.finished.connect(self.cleanup)
+        self.p.readyReadStandardOutput.connect(self.handle_stdout)
+        self.p.readyReadStandardError.connect(self.handle_stderr)
+        self.p.stateChanged.connect(self.handle_state)
+        self.p.finished.connect(self.process_finished)
         self.p.start("python",["/home/rfile/python3/bpvitals/forms/vitals_code.py"])
     
     def showbp(self):
