@@ -12,16 +12,9 @@ from icecream import ic
 from sqlalchemy.orm import sessionmaker
 from lclutils import Sqlpg
 from menu import Ui_Menu
-# for graph
-# import sugarstats48
-#import sugarstats8days
 import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
-from PyQt5.Qt import QMainWindow
-import pyqtgraph as pg
-
-
 
 
 
@@ -52,12 +45,12 @@ class Main(QtWidgets.QWidget, Ui_Menu):
             self.model = QSqlTableModel(db=self.sdb)
             self.model.setTable(mytable)
             self.model.setSort(0, Qt.DescendingOrder)
-            self.model.setFilter("bsid >= " + str(self.bsid_20) )
+            self.model.setFilter("bsid >= " + str(self.bsid_20))
             # self.model.setFilter("bsid = (select max(bsid) from qtsugar)")
             self.ui.tblViewRec.setModel(self.model)
             self.ui.tblViewRec.maximumViewportSize()
             self.ui.tblViewRec.resizeColumnsToContents()
-            self.ui.tblViewRec.setColumnWidth(1,160)
+            self.ui.tblViewRec.setColumnWidth(1, 160)
             # ic(self.model.tableName())
             self.model.select()
 
@@ -83,15 +76,14 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
-        self.ui.btnGraph48.clicked.connect(self.bpgraph)
-        self.ui.btnGraph8.clicked.connect(self.bpgraph2)
+        self.ui.btnGraph48.clicked.connect(self.bpgraph48)
+        self.ui.btnGraph8.clicked.connect(self.bpgraph8)
         self.ui.btnVitals.clicked.connect(self.vitals)
         self.ui.btnShowBP.clicked.connect(self.showbp)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
         # Sunday, July 10, 2022 2:18:43 PM EDT rfile add for graphs
-        
 
     def recinsert(self):
         self.r = self.model.record()
@@ -106,6 +98,8 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.model.select()
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
+            self.message("Record inserted from menu_code")
+
 
         if self.ui.chkPG.isChecked():
             self.postgres_recinsert(self.mytable)
@@ -153,67 +147,29 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         if self.sdb.isOpen():
             self.sdb.removeDatabase(self.conn_name)
         ic(self.model.lastError().text())
-        
+
         self.close()
-    #############################################################################    
+
+    #############################################################################
     def message(self, s):
         self.ui.txtMsgs.appendPlainText(s)
-    def handle_stderr(self):
-        data = self.p.readAllStandardError()
-        stderr = bytes(data).decode("utf8")
-        self.message(stderr)
 
-    def handle_stdout(self):
-        data = self.p.readAllStandardOutput()
-        stdout = bytes(data).decode("utf8")
-        self.message(stdout)
 
-    def handle_state(self, state):
-        states = {
-            QProcess.NotRunning: 'Not running',
-            QProcess.Starting: 'Starting',
-            QProcess.Running: 'Running',
-        }
-        state_name = states[state]
-        self.message(f"State changed: {state_name}")
 
-    def process_finished(self):
-        self.message("Process finished.")
-        self.p = None        
-        
-        
-    ##############################################################################     
-    def bpgraph(self):
-        #os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        ##############################################################################
+
+    def bpgraph48(self):
+        self.message('graph 48')
         modbpstats.sugar48()
-       
-       
-    def bpgraph2(self):
+
+
+
+    def bpgraph8(self):
         modbpstats.days7()
-       
-    def vitals2(self):
-        #if self.p is None: # not running
-        self.message("vitals is running")
-        self.p = QProcess()
-        self.p.readyReadStandardOutput.connect(self.handle_stdout)
-        self.p.readyReadStandardError.connect(self.handle_stderr)
-        self.p.stateChanged.connect(self.handle_state)
-        self.p.finished.connect(self.process_finished)
-        self.p.start("python",["/home/rfile/python3/bpvitals/forms/vitals_code.py"])
-    
+
     def vitals(self):
         self.vitals = vitals()
         self.vitals.show()
-        
-    
-    
-    def showbp2(self):
-        self.sv = QProcess()
-        #self.p.readyReadStandardOutput.connect(self.handle_stdout)
-        #p.readyReadStandardError.connect(self.handle_stderr)
-        #p.stateChanged.connect(self.handle_state)
-        #p.finished.connect(self.cleanup)
-        self.sv.start("python",["/home/rfile/python3/bpvitals/forms/showquery.py"])
 
     def showbp(self):
         self.showqry = queryWin()

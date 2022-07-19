@@ -11,6 +11,7 @@ from showquerywin import Ui_MainWindow
 from vitals_code import Main as VMain
 import modbpstats
 
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, table_name="vsigns_bp"):
         super().__init__()
@@ -25,11 +26,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.tb1.setModel(self.model)
         self.model.setSort(0, Qt.DescendingOrder)
         # table sizing
-        #self.ui.tb1.maximumViewportSize()
+        # self.ui.tb1.maximumViewportSize()
         self.ui.tb1.resizeColumnsToContents()
-        self.ui.tb1.setColumnWidth(1,160)
-        
-        
+        self.ui.tb1.setColumnWidth(1, 160)
+
         self.model.select()
         self.ui.btnVform.clicked.connect(self.add_new)
         self.ui.btnRefresh.clicked.connect(self.refreshrecs)
@@ -59,7 +59,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def bpgraph(self):
         self.showSbar("showing graphs")
-        #os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        # os.system("/home/rfile/python3/bpvitals/bpstats.py")
         modbpstats.bp7days()
 
     def showSbar(self, msg):
