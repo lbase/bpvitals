@@ -37,6 +37,7 @@ def days7():
     mplcursors.cursor(lines) # or just mplcursors.cursor()
     #plt.draw()
     # myconn.close()
+    plt.ion
     plt.show()
 def bp7days():
     # blood pressure data 7 days
@@ -69,8 +70,9 @@ def bp7days():
     fig.set_figheight(10)
     mplcursors.cursor(rects3)
     mplcursors.cursor(rects2)
+    plt.ion()
     plt.show()  # draw?
-    #fig.canvas.draw()
+    # fig.canvas.draw()
     
 
 
@@ -79,6 +81,7 @@ def sugar48():
     sugar1days = pd.read_sql_query(sugonedays, myconn, parse_dates="bsdate")
     plot = sugar1days.plot.line(x="bsdate", y="bsugar",  title="sugar 48 hours")
     plt.tight_layout()
+    plt.ion()
     plt.show()
 
 

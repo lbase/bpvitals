@@ -12,7 +12,8 @@ import modbpstats
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
-    def __init__(self, object, mytable="vsigns_bp"):
+    def __init__(self, mytable="vsigns_bp"):
+    #def __init__(self, object, mytable="vsigns_bp"):
         super(Main, self).__init__()
         # build ui
         self.mytable = mytable

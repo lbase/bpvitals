@@ -16,6 +16,13 @@ from menu import Ui_Menu
 # import sugarstats48
 #import sugarstats8days
 import modbpstats
+from vitals_code import Main as vitals
+from showquery import MainWindow as queryWin
+from PyQt5.Qt import QMainWindow
+import pyqtgraph as pg
+
+
+
 
 
 class Main(QtWidgets.QWidget, Ui_Menu):
@@ -184,7 +191,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
     def bpgraph2(self):
         modbpstats.days7()
        
-    def vitals(self):
+    def vitals2(self):
         #if self.p is None: # not running
         self.message("vitals is running")
         self.p = QProcess()
@@ -194,21 +201,26 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.p.finished.connect(self.process_finished)
         self.p.start("python",["/home/rfile/python3/bpvitals/forms/vitals_code.py"])
     
-    def showbp(self):
+    def vitals(self):
+        self.vitals = vitals()
+        self.vitals.show()
+        
+    
+    
+    def showbp2(self):
         self.sv = QProcess()
         #self.p.readyReadStandardOutput.connect(self.handle_stdout)
         #p.readyReadStandardError.connect(self.handle_stderr)
         #p.stateChanged.connect(self.handle_state)
         #p.finished.connect(self.cleanup)
-        self.sv.start("python",["/home/rfile/python3/bpvitals/forms/showquery.py"])   
+        self.sv.start("python",["/home/rfile/python3/bpvitals/forms/showquery.py"])
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    if sys.argv.__len__() == 2:
-        main = Main(sys.argv[0], sys.argv[1])
-        main.show()
-        sys.exit(app.exec_())
-    else:
-        main = Main(sys.argv[0])
-        main.show()
-        sys.exit(app.exec_())
+    def showbp(self):
+        self.showqry = queryWin()
+        self.showqry.show()
+
+
+app = QtWidgets.QApplication(sys.argv)
+main = Main(sys.argv)
+main.show()
+sys.exit(app.exec_())
