@@ -3,8 +3,15 @@ import pdfkit as pdf
 import sqlite3
 
 con=sqlite3.connect("/data/sqlite/vitals.db")
-
-df=pd.read_sql_query("select * from qtsugar where bsdate >= '2022-06-01 07:30'", con)
-df.to_html('/home/rfile/python3/bpvitals/sugar.html')
-mypdf = '/home/rfile/python3/bpvitals/sugar.pdf'
-pdf.from_file('/home/rfile/python3/bpvitals/sugar.html', mypdf)
+sqlquery = """select bpdate as "date",
+bpsys as "systolic", 
+bpdia as "diastolic"  ,  
+bphr as "hr" ,
+bpoxy as "O2" , 
+bpsugar as "sugar" , 
+bpcomment as "comment"
+from vsigns_bp where bpdate >= '2022-07-01 01:00' """
+df=pd.read_sql_query(sqlquery, con)
+df.to_html('/home/rfile/python3/bpvitals/bpress.html')
+mypdf = '/home/rfile/python3/bpvitals/bpress.pdf'
+pdf.from_file('/home/rfile/python3/bpvitals/bpress.html', mypdf)
