@@ -202,10 +202,10 @@
   <widget class="QLabel" name="lblInsert">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>342</y>
-     <width>111</width>
-     <height>61</height>
+     <x>10</x>
+     <y>320</y>
+     <width>131</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="text">
@@ -264,6 +264,14 @@
     <string>Sugar 48</string>
    </property>
   </widget>
+  <zorder>btnInsert</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>btnExit</zorder>
+  <zorder>chkPG</zorder>
+  <zorder>btnbpgraph</zorder>
+  <zorder>btnsugar8</zorder>
+  <zorder>btnsugar48</zorder>
+  <zorder>lblInsert</zorder>
  </widget>
  <tabstops>
   <tabstop>dateTimeEdit</tabstop>
