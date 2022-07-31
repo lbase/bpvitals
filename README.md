@@ -37,5 +37,5 @@ use git pull --prune to get branches synced between local remote
 
  **Sunday, July 31, 2022 5:23:33 PM EDT**
 
- Just merged menuedit in main. Will continue to work on meuedit and add more features.
+ Just merged menuedit into main. Will continue to work on meuedit and add more features.
 
