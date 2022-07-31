@@ -69,6 +69,9 @@ class Ui_Menu(object):
         self.txtMsgs = QtWidgets.QPlainTextEdit(Menu)
         self.txtMsgs.setGeometry(QtCore.QRect(530, 220, 701, 94))
         self.txtMsgs.setObjectName("txtMsgs")
+        self.btnRefresh = QtWidgets.QPushButton(Menu)
+        self.btnRefresh.setGeometry(QtCore.QRect(530, 100, 102, 31))
+        self.btnRefresh.setObjectName("btnRefresh")
 
         self.retranslateUi(Menu)
         QtCore.QMetaObject.connectSlotsByName(Menu)
@@ -86,3 +89,4 @@ class Ui_Menu(object):
         self.btnGraph8.setText(_translate("Menu", "&Graph 8 days"))
         self.btnVitals.setText(_translate("Menu", "Vitals"))
         self.btnShowBP.setText(_translate("Menu", "Show BP"))
+        self.btnRefresh.setText(_translate("Menu", "refresh"))
