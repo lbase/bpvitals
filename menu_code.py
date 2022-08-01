@@ -87,7 +87,8 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.tblViewRec.setColumnWidth(1, 160)
         # ic(self.model.tableName())
         self.model.select()
-
+        msg = f"mytable: {self.mytable}"
+        self.message(msg)
     def recinsert(self):
         self.r = self.model.record()
 
@@ -171,8 +172,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         modbpstats.days7()
 
     def vitals(self):
+        self.message("running vitals")
         self.vitals = vitals()
         self.vitals.show()
+
 
     def showbp(self):
         self.showqry = queryWin()
