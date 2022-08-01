@@ -35,3 +35,7 @@ use git pull --prune to get branches synced between local remote
 
  https://youtu.be/8aV5AxJrHDg
 
+
+**Sunday, July 31, 2022 5:25:33 PM EDT**
+
+After adding some menu stuff and cosmetic ui edits merged menuedit into main.
