@@ -72,6 +72,9 @@ class Ui_Menu(object):
         self.btnRefresh = QtWidgets.QPushButton(Menu)
         self.btnRefresh.setGeometry(QtCore.QRect(530, 100, 102, 31))
         self.btnRefresh.setObjectName("btnRefresh")
+        self.btnWeight = QtWidgets.QPushButton(Menu)
+        self.btnWeight.setGeometry(QtCore.QRect(910, 40, 102, 31))
+        self.btnWeight.setObjectName("btnWeight")
 
         self.retranslateUi(Menu)
         QtCore.QMetaObject.connectSlotsByName(Menu)
@@ -90,3 +93,4 @@ class Ui_Menu(object):
         self.btnVitals.setText(_translate("Menu", "Vitals"))
         self.btnShowBP.setText(_translate("Menu", "Show BP"))
         self.btnRefresh.setText(_translate("Menu", "refresh"))
+        self.btnWeight.setText(_translate("Menu", "&Weight"))

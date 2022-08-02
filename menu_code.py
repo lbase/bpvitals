@@ -58,6 +58,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.btnVitals.clicked.connect(self.vitals)
         self.ui.btnShowBP.clicked.connect(self.showbp)
         self.ui.btnRefresh.clicked.connect(self.fillsugartab)
+        self.ui.btnWeight.clicked.connect(self.weightchart)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -180,6 +181,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
     def showbp(self):
         self.showqry = queryWin()
         self.showqry.show()
+
+    def weightchart(self):
+        modbpstats.weightline()
+
 
 
 app = QtWidgets.QApplication(sys.argv)

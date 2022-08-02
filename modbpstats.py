@@ -83,3 +83,44 @@ def sugar48():
     plt.tight_layout()
     plt.ion()
     plt.show()
+
+def weightline():
+    # jupyter to get just line graph of weight (fatty table)
+    # never got cursor to work so added mplcursors lib
+    # get data
+    # wtdta = "select ftime, weight from qfatty where ftime > (SELECT date('now','-30 day'))" # original 14 days
+    wtdta = "select ftime, weight from (select ftime, weight from fatty order by ftime desc limit 30) order by ftime asc"
+    wtdata = pd.read_sql_query(wtdta, myconn, parse_dates="ftime")
+    # wtdata['ftime'] = pd.to_datetime(wtdata['ftime'])
+    wtdata['ftime'] = pd.to_datetime(wtdata.ftime)
+    wtdata['ftime'] = wtdata['ftime'].dt.strftime('%Y-%m-%d %H:%M')
+    # wtdata['ftime'] = wtdata['ftime'].dt.floor('Min')
+    wtdata.rename(columns={'ftime': 'Time', 'weight': 'Weight'}, inplace=True)
+
+    # formatter = dates.DateFormatter('%Y-%m-%d %H:%M')
+
+    fig4, ax4, = plt.subplots()
+    # plt.subplot()
+    # start setting up figure
+    mylegend = "Weight 30 entries "
+    mystats = wtdata.describe(include='float')
+    plt.ylim(230, 260)
+    ax4.set_xlabel('Date')
+    plt.title('weight plot')
+    ax4.annotate([mystats], xy=(200, 380), xycoords='figure points')
+
+    plt.grid(visible=True, which='both', axis='both', )
+    fig4.set_figwidth(12)
+    fig4.set_figheight(10)
+    # thetable = pd.plotting.table(fig4, wtdata, colLabels= wtdata.columns )
+    lines = ax4.plot(wtdata.Time, wtdata.Weight, marker='o', linestyle='dashed')
+    # df['date_string'] = df['DateTime'].dt.strftime('%Y-%m-%d %H:%M:%S')
+    # df['start_date_time'] = df['start_date_time'].dt.floor('T')
+    # df['DateTime'] = pd.to_datetime(df['DateTime'], format='%Y-%m-%d %H:%M:%S')
+    # df.plot(x='DateTime', y='Value')
+    # formatter = dates.DateFormatter('%Y-%m-%d %H:%M')
+    # plt.setp(ax4.xaxis.set_major_formatter(formatter))
+    plt.setp(ax4.get_xticklabels(), rotation=60, fontsize=6)
+    mplcursors.cursor(lines)  # or just mplcursors.cursor()
+    plt.ion()
+    plt.show()
