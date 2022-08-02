@@ -95,7 +95,7 @@ def main(filename):
         )
         wtdata = wtdata.sort_values("ftime")
         wtdata.to_sql("fatty", myconn, if_exists="append", index=False)
-        logger.info("query ran on sqlite : %s ", filename)
+        logger.info(f"query ran on sqlite : {engstr}  csv file: {filename}")
     except Exception as e:
         print("sorry, an error occurred  ", e)
         logger.error("sqlite error:  %s", filename)
