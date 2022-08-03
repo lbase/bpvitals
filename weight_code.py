@@ -12,7 +12,7 @@ import modbpstats
 
 
 class Main(QtWidgets.QWidget, Wform):
-    def __init__(self, mytable="qfatty"):
+    def __init__(self, mytable="fatty"):
         super(Main, self).__init__()
         # build ui
         self.mytable = mytable
