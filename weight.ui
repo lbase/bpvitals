@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>691</height>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,244 +23,43 @@
     </rect>
    </property>
    <property name="text">
-    <string>&amp;Submit Rec</string>
+    <string>Add &amp;Rec</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QPlainTextEdit" name="txtMsgbox">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>30</x>
+     <y>520</y>
+     <width>541</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWeightchart">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>110</y>
+     <width>102</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Wt Chart</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
      <y>30</y>
      <width>328</width>
-     <height>936</height>
+     <height>471</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
-    <item row="1" column="1">
-     <widget class="QDateTimeEdit" name="dateTimeEdit"/>
-    </item>
-    <item row="5" column="1">
-     <widget class="QComboBox" name="cmbWeight">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QComboBox" name="cmbBmi">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="1">
-     <widget class="QComboBox" name="cmbBodyfat">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="16" column="1">
-     <widget class="QComboBox" name="cmbFatfree">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="19" column="1">
-     <widget class="QComboBox" name="cmbSubfat">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="21" column="1">
-     <widget class="QComboBox" name="cmbViscfat">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="23" column="1">
-     <widget class="QComboBox" name="cmbWater">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="25" column="1">
-     <widget class="QComboBox" name="cmbMuscle">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="29" column="1">
-     <widget class="QComboBox" name="cmbSkelmuscle">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="32" column="1">
-     <widget class="QComboBox" name="cmbBonemass">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="35" column="1">
-     <widget class="QComboBox" name="cmbProtein">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="38" column="1">
-     <widget class="QComboBox" name="cmbBmr">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="43" column="1">
-     <widget class="QComboBox" name="cmbAge">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="lblWeight">
-      <property name="text">
-       <string>Weight</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbWeight</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="0">
-     <widget class="QLabel" name="lblBmi">
-      <property name="text">
-       <string>BMI</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbBmi</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="0">
-     <widget class="QLabel" name="lblBodyfat">
-      <property name="text">
-       <string>BodyFat</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbBodyfat</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="16" column="0">
-     <widget class="QLabel" name="lblFatfree">
-      <property name="text">
-       <string>FatFreeWt</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbFatfree</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="19" column="0">
-     <widget class="QLabel" name="lblSubfat">
-      <property name="text">
-       <string>SubC Fat</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbSubfat</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="21" column="0">
-     <widget class="QLabel" name="lblViscfat">
-      <property name="text">
-       <string>Visc Fat</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbViscfat</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="23" column="0">
-     <widget class="QLabel" name="lblWater">
-      <property name="text">
-       <string>Body Water</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbWater</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="25" column="0">
-     <widget class="QLabel" name="lblMuscle">
-      <property name="text">
-       <string>Muscle Mass</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbMuscle</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="29" column="0">
-     <widget class="QLabel" name="lblSkelmuscle">
-      <property name="text">
-       <string>Skeletal Muscle</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbSkelmuscle</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="32" column="0">
-     <widget class="QLabel" name="lblBonemass">
-      <property name="text">
-       <string>Bone Mass</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbBonemass</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="35" column="0">
-     <widget class="QLabel" name="lblProtein">
-      <property name="text">
-       <string>Protein</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbProtein</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="38" column="0">
-     <widget class="QLabel" name="lblBmr">
-      <property name="text">
-       <string>BMR</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbBmr</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="43" column="0">
-     <widget class="QLabel" name="lblAge">
-      <property name="text">
-       <string>Metabolic Age</string>
-      </property>
-      <property name="buddy">
-       <cstring>cmbAge</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
+    <item row="0" column="0">
      <widget class="QLabel" name="lblTime">
       <property name="text">
        <string>Date</string>
@@ -270,9 +69,420 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="1">
+     <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="lblWeight">
+      <property name="text">
+       <string>Weight</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnWeight</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QDoubleSpinBox" name="spnWeight">
+      <property name="toolTip">
+       <string>weight in pounds</string>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="minimum">
+       <double>200.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>310.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="lblBmi">
+      <property name="text">
+       <string>BMI</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnBmi</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QDoubleSpinBox" name="spnBmi">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>20.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>40.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="lblBodyfat">
+      <property name="text">
+       <string>BodyFat</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnBodyfat</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QDoubleSpinBox" name="spnBodyfat">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>20.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="lblFatfree">
+      <property name="text">
+       <string>FatFreeWt</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnFatfree</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QDoubleSpinBox" name="spnFatfree">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>120.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>180.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>120.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="lblSubfat">
+      <property name="text">
+       <string>SubC Fat</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnSubfat</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QDoubleSpinBox" name="spnSubfat">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>20.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>40.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="lblViscfat">
+      <property name="text">
+       <string>Visc Fat</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnViscfat</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QDoubleSpinBox" name="spnViscfat">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>10.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>30.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>10.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="lblWater">
+      <property name="text">
+       <string>Body Water</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnWater</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QDoubleSpinBox" name="spnWater">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>35.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="lblSkelmuscle">
+      <property name="text">
+       <string>Skeletal Muscle</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnSkelmuscle</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QDoubleSpinBox" name="spnSkelmuscle">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>30.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>30.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QLabel" name="lblMuscle">
+      <property name="text">
+       <string>Muscle Mass</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnMuscle</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QDoubleSpinBox" name="spnMuscle">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>140.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>200.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="lblBonemass">
+      <property name="text">
+       <string>Bone Mass</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnBonemass</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QDoubleSpinBox" name="spnBonemass">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>6.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>9.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>6.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QLabel" name="lblProtein">
+      <property name="text">
+       <string>Protein</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnProtein</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QDoubleSpinBox" name="spnProtein">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>10.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>20.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>10.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
+     <widget class="QLabel" name="lblBmr">
+      <property name="text">
+       <string>BMR</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnBmr</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QDoubleSpinBox" name="spnBmr">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>1800.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>2000.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>10.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
+     <widget class="QLabel" name="lblAge">
+      <property name="text">
+       <string>Metabolic Age</string>
+      </property>
+      <property name="buddy">
+       <cstring>spnAge</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QDoubleSpinBox" name="spnAge">
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+      </property>
+      <property name="minimum">
+       <double>70.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>80.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>dateTimeEdit</tabstop>
+  <tabstop>spnWeight</tabstop>
+  <tabstop>spnBmi</tabstop>
+  <tabstop>spnBodyfat</tabstop>
+  <tabstop>spnFatfree</tabstop>
+  <tabstop>spnSubfat</tabstop>
+  <tabstop>spnViscfat</tabstop>
+  <tabstop>spnWater</tabstop>
+  <tabstop>spnSkelmuscle</tabstop>
+  <tabstop>spnMuscle</tabstop>
+  <tabstop>spnBonemass</tabstop>
+  <tabstop>spnProtein</tabstop>
+  <tabstop>spnBmr</tabstop>
+  <tabstop>spnAge</tabstop>
+  <tabstop>btnSubmit</tabstop>
+  <tabstop>txtMsgbox</tabstop>
+  <tabstop>btnWeightchart</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
