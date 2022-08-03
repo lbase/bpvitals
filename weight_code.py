@@ -12,10 +12,10 @@ import modbpstats
 
 
 class Main(QtWidgets.QWidget, Wform):
-    def __init__(self):
+    def __init__(self, mytable="qfatty"):
         super(Main, self).__init__()
         # build ui
-        self.mytable = "qfatty"
+        self.mytable = mytable
         self.ui = Wform()
         self.ui.setupUi(self)
         self.conn_name = "wcode"
@@ -29,6 +29,7 @@ class Main(QtWidgets.QWidget, Wform):
             self.model.setSort(0, Qt.AscendingOrder)
             self.model.select()
             # self.db.close()   # going to open close in  recinsert
+            self.message(f"table name: {self.mytable}")
         else:
             dbDlg = QMessageBox(self)
             dbDlg.setWindowTitle("Database error")
@@ -40,6 +41,7 @@ class Main(QtWidgets.QWidget, Wform):
             )
             dbDlg.exec()
             sys.exit()
+
     # ---------------------------------------------------------------------------- #
     #                                start of setup                                #
     # ---------------------------------------------------------------------------- #
@@ -50,7 +52,7 @@ class Main(QtWidgets.QWidget, Wform):
         # self.ui.cmbWeight.setValidator(QtGui.QDoubleValidator(0.0,300.0,1,notation=QtGui.QDoubleValidator.StandardNotation))
 
         self.ui.btnSubmit.clicked.connect(self.recinsert)
-
+        self.ui.btnWeightchart.clicked.connect(self.weightchart)
 
     def recinsert(self):
         try:
@@ -73,9 +75,13 @@ class Main(QtWidgets.QWidget, Wform):
             self.model.submit()
 
             self.submit_OK = self.model.select()
-            self.message(f"record added: {self.submit_OK}  errors:  {self.model.lastError().text()}")
+            self.message(f"record added; submit value: {self.submit_OK}  errors:  {self.model.lastError().text()}")
         except:
             print(f"please check inputs are in range {self.model.lastError().text()} ")
+
+    def weightchart(self):
+        modbpstats.weightline()
+
 
 
     def message(self, s):
@@ -93,6 +99,11 @@ class Main(QtWidgets.QWidget, Wform):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    main = Main()
-    main.show()
-    sys.exit(app.exec_())
+    if sys.argv.__len__() == 2:
+        main = Main(sys.argv[1])
+        main.show()
+        sys.exit(app.exec_())
+    else:
+        main = Main()
+        main.show()
+        sys.exit(app.exec_())
