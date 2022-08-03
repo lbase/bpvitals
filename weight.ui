@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>691</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="btnSubmit">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>40</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;Submit Rec</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>328</width>
+     <height>936</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="1" column="1">
+     <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+    </item>
+    <item row="5" column="1">
+     <widget class="QComboBox" name="cmbWeight">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QComboBox" name="cmbBmi">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QComboBox" name="cmbBodyfat">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="1">
+     <widget class="QComboBox" name="cmbFatfree">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="19" column="1">
+     <widget class="QComboBox" name="cmbSubfat">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="21" column="1">
+     <widget class="QComboBox" name="cmbViscfat">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="23" column="1">
+     <widget class="QComboBox" name="cmbWater">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="25" column="1">
+     <widget class="QComboBox" name="cmbMuscle">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="29" column="1">
+     <widget class="QComboBox" name="cmbSkelmuscle">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="32" column="1">
+     <widget class="QComboBox" name="cmbBonemass">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="35" column="1">
+     <widget class="QComboBox" name="cmbProtein">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="38" column="1">
+     <widget class="QComboBox" name="cmbBmr">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="43" column="1">
+     <widget class="QComboBox" name="cmbAge">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="lblWeight">
+      <property name="text">
+       <string>Weight</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbWeight</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="lblBmi">
+      <property name="text">
+       <string>BMI</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbBmi</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
+     <widget class="QLabel" name="lblBodyfat">
+      <property name="text">
+       <string>BodyFat</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbBodyfat</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="0">
+     <widget class="QLabel" name="lblFatfree">
+      <property name="text">
+       <string>FatFreeWt</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbFatfree</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="19" column="0">
+     <widget class="QLabel" name="lblSubfat">
+      <property name="text">
+       <string>SubC Fat</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbSubfat</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="21" column="0">
+     <widget class="QLabel" name="lblViscfat">
+      <property name="text">
+       <string>Visc Fat</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbViscfat</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="23" column="0">
+     <widget class="QLabel" name="lblWater">
+      <property name="text">
+       <string>Body Water</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbWater</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="25" column="0">
+     <widget class="QLabel" name="lblMuscle">
+      <property name="text">
+       <string>Muscle Mass</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbMuscle</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="29" column="0">
+     <widget class="QLabel" name="lblSkelmuscle">
+      <property name="text">
+       <string>Skeletal Muscle</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbSkelmuscle</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="32" column="0">
+     <widget class="QLabel" name="lblBonemass">
+      <property name="text">
+       <string>Bone Mass</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbBonemass</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="35" column="0">
+     <widget class="QLabel" name="lblProtein">
+      <property name="text">
+       <string>Protein</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbProtein</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="38" column="0">
+     <widget class="QLabel" name="lblBmr">
+      <property name="text">
+       <string>BMR</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbBmr</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="43" column="0">
+     <widget class="QLabel" name="lblAge">
+      <property name="text">
+       <string>Metabolic Age</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbAge</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="lblTime">
+      <property name="text">
+       <string>Date</string>
+      </property>
+      <property name="buddy">
+       <cstring>dateTimeEdit</cstring>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
