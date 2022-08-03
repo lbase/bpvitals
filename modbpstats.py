@@ -89,7 +89,7 @@ def weightline():
     # never got cursor to work so added mplcursors lib
     # get data
     # wtdta = "select ftime, weight from qfatty where ftime > (SELECT date('now','-30 day'))" # original 14 days
-    wtdta = "select ftime, weight from (select ftime, weight from fatty order by ftime desc limit 30) order by ftime asc"
+    wtdta = "select ftime, weight from (select ftime, weight from fatty order by ftime desc limit 10) order by ftime asc"
     wtdata = pd.read_sql_query(wtdta, myconn, parse_dates="ftime")
     # wtdata['ftime'] = pd.to_datetime(wtdata['ftime'])
     wtdata['ftime'] = pd.to_datetime(wtdata.ftime)
@@ -102,11 +102,11 @@ def weightline():
     fig4, ax4, = plt.subplots()
     # plt.subplot()
     # start setting up figure
-    mylegend = "Weight 30 entries "
+    mylegend = "Weight 10 entries "
     mystats = wtdata.describe(include='float')
-    plt.ylim(230, 260)
+    plt.ylim(220, 300)
     ax4.set_xlabel('Date')
-    plt.title('weight plot')
+    plt.title('Weight Plot last 10 entries')
     ax4.annotate([mystats], xy=(200, 380), xycoords='figure points')
 
     plt.grid(visible=True, which='both', axis='both', )
