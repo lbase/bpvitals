@@ -46,15 +46,17 @@ Got rid of error :
 
 QSqlDatabasePrivate::removeDatabase: connection 'notesconnect' is still in use, all queries will cease to work.
 
+in notes_code.py
 
-```     
-def closeDatabase(self):
-            self.tbl.setModel(None)
-            del self.model
-            self.db.close()
-            del self.db
-            QSqlDatabase.removeDatabase(self.conn_name)
-``````
+
+     
+    def closeDatabase(self):
+                self.tbl.setModel(None)
+                del self.model
+                self.db.close()
+                del self.db
+                QSqlDatabase.removeDatabase(self.conn_name)
+
 
 
 

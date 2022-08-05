@@ -23,6 +23,7 @@ class Main(QtWidgets.QWidget, Wform):
         self.db.setDatabaseName("/data/sqlite/vitals.db")
 
         ok = self.db.open()
+
         if ok:
             self.model = QSqlTableModel(db=self.db)
             self.model.setTable(self.mytable)

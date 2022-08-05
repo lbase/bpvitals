@@ -17,13 +17,14 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    ic.enable()
+    #ic.disable()
 
     def __init__(
         self, object, table_name="foodnotes"
     ):  # foodnotes default table alternate is fastnotes
         super(Main, self).__init__()
         self.table_name = table_name
+        ic.configureOutput(includeContext=True)
         self.ui = Ui_Comment()
         self.ui.setupUi(self)
 
@@ -79,7 +80,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             + self.table_name
             + " ) " )
         self.texbx_txt = self.texbx.fetchone()
-        # ic(self.texbx_txt.foodid)
+        ic(self.texbx_txt.foodid)
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
 
         self.model = QSqlTableModel(db=self.db)

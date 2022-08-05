@@ -16,7 +16,6 @@ import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
 from weight_code import Main as Wtentry
-#from notes_code import Main as notes
 from notes_code import Main as notes
 
 
@@ -30,6 +29,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.sdb = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
         self.sdb.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.sdb.open()
+        ic(self.sdb.databaseName())
         if ok:
             self.fillsugartab()
 

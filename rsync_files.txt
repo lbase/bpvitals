@@ -13,3 +13,5 @@ bpstats.py
 modbpstats.py
 menu_code.py
 menu.py
+weight_code.py
+weight.py
