@@ -76,9 +76,6 @@
        <verstretch>25</verstretch>
       </sizepolicy>
      </property>
-     <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
-     </property>
     </widget>
    </item>
    <item row="4" column="0" colspan="5">

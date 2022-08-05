@@ -12,7 +12,7 @@ import modbpstats
 
 
 class Main(QtWidgets.QWidget, Wform):
-    def __init__(self, mytable="fatty"):
+    def __init__(self, mytable="qfatty"):
         super(Main, self).__init__()
         # build ui
         self.mytable = mytable
@@ -86,6 +86,8 @@ class Main(QtWidgets.QWidget, Wform):
 
     def message(self, s):
         self.ui.txtMsgbox.appendPlainText(s)
+
+
 
 
     def exitfunc(self):

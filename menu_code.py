@@ -15,7 +15,9 @@ from menu import Ui_Menu
 import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
-
+from weight_code import Main as Wtentry
+#from notes_code import Main as notes
+from notes_code import Main as notes
 
 
 class Main(QtWidgets.QWidget, Ui_Menu):
@@ -59,6 +61,9 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.btnShowBP.clicked.connect(self.showbp)
         self.ui.btnRefresh.clicked.connect(self.fillsugartab)
         self.ui.btnWeight.clicked.connect(self.weightchart)
+        self.ui.btnWeightshow.clicked.connect(self.weightentry)
+        self.ui.btnFoodnotes.clicked.connect(self.foodnotes)
+        self.ui.btnFastnotes.clicked.connect(self.fastnotes)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -151,8 +156,6 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.model.database().close()
         if self.sdb.isOpen():
             self.sdb.removeDatabase(self.conn_name)
-        ic(self.model.lastError().text())
-
         self.close()
 
     #############################################################################
@@ -185,6 +188,19 @@ class Main(QtWidgets.QWidget, Ui_Menu):
     def weightchart(self):
         modbpstats.weightline()
 
+    def weightentry(self):
+        self.showwt = Wtentry()
+        self.showwt.show()
+
+    def foodnotes(self):
+        self.notes = notes(self, "foodnotes")
+        self.notes.show()
+
+
+
+    def fastnotes(self):
+        self.fnotes = notes(self, "fastnotes")
+        self.fnotes.show()
 
 
 app = QtWidgets.QApplication(sys.argv)

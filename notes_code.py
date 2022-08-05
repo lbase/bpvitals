@@ -17,7 +17,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    ic.disable()
+    ic.enable()
 
     def __init__(
         self, object, table_name="foodnotes"
@@ -39,7 +39,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
-        self.db = QSqlDatabase.addDatabase("QSQLITE")
+        self.conn_name = "notes"
+        self.db = QSqlDatabase.addDatabase("QSQLITE" , self.conn_name)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.db.open()
         ic(self.ok, self.db.driverName())
@@ -221,12 +222,15 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         else:
             self.populate_boxes()
 
-    def exitfunc(self):
+    def closeDatabase(self):
+        self.tbl.setModel(None)
+        del self.model
         self.db.close()
-        self.model.database().close()
-        if self.db.isOpen():
-            self.db.removeDatabase(self.conn_name)
-        ic(self.model.lastError().text())
+        del self.db
+        QSqlDatabase.removeDatabase(self.conn_name)
+
+    def exitfunc(self):
+        self.closeDatabase()
         self.close()
 
 
