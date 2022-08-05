@@ -39,3 +39,22 @@ use git pull --prune to get branches synced between local remote
 **Sunday, July 31, 2022 5:25:33 PM EDT**
 
 After adding some menu stuff and cosmetic ui edits merged menuedit into main.
+
+**Friday, August 5, 2022 10:42:10 AM EDT**
+
+Got rid of error :
+
+QSqlDatabasePrivate::removeDatabase: connection 'notesconnect' is still in use, all queries will cease to work.
+
+
+```     
+def closeDatabase(self):
+            self.tbl.setModel(None)
+            del self.model
+            self.db.close()
+            del self.db
+            QSqlDatabase.removeDatabase(self.conn_name)
+``````
+
+
+
