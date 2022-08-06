@@ -10,7 +10,7 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
 from sqlalchemy.orm import sessionmaker
-from lclutils import Sqlpg
+from lclutilscls import Sqlpg
 from menu import Ui_Menu
 import modbpstats
 from vitals_code import Main as vitals
