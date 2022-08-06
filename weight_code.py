@@ -3,11 +3,10 @@
 import sys
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
-from PyQt5 import QtWidgets , QtGui
-from PyQt5.QtCore import  QDateTime, Qt, QSettings
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import  QDateTime, Qt
 from icecream import ic
 from weight import Ui_Weight as Wform
-from lclutils import Sqlpg
 import modbpstats
 
 

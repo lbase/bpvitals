@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import  QDateTime, Qt, QSettings
 from icecream import ic
 from addvitals import Ui_Form
-from lclutils import Sqlpg
+from utils.lclutils import Sqlpg
 import modbpstats
 
 
