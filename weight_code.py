@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import  QDateTime, Qt
 from icecream import ic
 from weight import Ui_Weight as Wform
-import modbpstats
+from graphs import modbpstats
 
 
 class Main(QtWidgets.QWidget, Wform):

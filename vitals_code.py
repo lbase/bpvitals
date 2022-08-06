@@ -7,8 +7,7 @@ from PyQt5.QtCore import  QDateTime, Qt, QSettings
 from icecream import ic
 from addvitals import Ui_Form
 from lclutils import Sqlpg
-import modbpstats
-
+from graphs import modbpstats
 
 
 class Main(QtWidgets.QWidget, Ui_Form):

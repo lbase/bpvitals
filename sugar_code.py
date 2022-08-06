@@ -14,7 +14,7 @@ from sugar import Ui_Sugar
 # for graph
 # import sugarstats48
 #import sugarstats8days
-import modbpstats
+from graphs import modbpstats
 
 
 class Main(QtWidgets.QWidget, Ui_Sugar):

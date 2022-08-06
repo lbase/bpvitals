@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 import sys
-import os
-from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel, QSqlTableModel
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableView
-from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtCore import Qt
+from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from icecream import ic
-from icecream.icecream import IceCreamDebugger
 from showquerywin import Ui_MainWindow
 from vitals_code import Main as VMain
-import modbpstats
+from graphs import modbpstats
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):

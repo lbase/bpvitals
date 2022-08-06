@@ -1,18 +1,16 @@
 #! /usr/bin/env python3
 
-import os
 import sys
-
 import sqlalchemy as dbsql
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QDateTime, Qt, QProcess
+from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
 from sqlalchemy.orm import sessionmaker
 from lclutils import Sqlpg
 from menu import Ui_Menu
-import modbpstats
+from graphs import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
 from weight_code import Main as Wtentry
@@ -167,7 +165,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         ##############################################################################
 
     def bpgraph48(self):
-        self.message('graph 48')
+        self.message(f'graph 48 {self.mytable} ')
         modbpstats.sugar48()
 
 
