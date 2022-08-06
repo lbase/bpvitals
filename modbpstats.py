@@ -22,12 +22,14 @@ def days7():
     mylegend = "7 days stats "
     mystats = sugar8days.describe(include='int')
     sugar8days = sugar8days.sort_values("bsdate")
+    sugar8days['bsdate'] = pd.to_datetime(sugar8days.bsdate)
+    sugar8days['bsdate'] = sugar8days['bsdate'].dt.strftime('%Y-%m-%d %H:%M')
     fig3, ax3 = plt.subplots()
     plt.ylim(100, 250)
     ax3.set_xlabel('Date')
     plt.title('blood sugar last 8 days')
     ax3.annotate([mystats], xy=(200, 380), xycoords='figure points')
-    plt.setp(ax3.get_xticklabels(), rotation=90, fontsize=6)
+    plt.setp(ax3.get_xticklabels(), rotation=60, fontsize=6)
     # ax3.set_xticklabels(sugar8days.bsdate, rotation=90, fontsize=6)
     plt.grid(visible=True, which='both', axis='both', )
     fig3.set_figwidth(18)
@@ -36,7 +38,7 @@ def days7():
     mplcursors.cursor(lines)  # or just mplcursors.cursor()
     # plt.draw()
     # myconn.close()
-    plt.ion
+    plt.ion ()
     plt.show()
 
 
@@ -61,7 +63,7 @@ def bp7days():
     ax.set_ylabel("120/80 = perfect")
     ax.set_title("Blood press 7 days")
     ax.set_xticks(x)
-    ax.set_xticklabels(bp7days.bpdate, rotation=90, fontsize=6)
+    ax.set_xticklabels(bp7days.bpdate, rotation=60, fontsize=6)
     ax.legend()
 
     ax.bar_label(rects1, label_type="center", color="#EEEED0")
@@ -79,7 +81,11 @@ def bp7days():
 def sugar48():
     sugonedays = "SELECT bsdate,bsugar FROM qtsugar WHERE bsdate >= (SELECT date('now', '-48 hours'))"
     sugar1days = pd.read_sql_query(sugonedays, myconn, parse_dates="bsdate")
-    plot = sugar1days.plot.line(x="bsdate", y="bsugar", title="sugar 48 hours")
+    sugar1days['bsdate'] = pd.to_datetime(sugar1days.bsdate)
+    sugar1days['bsdate'] = sugar1days['bsdate'].dt.strftime('%Y-%m-%d %H:%M')
+    lines = sugar1days.plot.line(x="bsdate", y="bsugar", title="sugar 48 hours" , color='green', marker='o', linestyle='dashed')
+    plt.xticks(rotation=60, fontsize=6)
+    mplcursors.cursor(lines)
     plt.tight_layout()
     plt.ion()
     plt.show()
@@ -114,12 +120,6 @@ def weightline():
     fig4.set_figheight(10)
     # thetable = pd.plotting.table(fig4, wtdata, colLabels= wtdata.columns )
     lines = ax4.plot(wtdata.Time, wtdata.Weight, marker='o', linestyle='dashed')
-    # df['date_string'] = df['DateTime'].dt.strftime('%Y-%m-%d %H:%M:%S')
-    # df['start_date_time'] = df['start_date_time'].dt.floor('T')
-    # df['DateTime'] = pd.to_datetime(df['DateTime'], format='%Y-%m-%d %H:%M:%S')
-    # df.plot(x='DateTime', y='Value')
-    # formatter = dates.DateFormatter('%Y-%m-%d %H:%M')
-    # plt.setp(ax4.xaxis.set_major_formatter(formatter))
     plt.setp(ax4.get_xticklabels(), rotation=60, fontsize=6)
     mplcursors.cursor(lines)  # or just mplcursors.cursor()
     plt.ion()
