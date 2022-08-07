@@ -1,21 +1,21 @@
 #! /usr/bin/env python3
 
-import os
 import sys
-
 import sqlalchemy as dbsql
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QDateTime, Qt, QProcess
+from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
+from devtools import debug
 from sqlalchemy.orm import sessionmaker
-from lclutils import Sqlpg
-from menu import Ui_Menu
-import modbpstats
+from utils.lclutils import Sqlpg
+from forms.menu import Ui_Menu
+from graphs import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
-
+from weight_code import Main as Wtentry
+from notes_code import Main as notes
 
 
 class Main(QtWidgets.QWidget, Ui_Menu):
@@ -28,6 +28,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.sdb = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
         self.sdb.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.sdb.open()
+        debug(self.sdb.databaseName())
         if ok:
             self.fillsugartab()
 
@@ -58,6 +59,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.btnVitals.clicked.connect(self.vitals)
         self.ui.btnShowBP.clicked.connect(self.showbp)
         self.ui.btnRefresh.clicked.connect(self.fillsugartab)
+        self.ui.btnWeight.clicked.connect(self.weightchart)
+        self.ui.btnWeightshow.clicked.connect(self.weightentry)
+        self.ui.btnFoodnotes.clicked.connect(self.foodnotes)
+        self.ui.btnFastnotes.clicked.connect(self.fastnotes)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -85,9 +90,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.tblViewRec.maximumViewportSize()
         self.ui.tblViewRec.resizeColumnsToContents()
         self.ui.tblViewRec.setColumnWidth(1, 160)
-        # ic(self.model.tableName())
+        # debug(self.model.tableName())
         self.model.select()
-
+        msg = f"mytable: {self.mytable}"
+        self.message(msg)
     def recinsert(self):
         self.r = self.model.record()
 
@@ -149,8 +155,6 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.model.database().close()
         if self.sdb.isOpen():
             self.sdb.removeDatabase(self.conn_name)
-        ic(self.model.lastError().text())
-
         self.close()
 
     #############################################################################
@@ -162,7 +166,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         ##############################################################################
 
     def bpgraph48(self):
-        self.message('graph 48')
+        self.message(f'graph 48 {self.mytable} ')
         modbpstats.sugar48()
 
 
@@ -171,12 +175,31 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         modbpstats.days7()
 
     def vitals(self):
+        self.message("running vitals")
         self.vitals = vitals()
         self.vitals.show()
+
 
     def showbp(self):
         self.showqry = queryWin()
         self.showqry.show()
+
+    def weightchart(self):
+        modbpstats.weightline()
+
+    def weightentry(self):
+        self.showwt = Wtentry()
+        self.showwt.show()
+
+    def foodnotes(self):
+        self.notes = notes(self, "foodnotes")
+        self.notes.show()
+
+
+
+    def fastnotes(self):
+        self.fnotes = notes(self, "fastnotes")
+        self.fnotes.show()
 
 
 app = QtWidgets.QApplication(sys.argv)

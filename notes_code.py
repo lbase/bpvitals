@@ -5,11 +5,10 @@ from notes import Ui_Comment
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
-from PyQt5.QtWidgets import QDataWidgetMapper, QTableView
 import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from icecream import ic
-from lclutils import Sqlpg
+from utils.lclutils import Sqlpg
 import sys
 
 
@@ -17,13 +16,14 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    ic.disable()
+    #ic.disable()
 
     def __init__(
         self, object, table_name="foodnotes"
     ):  # foodnotes default table alternate is fastnotes
         super(Main, self).__init__()
         self.table_name = table_name
+        ic.configureOutput(includeContext=True)
         self.ui = Ui_Comment()
         self.ui.setupUi(self)
 
@@ -39,7 +39,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
-        self.db = QSqlDatabase.addDatabase("QSQLITE")
+        self.conn_name = "notes"
+        self.db = QSqlDatabase.addDatabase("QSQLITE" , self.conn_name)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.db.open()
         ic(self.ok, self.db.driverName())
@@ -78,7 +79,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             + self.table_name
             + " ) " )
         self.texbx_txt = self.texbx.fetchone()
-        # ic(self.texbx_txt.foodid)
+        ic(self.texbx_txt.foodid)
         self.ui.textEdit.setText(self.texbx_txt.fnotes)
 
         self.model = QSqlTableModel(db=self.db)
@@ -221,12 +222,15 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         else:
             self.populate_boxes()
 
-    def exitfunc(self):
+    def closeDatabase(self):
+        self.tbl.setModel(None)
+        del self.model
         self.db.close()
-        self.model.database().close()
-        if self.db.isOpen():
-            self.db.removeDatabase(self.conn_name)
-        ic(self.model.lastError().text())
+        del self.db
+        QSqlDatabase.removeDatabase(self.conn_name)
+
+    def exitfunc(self):
+        self.closeDatabase()
         self.close()
 
 

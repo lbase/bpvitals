@@ -1,12 +1,10 @@
 #! /usr/bin/env python3
 import sys
 import os
-from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel, QSqlTableModel
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableView
-from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from icecream import ic
-from shownoteswin import Ui_NotesWin
+from forms.shownoteswin import Ui_NotesWin
 from vitals_code import Main as VMain
 
 
@@ -59,7 +57,7 @@ class MainWindow(QMainWindow, Ui_NotesWin):
 
     def bpgraph(self):
         self.showSbar("showing graphs")
-        os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        os.system("/utils/bpstats.py")
 
     def showSbar(self, msg):
         self.ui.statusbar.showMessage(msg)

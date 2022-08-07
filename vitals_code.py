@@ -5,10 +5,9 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import  QDateTime, Qt, QSettings
 from icecream import ic
-from addvitals import Ui_Form
-from lclutils import Sqlpg
-import modbpstats
-
+from forms.addvitals import Ui_Form
+from utils.lclutils import Sqlpg
+from graphs import modbpstats
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
@@ -41,6 +40,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
             )
             dbDlg.exec()
             sys.exit()
+
         # ---------------------------------------------------------------------------- #
         #                                start of setup                                #
         # ---------------------------------------------------------------------------- #
@@ -148,10 +148,11 @@ class Main(QtWidgets.QWidget, Ui_Form):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     if sys.argv.__len__() == 2:
-        main = Main(sys.argv[0], sys.argv[1])
+        main = Main(sys.argv[1])
         main.show()
         sys.exit(app.exec_())
+        ic(sys.argv.__len__())
     else:
-        main = Main(sys.argv[0])
+        main = Main()
         main.show()
         sys.exit(app.exec_())

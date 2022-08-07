@@ -125,7 +125,7 @@ dmypy.json
 vitals.sqbpro
 
 exbak/
-forms/
+../forms/forms/
 
 vitals/
 *.py~
@@ -134,3 +134,4 @@ vitals/
 .vscode/
 /vsigns.db
 /.py~
+/.idea/
