@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
 from sqlalchemy.orm import sessionmaker
 from lclutils import Sqlpg
-from menu import Ui_Menu
+from forms.menu import Ui_Menu
 from graphs import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
