@@ -7,6 +7,7 @@ from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
+from devtools import debug
 from sqlalchemy.orm import sessionmaker
 from utils.lclutils import Sqlpg
 from forms.menu import Ui_Menu
@@ -27,7 +28,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.sdb = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
         self.sdb.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.sdb.open()
-        ic(self.sdb.databaseName())
+        debug(self.sdb.databaseName())
         if ok:
             self.fillsugartab()
 
@@ -89,7 +90,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.tblViewRec.maximumViewportSize()
         self.ui.tblViewRec.resizeColumnsToContents()
         self.ui.tblViewRec.setColumnWidth(1, 160)
-        # ic(self.model.tableName())
+        # debug(self.model.tableName())
         self.model.select()
         msg = f"mytable: {self.mytable}"
         self.message(msg)
