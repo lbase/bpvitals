@@ -134,3 +134,4 @@ vitals/
 .vscode/
 /vsigns.db
 /.py~
+/.idea/
