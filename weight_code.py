@@ -6,7 +6,7 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import  QDateTime, Qt
 from icecream import ic
-from weight import Ui_Weight as Wform
+from forms.weight import Ui_Weight as Wform
 from graphs import modbpstats
 
 

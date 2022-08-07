@@ -5,8 +5,8 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import  QDateTime, Qt, QSettings
 from icecream import ic
-from addvitals import Ui_Form
-from lclutils import Sqlpg
+from forms.addvitals import Ui_Form
+from utils.lclutils import Sqlpg
 from graphs import modbpstats
 
 

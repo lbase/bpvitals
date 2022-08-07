@@ -8,7 +8,7 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from icecream import ic
-from lclutils import Sqlpg
+from utils.lclutils import Sqlpg
 import sys
 
 
