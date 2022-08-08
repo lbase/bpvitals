@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 
-from notes import Ui_Comment
+from forms.notes import Ui_Comment
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel

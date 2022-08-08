@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
 from sqlalchemy.orm import sessionmaker
 from utils.lclutils import Sqlpg
-from sugar import Ui_Sugar
+from forms.sugar import Ui_Sugar
 # for graph
 # import sugarstats48
 #import sugarstats8days
