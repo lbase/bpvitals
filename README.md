@@ -39,3 +39,13 @@ use git pull --prune to get branches synced between local remote
 
  Just merged menuedit into main. Will continue to work on meuedit and add more features.
 
+**Monday, August 8, 2022 12:45:30 PM EDT**
+
+branch now called edit 
+
+moving forms into /forms subdirectory 
+
+last merge to main:
+
+673d5ee247507527f45c1f9b3c2abb1fb603133a
+
