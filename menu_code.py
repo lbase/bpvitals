@@ -2,10 +2,10 @@
 
 import sys
 import sqlalchemy as dbsql
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QApplication
 from icecream import ic
 from devtools import debug
 from sqlalchemy.orm import sessionmaker
@@ -94,9 +94,9 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.model.select()
         msg = f"mytable: {self.mytable}"
         self.message(msg)
+
     def recinsert(self):
         self.r = self.model.record()
-
         self.r.setValue(
             "bsdate", self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm")
         ),
@@ -202,7 +202,13 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.fnotes.show()
 
 
-app = QtWidgets.QApplication(sys.argv)
-main = Main(sys.argv)
-main.show()
-sys.exit(app.exec_())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = Main(sys.argv)
+    window.show()
+    app.exec_()
+else:
+
+    main = Main(sys.argv)
+    main.show()
+    sys.exit(app.exec_())

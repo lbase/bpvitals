@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import sys
-from PyQt5.QtCore import Qt
-from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
-from PyQt5.QtWidgets import QApplication, QMainWindow
+import os
+from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel, QSqlTableModel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableView
+from PyQt5.QtCore import QCoreApplication
 from icecream import ic
+from icecream.icecream import IceCreamDebugger
 from forms.showquerywin import Ui_MainWindow
 from vitals_code import Main as VMain
 from graphs import modbpstats
-
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, table_name="vsigns_bp"):
@@ -23,10 +25,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.tb1.setModel(self.model)
         self.model.setSort(0, Qt.DescendingOrder)
         # table sizing
-        # self.ui.tb1.maximumViewportSize()
+        #self.ui.tb1.maximumViewportSize()
         self.ui.tb1.resizeColumnsToContents()
-        self.ui.tb1.setColumnWidth(1, 160)
-
+        self.ui.tb1.setColumnWidth(1,160)
+        
+        
         self.model.select()
         self.ui.btnVform.clicked.connect(self.add_new)
         self.ui.btnRefresh.clicked.connect(self.refreshrecs)
@@ -56,7 +59,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def bpgraph(self):
         self.showSbar("showing graphs")
-        # os.system("/home/rfile/python3/bpvitals/bpstats.py")
+        #os.system("/home/rfile/python3/bpvitals/bpstats.py")
         modbpstats.bp7days()
 
     def showSbar(self, msg):
@@ -85,6 +88,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    main = MainWindow()
+    window = MainWindow()
+    window.show()
+    app.exec_()
+else:
+    
+    main = MainWindow(sys.argv[0])
     main.show()
     sys.exit(app.exec_())
+
+
