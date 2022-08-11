@@ -49,6 +49,3 @@ last merge to main:
 
 673d5ee247507527f45c1f9b3c2abb1fb603133a
 
-time to quit using rsync to copy stuff into another directory
-
-delete rsync_files.txt rsync_forms
