@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>933</width>
+    <height>623</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QMdiArea" name="mdiArea"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>933</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuRecord">
+    <property name="title">
+     <string>Record</string>
+    </property>
+    <addaction name="actionRec_Vitals"/>
+    <addaction name="actionView"/>
+    <addaction name="actionRec_sugar"/>
+   </widget>
+   <widget class="QMenu" name="menuGraphs">
+    <property name="title">
+     <string>Graphs</string>
+    </property>
+    <addaction name="actionSugar_8_days"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuRecord"/>
+   <addaction name="menuGraphs"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionRec_Vitals">
+   <property name="text">
+    <string>rec Vitals</string>
+   </property>
+  </action>
+  <action name="actionView">
+   <property name="text">
+    <string>View BP records</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionRec_sugar">
+   <property name="text">
+    <string>rec sugar</string>
+   </property>
+  </action>
+  <action name="actionSugar_8_days">
+   <property name="text">
+    <string>Sugar 8 days</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

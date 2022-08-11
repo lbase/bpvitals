@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from icecream import ic
+from devtools import debug
 from forms.showquerywin import Ui_MainWindow
 from vitals_code import Main as VMain
 from graphs import modbpstats
@@ -84,6 +85,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == "__main__":
+    debug(__name__)
     app = QApplication(sys.argv)
     main = MainWindow()
     main.show()
