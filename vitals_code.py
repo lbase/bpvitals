@@ -135,13 +135,17 @@ class Main(QtWidgets.QWidget, Ui_Form):
         settings.setValue("tablename", self.mytable)
         settings.setValue("databasename", self.db.databaseName())
 
+
+    def closeDatabase(self):
+            del self.model
+            self.db.close()
+            del self.db
+            QSqlDatabase.removeDatabase(self.conn_name)
+
+
     def exitfunc(self):
         self.write_settings()
-        self.db.close()
-        self.model.database().close()
-        if self.db.isOpen():
-            self.db.removeDatabase(self.conn_name)
-        ic(self.model.lastError().text())
+        self.closeDatabase()
         self.close()
 
 
