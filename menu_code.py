@@ -188,7 +188,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         modbpstats.weightline()
 
     def weightentry(self):
-        self.showwt = Wtentry()
+        self.showwt = Wtentry('fatty')
         self.showwt.show()
 
     def foodnotes(self):
