@@ -2,11 +2,11 @@
 
 import sys
 import sqlalchemy as dbsql
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox, QApplication
-from icecream import ic
+
 from devtools import debug
 from sqlalchemy.orm import sessionmaker
 from utils.lclutils import Sqlpg
