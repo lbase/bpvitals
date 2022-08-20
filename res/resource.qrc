@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="ico">
+    <file>blood.png</file>
+    <file>bp.png</file>
+    <file>diabetes.png</file>
+  </qresource>
+</RCC>

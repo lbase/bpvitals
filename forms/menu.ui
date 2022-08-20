@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Menu</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/resource.qrc">
+    <normaloff>:/ico/diabetes.png</normaloff>:/ico/diabetes.png</iconset>
+  </property>
   <widget class="QLabel" name="lblComment">
    <property name="geometry">
     <rect>
@@ -280,6 +284,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

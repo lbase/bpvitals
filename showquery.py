@@ -85,7 +85,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == "__main__":
-    debug(__name__)
+    # debug(__name__)
     app = QApplication(sys.argv)
     main = MainWindow()
     main.show()

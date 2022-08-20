@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './menu.ui'
+# Form implementation generated from reading ui file 'menu.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -21,6 +21,9 @@ class Ui_Menu(object):
         sizePolicy.setHeightForWidth(Menu.sizePolicy().hasHeightForWidth())
         Menu.setSizePolicy(sizePolicy)
         Menu.setMaximumSize(QtCore.QSize(1247, 692))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/ico/diabetes.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Menu.setWindowIcon(icon)
         self.lblComment = QtWidgets.QLabel(Menu)
         self.lblComment.setGeometry(QtCore.QRect(10, 8, 209, 21))
         self.lblComment.setObjectName("lblComment")
@@ -106,3 +109,4 @@ class Ui_Menu(object):
         self.btnWeightshow.setText(_translate("Menu", "Weight Entry"))
         self.btnFoodnotes.setText(_translate("Menu", "Food Notes"))
         self.btnFastnotes.setText(_translate("Menu", "Fast Notes"))
+import resource_rc

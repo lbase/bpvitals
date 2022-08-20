@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/resource.qrc">
+    <normaloff>:/ico/bp.png</normaloff>:/ico/bp.png</iconset>
+  </property>
   <widget class="QPushButton" name="btnInsert">
    <property name="geometry">
     <rect>
@@ -283,6 +287,8 @@
   <tabstop>lncomment</tabstop>
   <tabstop>btnInsert</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../res/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

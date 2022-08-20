@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './addvitals.ui'
+# Form implementation generated from reading ui file 'addvitals.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -15,6 +15,9 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(640, 480)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/ico/bp.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Form.setWindowIcon(icon)
         self.btnInsert = QtWidgets.QPushButton(Form)
         self.btnInsert.setGeometry(QtCore.QRect(10, 430, 84, 39))
         self.btnInsert.setObjectName("btnInsert")
@@ -139,3 +142,4 @@ class Ui_Form(object):
         self.btnbpgraph.setText(_translate("Form", "BP Graph"))
         self.btnsugar8.setText(_translate("Form", "Sugar 8"))
         self.btnsugar48.setText(_translate("Form", "Sugar 48"))
+import resource_rc
