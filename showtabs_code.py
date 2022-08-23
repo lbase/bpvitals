@@ -29,6 +29,35 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.bpmodel.setSort(0, Qt.DescendingOrder)
         self.ui.tblVbp.setModel(self.bpmodel)
         self.bpmodel.select()
+        self.ui.tblVbp.setColumnHidden(0, True)
+        self.ui.tblVbp.resizeColumnToContents(7)
+        self.ui.tblVbp.setColumnWidth(1, 160)
+        ################################################
+        # foodnotes
+        self.foodmodel = QSqlTableModel(db=self.db)
+        self.foodmodel.setTable('foodnotes')
+        self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 16)')
+        self.foodmodel.setSort(0,Qt.DescendingOrder)
+        self.ui.tblVfood.setModel(self.foodmodel)
+        self.foodmodel.select()
+        self.ui.tblVfood.setColumnHidden(0, True)
+        self.ui.tblVfood.setColumnHidden(3, True)
+        self.ui.tblVfood.setColumnHidden(4, True)
+        self.ui.tblVfood.resizeColumnToContents(2)
+        self.ui.tblVfood.setColumnWidth(1, 160)
+        #################################################
+        self.fastmodel = QSqlTableModel(db=self.db)
+        self.fastmodel.setTable('foodnotes')
+        self.fastmodel.setFilter('foodid >= ((select max(foodid) from fastnotes) - 16)')
+        self.fastmodel.setSort(0, Qt.DescendingOrder)
+        self.ui.tblVfast.setModel(self.fastmodel)
+        self.fastmodel.select()
+        self.ui.tblVfast.setColumnHidden(0, True)
+        self.ui.tblVfast.setColumnHidden(3, True)
+        self.ui.tblVfast.setColumnHidden(4, True)
+        self.ui.tblVfast.resizeColumnToContents(2)
+        self.ui.tblVfast.setColumnWidth(1, 160)
+
 
 if __name__ == "__main__":
     # debug(__name__)
