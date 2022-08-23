@@ -10,7 +10,7 @@ bphr as "hr" ,
 bpoxy as "O2" , 
 bpsugar as "sugar" , 
 bpcomment as "comment"
-from vsigns_bp  where bpdate >= '2022-02-01 01:00' and bpdate <= '2022-03-01 01:00'"""
+from vsigns_bp  where bpdate >= '2022-07-01 01:00' and bpdate <= '2022-08-20 01:00'"""
 # orig where bpdate >= '2022-07-01 01:00'
 df=pd.read_sql_query(sqlquery, con)
 df.to_html('/home/rfile/python3/bpvitals/bpress_f.html')
