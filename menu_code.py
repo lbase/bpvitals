@@ -70,24 +70,11 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.setup_pg()
         # Sunday, July 10, 2022 2:18:43 PM EDT rfile add for graphs
     def fillsugartab(self):
-        # get number for max(bsid)
-        self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
-        self.mysession = sessionmaker(bind=self.eng)
-        self.mysess = self.mysession()
-        self.bsid = self.mysess.execute("select max(bsid) as 'bsmax' from qtsugar")
-        self.bsidval = self.bsid.fetchone()
-        self.bsidint = str(self.bsidval)
-        self.bsidint = self.bsidint.strip("(),")
-        # print(self.bsidint)
-        self.bsidint = int(self.bsidint)
-        self.bsid_20 = (self.bsidint - 20)
 
-        # end get number
         self.model = QSqlTableModel(db=self.sdb)
         self.model.setTable(self.mytable)
         self.model.setSort(0, Qt.DescendingOrder)
-        self.model.setFilter("bsid >= " + str(self.bsid_20))
-        # self.model.setFilter("bsid = (select max(bsid) from qtsugar)")
+        self.model.setFilter("bsid >= ((select max(bsid) from qtsugar) - 20)")
         self.ui.tblViewRec.setModel(self.model)
         self.ui.tblViewRec.maximumViewportSize()
         self.ui.tblViewRec.setColumnHidden(0, True)
