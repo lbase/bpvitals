@@ -283,6 +283,19 @@
     <string>Fast Notes</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btnShowtabs">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>120</y>
+     <width>102</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Show Tables</string>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="../res/resource.qrc"/>

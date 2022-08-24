@@ -31,6 +31,7 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.bpmodel.select()
         self.ui.tblVbp.setColumnHidden(0, True)
         self.ui.tblVbp.resizeColumnToContents(7)
+        self.ui.tblVbp.resizeRowsToContents()
         self.ui.tblVbp.setColumnWidth(1, 160)
         ################################################
         # foodnotes
@@ -44,6 +45,7 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.ui.tblVfood.setColumnHidden(3, True)
         self.ui.tblVfood.setColumnHidden(4, True)
         self.ui.tblVfood.resizeColumnToContents(2)
+        self.ui.tblVfood.resizeRowsToContents()
         self.ui.tblVfood.setColumnWidth(1, 160)
         #################################################
         self.fastmodel = QSqlTableModel(db=self.db)
@@ -55,7 +57,8 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.ui.tblVfast.setColumnHidden(0, True)
         self.ui.tblVfast.setColumnHidden(3, True)
         self.ui.tblVfast.setColumnHidden(4, True)
-        self.ui.tblVfast.resizeColumnToContents(2)
+        self.ui.tblVfast.resizeColumnsToContents()
+        self.ui.tblVfast.resizeRowsToContents()
         self.ui.tblVfast.setColumnWidth(1, 160)
 
 

@@ -87,6 +87,9 @@ class Ui_Menu(object):
         self.btnFastnotes = QtWidgets.QPushButton(Menu)
         self.btnFastnotes.setGeometry(QtCore.QRect(1070, 80, 102, 31))
         self.btnFastnotes.setObjectName("btnFastnotes")
+        self.btnShowtabs = QtWidgets.QPushButton(Menu)
+        self.btnShowtabs.setGeometry(QtCore.QRect(1070, 120, 102, 31))
+        self.btnShowtabs.setObjectName("btnShowtabs")
 
         self.retranslateUi(Menu)
         QtCore.QMetaObject.connectSlotsByName(Menu)
@@ -109,4 +112,5 @@ class Ui_Menu(object):
         self.btnWeightshow.setText(_translate("Menu", "Weight Entry"))
         self.btnFoodnotes.setText(_translate("Menu", "Food Notes"))
         self.btnFastnotes.setText(_translate("Menu", "Fast Notes"))
+        self.btnShowtabs.setText(_translate("Menu", "Show Tables"))
 import resource_rc

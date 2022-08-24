@@ -16,6 +16,7 @@ from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
 from weight_code import Main as Wtentry
 from notes_code import Main as notes
+from showtabs_code import MainWindow as showtabs
 
 
 class Main(QtWidgets.QWidget, Ui_Menu):
@@ -63,6 +64,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.btnWeightshow.clicked.connect(self.weightentry)
         self.ui.btnFoodnotes.clicked.connect(self.foodnotes)
         self.ui.btnFastnotes.clicked.connect(self.fastnotes)
+        self.ui.btnShowtabs.clicked.connect(self.showtabs)
         self.ui.chkPG.setChecked(1)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         self.setup_pg()
@@ -88,6 +90,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         # self.model.setFilter("bsid = (select max(bsid) from qtsugar)")
         self.ui.tblViewRec.setModel(self.model)
         self.ui.tblViewRec.maximumViewportSize()
+        self.ui.tblViewRec.setColumnHidden(0, True)
         self.ui.tblViewRec.resizeColumnsToContents()
         self.ui.tblViewRec.setColumnWidth(1, 160)
         # debug(self.model.tableName())
@@ -200,6 +203,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
     def fastnotes(self):
         self.fnotes = notes(self, "fastnotes")
         self.fnotes.show()
+
+    def showtabs(self):
+        self.showtabs = showtabs()
+        self.showtabs.show()
 
 
 if __name__ == "__main__":
