@@ -29,7 +29,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.sdb = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
         self.sdb.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.sdb.open()
-        debug(self.sdb.databaseName())
+        # debug(self.sdb.databaseName())
         if ok:
             self.fillsugartab()
 

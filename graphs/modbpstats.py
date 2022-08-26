@@ -83,9 +83,18 @@ def sugar48():
     sugar1days = pd.read_sql_query(sugonedays, myconn, parse_dates="bsdate")
     sugar1days['bsdate'] = pd.to_datetime(sugar1days.bsdate)
     sugar1days['bsdate'] = sugar1days['bsdate'].dt.strftime('%Y-%m-%d %H:%M')
-    lines = sugar1days.plot.line(x="bsdate", y="bsugar", title="sugar 48 hours" , color='green', marker='o', linestyle='dashed')
+    #sugar1days = sugar1days.reindex(['bsdate' , 'bsugar'], axis=1)
+    # lines = sugar1days.plot.line(x="bsdate", y="bsugar", title="sugar 48 hours" , color='green', marker='o', linestyle='dashed')
+    #######################################################
+    fig6, ax6, = plt.subplots()
+    lines = ax6.plot(sugar1days.bsdate, sugar1days.bsugar, color='green',marker='o',linestyle='dashed')
+    plt.title('sugar 48 hours')
+    ############################################################
+
+
+
     plt.xticks(rotation=60, fontsize=6)
-    mplcursors.cursor(lines)
+    mplcursors.cursor()
     plt.tight_layout()
     plt.ion()
     plt.show()
