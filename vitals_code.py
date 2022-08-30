@@ -5,8 +5,9 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import  QDateTime, Qt, QSettings
 from icecream import ic
+from devtools import debug
 from forms.addvitals import Ui_Form
-from utils.lclutils import Sqlpg
+# from utils.lclutils import Sqlpg
 from graphs import modbpstats
 
 
@@ -63,9 +64,8 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.ui.btnbpgraph.clicked.connect(self.bpgraph)
         self.ui.btnsugar8.clicked.connect(self.sug8graph)
         self.ui.btnsugar48.clicked.connect(self.sug48graph)
-        self.ui.chkPG.setChecked(1)
+        self.ui.chkPG.setChecked(0)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
-        self.setup_pg()
 
     def recinsert(self):
         r = self.model.record()
@@ -82,12 +82,10 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.model.submit()
         ic(self.model.lastError().text())
         self.submit_OK = self.model.select()
-        ic(self.model.submit())
+        debug(self.model.submit())
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
-        if self.ui.chkPG.isChecked():
-            # self.pg_table_name = self.table_name
-            self.postgres_recinsert(self.mytable)
+
 
         # self.db.close()
     def bpgraph(self):
@@ -99,33 +97,6 @@ class Main(QtWidgets.QWidget, Ui_Form):
     def sug48graph(self):
         modbpstats.sugar48()
 
-    def setup_pg(self):
-        if self.ui.chkPG.isChecked():
-            self.pg = Sqlpg()
-            self.conn = self.pg.pg_sql_connect()
-            # self.eng = dbsql.create_engine("postgresql://rfile:simple@flatboy/rfile")
-            # self.conn = self.eng.connect()  # use this as connection for insert query
-
-    def postgres_recinsert(self, pg_table_name):
-        """[inserts record postgresql]
-           {{tbname}}
-        """
-        # self.tbname = "vsigns_bp"  # vsigns_bp or vsigns_bloodpressure because columns match
-        if self.ui.chkPG.isChecked():
-            # self.pg = Sqlpg()
-            self.vitals_dict = {
-                "bpdate": self.ui.dateTimeEdit.dateTime().toString(),
-                "bpsys": self.ui.cmbsystolic.currentText(),
-                "bpdia": self.ui.cmbdiastolic.currentText(),
-                "bphr": self.ui.cmbheartrate.currentText(),
-                "bpsugar": self.ui.cmbsugar.currentText(),
-                "bpoxy": self.ui.cmboxy.currentText(),
-                "bpcomment": self.ui.lncomment.toPlainText(),
-            }
-            self.pg_result_txt = self.pg.pgsql_insert_rec_vitals(
-                self.conn, self.mytable, self.vitals_dict
-            )
-            self.ui.lblInsert.setText(self.pg_result_txt)
 
     def refresh(self):
         self.model.select()

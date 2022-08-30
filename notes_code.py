@@ -8,6 +8,7 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 import sqlalchemy as dbsql
 from sqlalchemy.orm import sessionmaker
 from icecream import ic
+from devtools import debug
 from utils.lclutils import Sqlpg
 import sys
 
@@ -32,10 +33,10 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         #           make sqlalchemy session and database connection                    #
         # ---------------------------------------------------------------------------- #
         self.pg = Sqlpg()
-        self.pg_conn = self.pg.pg_sql_connect()
+        # self.pg_conn = self.pg.pg_sql_connect()
         # self.conn = self.pg
         self.sqlite_conn = self.pg.sl_sql_connect()
-        self.pg_sess = self.pg.pg_sql_session()
+        #self.pg_sess = self.pg.pg_sql_session()
         self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
@@ -56,7 +57,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.btnAdd.clicked.connect(self.add_rec)
         self.ui.btnUpdate.clicked.connect(self.update_rec)
         self.ui.btnExit.clicked.connect(self.exitfunc)
-        self.ui.chkPG.setCheckState(1)
+        self.ui.chkPG.setCheckState(0)
         self.populate_boxes()
         # ---------------------------------------------------------------------------- #
         #                      get numbers and one previous record                     #
@@ -113,53 +114,53 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             self.ui.lblRecord1.setText(
                 f"SL up {self.table_name} {self.texbx_txt.foodid}"
             )
-        if self.ui.chkPG.isChecked():
-            # get maxes from postgresql foodid
-            # check which table
-            if self.table_name == "foodnotes":
-                self.pg_table_name = "foodnotes"
-            elif self.table_name == "fastnotes":
-                self.pg_table_name = "fastnotes"
-            else:
-                self.pg_table_name = "foodnotes"
-            ic(self.pg_table_name)
-            self.pg_max_foodid = self.pg_sess.execute(
-                "select foodid from "
-                + self.pg_table_name
-                + " where fdate = (select max(fdate) from "
-                + self.pg_table_name
-                + ")"
-            )
-            self.pg_foodid = self.pg_max_foodid.fetchone()
-            self.pg_maxid = self.pg_foodid.foodid
-            # bpid
-            self.pg_max_bpid = self.pg_sess.execute(
-                "select max(bpid) as maxbpid from vsigns_bp"
-            )
-            self.pg_bpid = self.pg_max_bpid.fetchone()
-            self.pg_maxbpid = self.pg_bpid.maxbpid
-            # bsid
-            self.pg_max_bsid = self.pg_sess.execute(
-                "select max(bsid) as maxbsid from qtsugar"
-            )
-            self.pg_bsid = self.pg_max_bsid.fetchone()
-            self.pg_maxbsid = self.pg_bsid.maxbsid
-
-            self.pg_notes_dict = {
-                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-                "fnotes": self.ui.textEdit.toPlainText(),
-                "sugarid": self.pg_maxbsid,
-                "bpid": self.pg_maxbpid,
-            }
-
-            self.pg_result = self.pg.pg_sql_notes_update(
-                self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
-            )
-            if self.pg_result:
-                self.ui.lblRecord2.setText(
-                    f"PG up {self.pg_table_name} {self.pg_maxid}"
-                )
-                self.populate_boxes()
+        # if self.ui.chkPG.isChecked():
+        #     # get maxes from postgresql foodid
+        #     # check which table
+        #     if self.table_name == "foodnotes":
+        #         self.pg_table_name = "foodnotes"
+        #     elif self.table_name == "fastnotes":
+        #         self.pg_table_name = "fastnotes"
+        #     else:
+        #         self.pg_table_name = "foodnotes"
+        #     ic(self.pg_table_name)
+        #     self.pg_max_foodid = self.pg_sess.execute(
+        #         "select foodid from "
+        #         + self.pg_table_name
+        #         + " where fdate = (select max(fdate) from "
+        #         + self.pg_table_name
+        #         + ")"
+        #     )
+        #     self.pg_foodid = self.pg_max_foodid.fetchone()
+        #     self.pg_maxid = self.pg_foodid.foodid
+        #     # bpid
+        #     self.pg_max_bpid = self.pg_sess.execute(
+        #         "select max(bpid) as maxbpid from vsigns_bp"
+        #     )
+        #     self.pg_bpid = self.pg_max_bpid.fetchone()
+        #     self.pg_maxbpid = self.pg_bpid.maxbpid
+        #     # bsid
+        #     self.pg_max_bsid = self.pg_sess.execute(
+        #         "select max(bsid) as maxbsid from qtsugar"
+        #     )
+        #     self.pg_bsid = self.pg_max_bsid.fetchone()
+        #     self.pg_maxbsid = self.pg_bsid.maxbsid
+        #
+        #     self.pg_notes_dict = {
+        #         "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
+        #         "fnotes": self.ui.textEdit.toPlainText(),
+        #         "sugarid": self.pg_maxbsid,
+        #         "bpid": self.pg_maxbpid,
+        #     }
+        #
+        #     self.pg_result = self.pg.pg_sql_notes_update(
+        #         self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
+        #     )
+        #     if self.pg_result:
+        #         self.ui.lblRecord2.setText(
+        #             f"PG up {self.pg_table_name} {self.pg_maxid}"
+        #         )
+        #         self.populate_boxes()
         else:
             self.populate_boxes()
 

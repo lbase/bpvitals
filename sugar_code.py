@@ -8,8 +8,9 @@ from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox
 from icecream import ic
+from devtools import debug
 from sqlalchemy.orm import sessionmaker
-from utils.lclutils import Sqlpg
+# from utils.lclutils import Sqlpg
 from forms.sugar import Ui_Sugar
 # for graph
 # import sugarstats48
@@ -77,9 +78,8 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.btnExit.clicked.connect(self.exitfunc)
         self.ui.btnGraph.clicked.connect(self.bpgraph)
         self.ui.btnGraph_2.clicked.connect(self.bpgraph2)
-        self.ui.chkPG.setChecked(1)
+        self.ui.chkPG.setChecked(0)
         # self.ui.chkPG.stateChanged.connect(self.setup_pg)
-        self.setup_pg()
         # Sunday, July 10, 2022 2:18:43 PM EDT rfile add for graphs
         
 
@@ -102,40 +102,8 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         else:
             return
 
-    def setup_pg(self):
-        self.pg = Sqlpg()
-        self.pg_conn = self.pg.pg_sql_connect()
-        if not self.pg_conn:
-            dbDlg = QMessageBox(self)
-            dbDlg.setWindowTitle("Database error")
-            dbDlg.setText(
-                "Database did not connect \n"
-                + self.eng.driver()
-                + " \n"
-                + self.eng.lastError().text()
-            )
-            dbDlg.exec()
 
-    def postgres_recinsert(self, pg_table_name):
-        """[inserts record postgresql]
-           {{tbname}}
-        """
-        if self.ui.chkPG.isChecked():
-            # self.tbname = "vsigns_bp"  # vsigns_bp or vsigns_bloodpressure because columns match
-            self.pg_table_name = pg_table_name
-            self.sugar_dict = {
-                "bsdate": self.ui.dateTimeEdit.dateTime().toString(),  # "bpdate" : self.dt,\
-                "bsugar": self.ui.sugarCombo.currentText(),
-                "comment": self.ui.txtComment.toPlainText(),
-            }
-            self.result = self.pg.pg_sql_qtsugar_insert(
-                self.pg_conn, self.sugar_dict, self.pg_table_name
-            )
 
-            if self.result:
-                self.ui.lblInsert.setText(
-                    "Rec Inserted PG:\n %s" % (self.pg_table_name)
-                )
 
     def exitfunc(self):
         self.sdb.close()
