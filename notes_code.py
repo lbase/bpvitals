@@ -91,14 +91,6 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.tbl = self.ui.tblPrevRec
         self.tbl.setModel(self.model)
 
-        ic(self.ok)
-        ic(self.model.filter())
-        ic(self.model.lastError().type())
-        ic(self.model.lastError().text())
-        ic(self.model.tableName())
-        ic(self.model.select())
-        # ic(self.db.connectionNames())
-        # ic(self.db.tables())
 
     def update_rec(self):
         self.notes_dict = {
@@ -114,53 +106,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             self.ui.lblRecord1.setText(
                 f"SL up {self.table_name} {self.texbx_txt.foodid}"
             )
-        # if self.ui.chkPG.isChecked():
-        #     # get maxes from postgresql foodid
-        #     # check which table
-        #     if self.table_name == "foodnotes":
-        #         self.pg_table_name = "foodnotes"
-        #     elif self.table_name == "fastnotes":
-        #         self.pg_table_name = "fastnotes"
-        #     else:
-        #         self.pg_table_name = "foodnotes"
-        #     ic(self.pg_table_name)
-        #     self.pg_max_foodid = self.pg_sess.execute(
-        #         "select foodid from "
-        #         + self.pg_table_name
-        #         + " where fdate = (select max(fdate) from "
-        #         + self.pg_table_name
-        #         + ")"
-        #     )
-        #     self.pg_foodid = self.pg_max_foodid.fetchone()
-        #     self.pg_maxid = self.pg_foodid.foodid
-        #     # bpid
-        #     self.pg_max_bpid = self.pg_sess.execute(
-        #         "select max(bpid) as maxbpid from vsigns_bp"
-        #     )
-        #     self.pg_bpid = self.pg_max_bpid.fetchone()
-        #     self.pg_maxbpid = self.pg_bpid.maxbpid
-        #     # bsid
-        #     self.pg_max_bsid = self.pg_sess.execute(
-        #         "select max(bsid) as maxbsid from qtsugar"
-        #     )
-        #     self.pg_bsid = self.pg_max_bsid.fetchone()
-        #     self.pg_maxbsid = self.pg_bsid.maxbsid
-        #
-        #     self.pg_notes_dict = {
-        #         "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-        #         "fnotes": self.ui.textEdit.toPlainText(),
-        #         "sugarid": self.pg_maxbsid,
-        #         "bpid": self.pg_maxbpid,
-        #     }
-        #
-        #     self.pg_result = self.pg.pg_sql_notes_update(
-        #         self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
-        #     )
-        #     if self.pg_result:
-        #         self.ui.lblRecord2.setText(
-        #             f"PG up {self.pg_table_name} {self.pg_maxid}"
-        #         )
-        #         self.populate_boxes()
+
         else:
             self.populate_boxes()
 

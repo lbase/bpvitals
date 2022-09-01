@@ -17,7 +17,6 @@ class Main(QtWidgets.QWidget, Ui_Comment):
     """docstring for Main
 """
 
-    #ic.disable()
 
     def __init__(self, object, table_name="foodnotes"):
         # foodnotes default table alternate is fastnotes
@@ -60,182 +59,95 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
     def populate_boxes(self):
         ####
+        # https://realpython.com/python-pyqt-database/#running-sql-queries-with-pyqt
         self.conn_name = "notes"
-        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
-        self.db.setDatabaseName("/data/sqlite/vitals.db")
-        self.ok = self.db.open()
-        debug(self.ok)
+        self.dbnotes = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
+        self.dbnotes.setDatabaseName("/data/sqlite/vitals.db")
+        self.okdbnotes = self.dbnotes.open()
+        debug(self.okdbnotes)
         # self.query = QSqlQuery()
         ####
         self.query = "select max(bsid) as bsmax from qtsugar"
-        self.bsid = QSqlQuery(self.query, self.db)
-
+        self.bsid = QSqlQuery(self.query, self.dbnotes)
         self.bsid.first()
-        debug(self.bsid.lastError().text())
-        debug(self.bsid.value('bsmax'))
         self.ui.spinBsid.setValue(self.bsid.value('bsmax'))
         self.bsid.finish()
-        self.bpid = self.mysess.execute("select max(bpid) as 'bpmax' from vsigns_bp")
-        self.spin_bp = self.bpid.fetchone()
-        self.ui.spinBpid.setValue(self.spin_bp.bpmax)
-        # started with 15 days but moving to 30 2-21-22
-        # note to see if backuppc is working 2-27-22 8:31
-        # 
-        self.texbx = self.mysess.execute(
-            "select foodid, fdate, fnotes from "
-            + self.table_name
-            + " where foodid = (select max(foodid) from "
-            + self.table_name
-            + " ) " )
-        self.texbx_txt = self.texbx.fetchone()
-        ic(self.texbx_txt.foodid)
-        self.ui.textEdit.setText(self.texbx_txt.fnotes)
+        ##### first QSQlquery above
+        self.query = "select max(bpid) as bpmax from vsigns_bp"
+        self.bpid = QSqlQuery(self.query, self.dbnotes)
+        self.bpid.first()
+        self.ui.spinBpid.setValue(self.bpid.value('bpmax'))
+        self.bpid.finish()
+        #### second above
 
+        ### get last note from table
+        self.query = f"select fnotes, foodid from {self.table_name} where foodid = (select max(foodid) from {self.table_name})"
+        self.fnotes = QSqlQuery(self.query, self.dbnotes)
+        self.fnotes.first()
+        self.ui.textEdit.setText(self.fnotes.value('fnotes'))
+        self.foodid = self.fnotes.value('foodid')
+        self.fnotes.finish()
+
+        ###
+        self.conn_rec = "bprec"
+        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
+        self.db.setDatabaseName("/data/sqlite/vitals.db")
+        self.ok = self.db.open()
+        ###
         self.model = QSqlTableModel(db=self.db)
         self.model.setTable("vsigns_bp")
         self.model.setFilter("bpid = (select max(bpid) from vsigns_bp)")
         self.model.select()
-
         self.tbl = self.ui.tblPrevRec
         self.tbl.setModel(self.model)
-
-        ic(self.ok)
-        ic(self.model.filter())
-        ic(self.model.lastError().type())
-        ic(self.model.lastError().text())
-        ic(self.model.tableName())
-        ic(self.model.select())
-        # ic(self.db.connectionNames())
-        # ic(self.db.tables())
+        self.db.close()
 
     def update_rec(self):
-        self.notes_dict = {
-            "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-            "fnotes": self.ui.textEdit.toPlainText(),
-            "sugarid": self.ui.spinBsid.value(),
-            "bpid": self.ui.spinBpid.value(),
-        }
-        self.note_result = self.pg.pg_sql_notes_update(
-            self.sqlite_conn, self.notes_dict, self.table_name, self.texbx_txt.foodid
-        )
-        if self.note_result:
-            self.ui.lblRecord1.setText(
-                f"SL up {self.table_name} {self.texbx_txt.foodid}"
-            )
-        # if self.ui.chkPG.isChecked():
-        #     # get maxes from postgresql foodid
-        #     # check which table
-        #     if self.table_name == "foodnotes":
-        #         self.pg_table_name = "foodnotes"
-        #     elif self.table_name == "fastnotes":
-        #         self.pg_table_name = "fastnotes"
-        #     else:
-        #         self.pg_table_name = "foodnotes"
-        #     ic(self.pg_table_name)
-        #     self.pg_max_foodid = self.pg_sess.execute(
-        #         "select foodid from "
-        #         + self.pg_table_name
-        #         + " where fdate = (select max(fdate) from "
-        #         + self.pg_table_name
-        #         + ")"
-        #     )
-        #     self.pg_foodid = self.pg_max_foodid.fetchone()
-        #     self.pg_maxid = self.pg_foodid.foodid
-        #     # bpid
-        #     self.pg_max_bpid = self.pg_sess.execute(
-        #         "select max(bpid) as maxbpid from vsigns_bp"
-        #     )
-        #     self.pg_bpid = self.pg_max_bpid.fetchone()
-        #     self.pg_maxbpid = self.pg_bpid.maxbpid
-        #     # bsid
-        #     self.pg_max_bsid = self.pg_sess.execute(
-        #         "select max(bsid) as maxbsid from qtsugar"
-        #     )
-        #     self.pg_bsid = self.pg_max_bsid.fetchone()
-        #     self.pg_maxbsid = self.pg_bsid.maxbsid
-        #
-        #     self.pg_notes_dict = {
-        #         "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-        #         "fnotes": self.ui.textEdit.toPlainText(),
-        #         "sugarid": self.pg_maxbsid,
-        #         "bpid": self.pg_maxbpid,
-        #     }
-        #
-        #     self.pg_result = self.pg.pg_sql_notes_update(
-        #         self.pg_conn, self.pg_notes_dict, self.pg_table_name, self.pg_maxid
-        #     )
-        #     if self.pg_result:
-        #         self.ui.lblRecord2.setText(
-        #             f"PG up {self.pg_table_name} {self.pg_maxid}"
-        #         )
-        #         self.populate_boxes()
-        else:
-            self.populate_boxes()
+        self.query = f"""
+            update {self.table_name} SET
+            fdate = '{self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm")}',
+            fnotes = '{self.ui.textEdit.toPlainText()}',
+            sugarid = {self.ui.spinBsid.value()},
+            bpid = {self.ui.spinBpid.value()}
+            where foodid = {self.foodid}
+            """
+
+        self.updatedata = QSqlQuery(self.query,self.dbnotes)
+        self.updatedata.exec()
+        debug(self.dbnotes.lastError().text())
+        self.closeDatabase()
+        self.populate_boxes()
 
     def add_rec(self):
-        self.my_table = dbsql.table(
-            self.table_name,
-            dbsql.column("fdate"),
-            dbsql.column("sugarid"),
-            dbsql.column("bpid"),
-            dbsql.column("fnotes"),
-        )
-        self.notes_dict = {
-            "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-            "fnotes": self.ui.textEdit.toPlainText(),
-            "sugarid": self.ui.spinBsid.value(),
-            "bpid": self.ui.spinBpid.value(),
-        }
-        self.ins = self.my_table.insert().values(self.notes_dict)
+        self.insertdata = QSqlQuery(self.dbnotes)
+        self.insertdata.prepare(
+            f"""
+            insert into {self.table_name}( 
+            fdate,
+            fnotes,
+            sugarid,
+            bpid
+            )
+            VALUES (?,?,?,?)
+            """ )
+        self.insertdata.addBindValue(self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"))
+        self.insertdata.addBindValue(self.ui.textEdit.toPlainText())
+        self.insertdata.addBindValue(self.ui.spinBsid.value())
+        self.insertdata.addBindValue(self.ui.spinBpid.value())
+        self.insertdata.exec()
+        self.closeDatabase()
+        self.populate_boxes()
 
-        self.result = self.mysess.execute(self.ins)
-        self.mysess.commit()
-        if self.result:
-            self.ui.lblRecord1.setText(f"SL Rec Add {self.table_name}")
-        if self.ui.chkPG.isChecked():
-            # bpid
-            # get maxes from postgresql foodid
-            # check which table
-            if self.table_name == "foodnotes":
-                self.pg_table_name = "foodnotes"
-            elif self.table_name == "fastnotes":
-                self.pg_table_name = "fastnotes"
-            else:
-                self.pg_table_name = "foodnotes"
-            ic(self.pg_table_name)
 
-            self.pg_max_bpid = self.pg_sess.execute(
-                "select max(bpid) as maxbpid from vsigns_bp"
-            )
-            self.pg_bpid = self.pg_max_bpid.fetchone()
-            self.pg_maxbpid = self.pg_bpid.maxbpid
-            # bsid
-            self.pg_max_bsid = self.pg_sess.execute(
-                "select max(bsid) as maxbsid from qtsugar"
-            )
-            self.pg_bsid = self.pg_max_bsid.fetchone()
-            self.pg_maxbsid = self.pg_bsid.maxbsid
-            # make the dictionary
-            self.pg_notes_dict = {
-                "fdate": self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm"),
-                "fnotes": self.ui.textEdit.toPlainText(),
-                "sugarid": self.pg_maxbsid,
-                "bpid": self.pg_maxbpid,
-            }
-            self.pg_result = self.pg.pg_sql_notes_insert(
-                self.pg_conn, self.pg_notes_dict, self.pg_table_name
-            )
-            if self.pg_result:
-                self.ui.lblRecord2.setText(f"PG add {self.pg_table_name}")
-                self.populate_boxes
-        else:
-            self.populate_boxes()
 
     def closeDatabase(self):
         self.tbl.setModel(None)
         del self.model
+        self.dbnotes.close()
+        del self.dbnotes
         self.db.close()
         del self.db
+        QSqlDatabase.removeDatabase(self.conn_rec)
         QSqlDatabase.removeDatabase(self.conn_name)
 
     def exitfunc(self):
