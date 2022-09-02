@@ -18,11 +18,13 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         super().__init__()
         self.ui = Ui_ShowTables()
         self.ui.setupUi(self)
+        self.fillTables()
+    def fillTables(self):    
         self.conn_name = "tblshowqry"
-        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
-        self.db.setDatabaseName("/data/sqlite/vitals.db")
-        ok = self.db.open()
-        self.bpmodel = QSqlTableModel(db=self.db)
+        self.dbt = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
+        self.dbt.setDatabaseName("/data/sqlite/vitals.db")
+        self.ok = self.dbt.open()
+        self.bpmodel = QSqlTableModel(db=self.dbt)
         self.bpmodel.setTable('vsigns_bp')
         self.bpfilter = "bpid >= ((select max(bpid) from vsigns_bp) - 16)"
         self.bpmodel.setFilter(self.bpfilter)
@@ -35,7 +37,7 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.ui.tblVbp.setColumnWidth(1, 160)
         ################################################
         # foodnotes
-        self.foodmodel = QSqlTableModel(db=self.db)
+        self.foodmodel = QSqlTableModel(db=self.dbt)
         self.foodmodel.setTable('foodnotes')
         self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 16)')
         self.foodmodel.setSort(0,Qt.DescendingOrder)
@@ -48,19 +50,51 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.ui.tblVfood.resizeRowsToContents()
         self.ui.tblVfood.setColumnWidth(1, 160)
         #################################################
-        self.fastmodel = QSqlTableModel(db=self.db)
-        self.fastmodel.setTable('foodnotes')
+        self.fastmodel = QSqlTableModel(db=self.dbt)
+        self.fastmodel.setTable('fastnotes')
         self.fastmodel.setFilter('foodid >= ((select max(foodid) from fastnotes) - 16)')
         self.fastmodel.setSort(0, Qt.DescendingOrder)
         self.ui.tblVfast.setModel(self.fastmodel)
         self.fastmodel.select()
         self.ui.tblVfast.setColumnHidden(0, True)
+        self.ui.tblVfast.setColumnHidden(2, True)
         self.ui.tblVfast.setColumnHidden(3, True)
-        self.ui.tblVfast.setColumnHidden(4, True)
-        self.ui.tblVfast.resizeColumnsToContents()
-        self.ui.tblVfast.resizeRowsToContents()
+        self.ui.tblVfast.resizeColumnToContents(4)
+        # self.ui.tblVfast.resizeRowsToContents()
         self.ui.tblVfast.setColumnWidth(1, 160)
+        self.ui.actionExit.triggered.connect(self.myExit)
+        # self.dbt.close()
 
+
+    def closeDB(self):
+        debug(self.dbt.isOpen())
+        debug(self.dbt.lastError().text())
+        debug(self.dbt.contains(self.conn_name))
+        self.ui.tblVbp.setModel(None)
+        self.ui.tblVfood.setModel(None)
+        self.ui.tblVfast.setModel(None)
+        del self.foodmodel
+        del self.fastmodel
+        del self.bpmodel
+        # del self.dbt
+        self.dbt.close()
+        # self.dbt = None
+        self.dbt.removeDatabase('tblshowqry')
+
+        # QSqlDatabase.removeDatabase('tblshowqry')
+
+
+        debug(self.dbt.lastError().text())
+
+    def myExit(self):
+        self.closeDB()
+        self.close()
+
+
+    # close connections on close window for no connection errors
+def closeEvent(self):
+    self.closeDB()
+    self.close()
 
 if __name__ == "__main__":
     # debug(__name__)

@@ -1,15 +1,11 @@
 #! /usr/bin/env python3
 
 import sys
-# import sqlalchemy as dbsql
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox, QApplication
-
 from devtools import debug
-# from sqlalchemy.orm import sessionmaker
-# from utils.lclutils import Sqlpg
 from forms.menu import Ui_Menu
 from graphs import modbpstats
 from vitals_code import Main as vitals
@@ -65,7 +61,6 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.btnFoodnotes.clicked.connect(self.foodnotes)
         self.ui.btnFastnotes.clicked.connect(self.fastnotes)
         self.ui.btnShowtabs.clicked.connect(self.showtabs)
-        self.ui.chkPG.setChecked(0) # no pg version
         # Sunday, July 10, 2022 2:18:43 PM EDT rfile add for graphs
     def fillsugartab(self):
 

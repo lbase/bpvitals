@@ -55,19 +55,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QCheckBox" name="chkPG">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>10</y>
-     <width>94</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Postgres</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btnInsert">
    <property name="geometry">
     <rect>

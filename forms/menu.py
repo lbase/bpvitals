@@ -31,9 +31,6 @@ class Ui_Menu(object):
         self.txtComment.setGeometry(QtCore.QRect(10, 40, 621, 51))
         self.txtComment.setPlainText("")
         self.txtComment.setObjectName("txtComment")
-        self.chkPG = QtWidgets.QCheckBox(Menu)
-        self.chkPG.setGeometry(QtCore.QRect(510, 10, 94, 26))
-        self.chkPG.setObjectName("chkPG")
         self.btnInsert = QtWidgets.QPushButton(Menu)
         self.btnInsert.setGeometry(QtCore.QRect(110, 100, 75, 31))
         self.btnInsert.setObjectName("btnInsert")
@@ -98,7 +95,6 @@ class Ui_Menu(object):
         _translate = QtCore.QCoreApplication.translate
         Menu.setWindowTitle(_translate("Menu", "Menu"))
         self.lblComment.setText(_translate("Menu", "Comment for new record:"))
-        self.chkPG.setText(_translate("Menu", "Postgres"))
         self.btnInsert.setText(_translate("Menu", "A&dd"))
         self.lblInsert.setText(_translate("Menu", "Insert Rec"))
         self.btnExit.setText(_translate("Menu", "E&xit"))

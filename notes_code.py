@@ -57,7 +57,6 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.btnAdd.clicked.connect(self.add_rec)
         self.ui.btnUpdate.clicked.connect(self.update_rec)
         self.ui.btnExit.clicked.connect(self.exitfunc)
-        self.ui.chkPG.setCheckState(0)
         self.populate_boxes()
         # ---------------------------------------------------------------------------- #
         #                      get numbers and one previous record                     #
