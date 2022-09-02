@@ -15,7 +15,7 @@ from graphs import modbpstats
 from vitals_code import Main as vitals
 from showquery import MainWindow as queryWin
 from weight_code import Main as Wtentry
-from notes_code import Main as notes
+from notes_qtcode import Main as notes
 from showtabs_code import MainWindow as showtabs
 
 

@@ -5,11 +5,7 @@ from forms.notes import Ui_Comment
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery
-import sqlalchemy as dbsql
-from sqlalchemy.orm import sessionmaker
-from icecream import ic
 from devtools import debug
-from utils.lclutils import Sqlpg
 import sys
 
 
@@ -27,16 +23,22 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
         # self.conn_notes = self.eng.connect()  # use this as connection for insert query
         # ---------------------------------------------------------------------------- #
-        #           make sqlalchemy session and database connection                    #
+        #            database connection                                               #
         # ---------------------------------------------------------------------------- #
-        self.pg = Sqlpg()
-        # self.pg_conn = self.pg.pg_sql_connect()
-        # self.conn = self.pg
-        self.sqlite_conn = self.pg.sl_sql_connect()
-        #self.pg_sess = self.pg.pg_sql_session()
-        self.eng = dbsql.create_engine("sqlite:////data/sqlite/vitals.db")
-        self.mysession = sessionmaker(bind=self.eng)
-        self.mysess = self.mysession()
+        # https://realpython.com/python-pyqt-database/#running-sql-queries-with-pyqt
+        # queries
+        self.conn_name = "notes"
+        self.dbnotes = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
+        self.dbnotes.setDatabaseName("/data/sqlite/vitals.db")
+        self.okdbnotes = self.dbnotes.open()
+        debug(self.okdbnotes)
+        ### table
+        self.conn_rec = "bprec"
+        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
+        self.db.setDatabaseName("/data/sqlite/vitals.db")
+        self.ok = self.db.open()
+        debug(self.ok)
+        ###
 
 
 
@@ -51,7 +53,6 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.btnAdd.clicked.connect(self.add_rec)
         self.ui.btnUpdate.clicked.connect(self.update_rec)
         self.ui.btnExit.clicked.connect(self.exitfunc)
-        self.ui.chkPG.setCheckState(0)
         self.populate_boxes()
         # ---------------------------------------------------------------------------- #
         #                      get numbers and one previous record                     #
@@ -59,12 +60,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
     def populate_boxes(self):
         ####
-        # https://realpython.com/python-pyqt-database/#running-sql-queries-with-pyqt
-        self.conn_name = "notes"
-        self.dbnotes = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
-        self.dbnotes.setDatabaseName("/data/sqlite/vitals.db")
-        self.okdbnotes = self.dbnotes.open()
-        debug(self.okdbnotes)
+
         # self.query = QSqlQuery()
         ####
         self.query = "select max(bsid) as bsmax from qtsugar"
@@ -87,20 +83,13 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.textEdit.setText(self.fnotes.value('fnotes'))
         self.foodid = self.fnotes.value('foodid')
         self.fnotes.finish()
-
-        ###
-        self.conn_rec = "bprec"
-        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
-        self.db.setDatabaseName("/data/sqlite/vitals.db")
-        self.ok = self.db.open()
-        ###
+        # table
         self.model = QSqlTableModel(db=self.db)
         self.model.setTable("vsigns_bp")
         self.model.setFilter("bpid = (select max(bpid) from vsigns_bp)")
         self.model.select()
         self.tbl = self.ui.tblPrevRec
         self.tbl.setModel(self.model)
-        self.db.close()
 
     def update_rec(self):
         self.query = f"""
@@ -112,10 +101,13 @@ class Main(QtWidgets.QWidget, Ui_Comment):
             where foodid = {self.foodid}
             """
 
-        self.updatedata = QSqlQuery(self.query,self.dbnotes)
-        self.updatedata.exec()
-        debug(self.dbnotes.lastError().text())
-        self.closeDatabase()
+        self.updatedata = QSqlQuery(self.query, self.dbnotes)
+        self.upok = self.updatedata.exec()
+        if self.upok :
+            self.ui.lblRecord2.setText(f"update rec {self.table_name}")
+        else:
+            self.ui.lblRecord2.setText(f"no update  {self.table_name}")
+
         self.populate_boxes()
 
     def add_rec(self):
@@ -134,8 +126,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.insertdata.addBindValue(self.ui.textEdit.toPlainText())
         self.insertdata.addBindValue(self.ui.spinBsid.value())
         self.insertdata.addBindValue(self.ui.spinBpid.value())
-        self.insertdata.exec()
-        self.closeDatabase()
+        self.insertok = self.insertdata.exec()
+        if self.insertok :
+            self.ui.lblRecord2.setText(f"rec add {self.table_name}")
+        else:
+            self.ui.lblRecord2.setText(f"NO REC {self.table_name}")
         self.populate_boxes()
 
 

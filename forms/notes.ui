@@ -68,13 +68,6 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="3">
-    <widget class="QLabel" name="lblRecord2">
-     <property name="text">
-      <string>PG</string>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="0" colspan="5">
     <widget class="QTableView" name="tblPrevRec">
      <property name="sizePolicy">
@@ -110,28 +103,6 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="3">
-    <widget class="QCheckBox" name="chkPG">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>40</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Postgres</string>
-     </property>
-     <property name="tristate">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
    <item row="5" column="0" colspan="5">
     <widget class="QTextEdit" name="textEdit">
      <property name="sizePolicy">
@@ -139,6 +110,13 @@
        <horstretch>0</horstretch>
        <verstretch>75</verstretch>
       </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3" colspan="2">
+    <widget class="QLabel" name="lblRecord2">
+     <property name="text">
+      <string>PG</string>
      </property>
     </widget>
    </item>
