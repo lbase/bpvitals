@@ -15,8 +15,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.conn_name = "dbshowqry"
-        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
+        self.connshow_name = "dbshowqry"
+        self.db = QSqlDatabase.addDatabase("QSQLITE", self.connshow_name)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
         ok = self.db.open()
         self.model = QSqlTableModel(db=self.db)
@@ -79,8 +79,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.model.submitAll()
 
     def exitFunc(self):
+        debug(QSqlDatabase.connectionNames())
         self.db.close()
-        ic(self.model.lastError().text())
+        self.ui.tb1.setModel(None)
+        del self.model
+        self.db.removeDatabase(self.connshow_name)
+        # debug(self.model.lastError().text())
+        debug(QSqlDatabase.connectionNames())
         self.close()
 
 

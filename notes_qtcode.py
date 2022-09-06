@@ -90,6 +90,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.model.select()
         self.tbl = self.ui.tblPrevRec
         self.tbl.setModel(self.model)
+        debug(QSqlDatabase.connectionNames())
 
     def update_rec(self):
         self.query = f"""
@@ -144,11 +145,16 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         del self.db
         QSqlDatabase.removeDatabase(self.conn_rec)
         QSqlDatabase.removeDatabase(self.conn_name)
+        debug(QSqlDatabase.connectionNames())
 
     def exitfunc(self):
         self.closeDatabase()
         self.close()
 
+    def closeEvent(self):
+        print('close event func triggered')
+        debug(self.closeEvent())
+        self.close()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
