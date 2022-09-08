@@ -14,17 +14,16 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 """
 
 
-    def __init__(self, object, table_name="foodnotes"):
+    def __init__(self, object,  table_name="foodnotes"):
         # foodnotes default table alternate is fastnotes
         super(Main, self).__init__()
         self.table_name = table_name
         self.ui = Ui_Comment()
         self.ui.setupUi(self)
 
-        # self.conn_notes = self.eng.connect()  # use this as connection for insert query
-        # ---------------------------------------------------------------------------- #
-        #            database connection                                               #
-        # ---------------------------------------------------------------------------- #
+        # ---------------------------------------------------------------- #
+        #            database connection                                   #
+        # ---------------------------------------------------------------- #
         # https://realpython.com/python-pyqt-database/#running-sql-queries-with-pyqt
         # queries
         self.conn_name = "notes"
@@ -148,12 +147,12 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         debug(QSqlDatabase.connectionNames())
 
     def exitfunc(self):
+        print('exitfunc triggered')
         self.closeDatabase()
         self.close()
 
-    def closeEvent(self):
+    def closeEvent(self, event):
         print('close event func triggered')
-        debug(self.closeEvent())
         self.close()
 
 if __name__ == "__main__":

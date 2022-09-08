@@ -75,7 +75,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.ui.tblViewRec.setColumnWidth(1, 160)
         # debug(self.model.tableName())
         self.model.select()
-        msg = f"mytable: {self.mytable}"
+        msg = f"mytable: {self.mytable} connections: {QSqlDatabase.connectionNames()}"
         self.message(msg)
 
     def recinsert(self):
@@ -134,13 +134,14 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         modbpstats.weightline()
 
     def weightentry(self):
-        self.showwt = Wtentry('fatty')
+        self.showwt = Wtentry('qfatty')  # fatty test table qfatty regular table
         self.showwt.show()
 
     def foodnotes(self):
         self.notes = notes(self, "foodnotes")
         self.notes.show()
-
+        msg = f"mytable: {self.mytable} connections: {QSqlDatabase.connectionNames()}"
+        self.message(msg)
 
 
     def fastnotes(self):
@@ -150,6 +151,8 @@ class Main(QtWidgets.QWidget, Ui_Menu):
     def showtabs(self):
         self.showtabs = showtabs()
         self.showtabs.show()
+        msg = f"mytable: {self.mytable} connections: {QSqlDatabase.connectionNames()}"
+        self.message(msg)
 
 
 if __name__ == "__main__":
