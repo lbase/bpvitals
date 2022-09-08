@@ -20,7 +20,7 @@ def main(filename):
         # log
         logger = logging.getLogger("dev")
         logger.setLevel(logging.INFO)
-        fileHandler = logging.FileHandler("/data/sqlite/weight.log")
+        fileHandler = logging.FileHandler("/data/sqlite/weight_lite.log")
         fileHandler.setLevel(logging.INFO)
         logger.addHandler(fileHandler)
         formatter = logging.Formatter(
@@ -94,8 +94,8 @@ def main(filename):
             pd.to_numeric
         )
         wtdata = wtdata.sort_values("ftime")
-        wtdata.to_sql("fatty", myconn, if_exists="append", index=False)
-        logger.info(f"query ran on sqlite : {engstr}  csv file: {filename}")
+        wtdata.to_sql("qfatty", myconn, if_exists="append", index=False)
+        logger.info(f"query ran on sqlite qfatty table : {engstr}  csv file: {filename}")
     except Exception as e:
         print("sorry, an error occurred  ", e)
         logger.error("sqlite error:  %s", filename)
@@ -111,5 +111,4 @@ if __name__ == "__main__":
         filename = sys.argv[1]
         main(filename)
     else:
-        # main("file:///home/rfile/motog3/Bob - Export Data 7-20-2021 ~ 7-24-2021.csv")
         main("file:///home/rfile/motog5/Bob_export_data_dummy.csv")

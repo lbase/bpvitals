@@ -4,6 +4,7 @@ import os
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from icecream import ic
+from devtools import debug
 from forms.shownoteswin import Ui_NotesWin
 from vitals_code import Main as VMain
 
@@ -77,7 +78,8 @@ class MainWindow(QMainWindow, Ui_NotesWin):
         self.model.removeRows(first, count)
         self.model.submitAll()
 
-    def exitFunc(self):
+    def exitFunc(self, event):
+        debug(QSqlDatabase.connectionNames())
         self.db.close()
         ic(self.model.lastError().text())
         self.close()
