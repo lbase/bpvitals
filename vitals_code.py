@@ -64,8 +64,6 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.ui.btnbpgraph.clicked.connect(self.bpgraph)
         self.ui.btnsugar8.clicked.connect(self.sug8graph)
         self.ui.btnsugar48.clicked.connect(self.sug48graph)
-        self.ui.chkPG.setChecked(0)
-        # self.ui.chkPG.stateChanged.connect(self.setup_pg)
 
     def recinsert(self):
         r = self.model.record()
@@ -115,7 +113,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
 
 
     def exitfunc(self):
-        self.write_settings()
+        # self.write_settings()
         self.closeDatabase()
         self.close()
 

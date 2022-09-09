@@ -136,6 +136,9 @@ class Main(QtWidgets.QWidget, Ui_Menu):
     def weightentry(self):
         self.showwt = Wtentry('qfatty')  # fatty test table qfatty regular table
         self.showwt.show()
+        msg = f"mytable: {self.mytable} connections: {QSqlDatabase.connectionNames()}"
+        self.message(msg)
+
 
     def foodnotes(self):
         self.notes = notes(self, "foodnotes")

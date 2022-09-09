@@ -53,6 +53,7 @@ class Main(QtWidgets.QWidget, Wform):
 
         self.ui.btnSubmit.clicked.connect(self.recinsert)
         self.ui.btnWeightchart.clicked.connect(self.weightchart)
+        self.ui.btnExit.clicked.connect(self.exitfunc)
 
     def recinsert(self):
         try:
@@ -87,14 +88,16 @@ class Main(QtWidgets.QWidget, Wform):
     def message(self, s):
         self.ui.txtMsgbox.appendPlainText(s)
 
-
+    def closeEvent(self, event):
+        print('close event func triggered')
+        self.exitfunc()
 
 
     def exitfunc(self):
+        print('exitfunc')
         self.db.close()
         self.model.database().close()
-        if self.db.isOpen():
-            self.db.removeDatabase(self.conn_name)
+        self.db.removeDatabase(self.conn_name)
         ic(self.model.lastError().text())
         self.close()
 

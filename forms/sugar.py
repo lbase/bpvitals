@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './sugar.ui'
+# Form implementation generated from reading ui file 'sugar.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -44,9 +44,6 @@ class Ui_Sugar(object):
         self.txtComment.setGeometry(QtCore.QRect(10, 40, 621, 51))
         self.txtComment.setPlainText("")
         self.txtComment.setObjectName("txtComment")
-        self.chkPG = QtWidgets.QCheckBox(Sugar)
-        self.chkPG.setGeometry(QtCore.QRect(510, 10, 94, 26))
-        self.chkPG.setObjectName("chkPG")
         self.btnInsert = QtWidgets.QPushButton(Sugar)
         self.btnInsert.setGeometry(QtCore.QRect(110, 100, 75, 31))
         self.btnInsert.setObjectName("btnInsert")
@@ -81,7 +78,6 @@ class Ui_Sugar(object):
         Sugar.setWindowTitle(_translate("Sugar", "Sugar"))
         self.lblLastRec.setText(_translate("Sugar", "Last Record"))
         self.lblComment.setText(_translate("Sugar", "Comment for new record:"))
-        self.chkPG.setText(_translate("Sugar", "Postgres"))
         self.btnInsert.setText(_translate("Sugar", "A&dd"))
         self.lblInsert.setText(_translate("Sugar", "Insert Rec"))
         self.btnExit.setText(_translate("Sugar", "E&xit"))

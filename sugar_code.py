@@ -78,8 +78,6 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         self.ui.btnExit.clicked.connect(self.exitfunc)
         self.ui.btnGraph.clicked.connect(self.bpgraph)
         self.ui.btnGraph_2.clicked.connect(self.bpgraph2)
-        self.ui.chkPG.setChecked(0)
-        # self.ui.chkPG.stateChanged.connect(self.setup_pg)
         # Sunday, July 10, 2022 2:18:43 PM EDT rfile add for graphs
         
 
@@ -97,10 +95,7 @@ class Main(QtWidgets.QWidget, Ui_Sugar):
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
 
-        if self.ui.chkPG.isChecked():
-            self.postgres_recinsert(self.mytable)
-        else:
-            return
+
 
 
 
