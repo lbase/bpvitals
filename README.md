@@ -49,3 +49,10 @@ last merge to main:
 
 673d5ee247507527f45c1f9b3c2abb1fb603133a
 
+Thursday, September 8, 2022 8:32:41 PM EDT
+
+Use **weight_lite.py for csv import**
+
+qfatty regular table and fatty test table
+
+
