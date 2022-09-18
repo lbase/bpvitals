@@ -104,7 +104,7 @@ def weightline():
     # never got cursor to work so added mplcursors lib
     # get data
     # wtdta = "select ftime, weight from qfatty where ftime > (SELECT date('now','-30 day'))" # original 14 days
-    wtdta = "select ftime, weight from (select ftime, weight from fatty order by ftime desc limit 10) order by ftime asc"
+    wtdta = "select ftime, weight from (select ftime, weight from qfatty order by ftime desc limit 10) order by ftime asc"
     wtdata = pd.read_sql_query(wtdta, myconn, parse_dates="ftime")
     # wtdata['ftime'] = pd.to_datetime(wtdata['ftime'])
     wtdata['ftime'] = pd.to_datetime(wtdata.ftime)
