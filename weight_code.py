@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # taken from vitals_code
 import sys
+import logging
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5 import QtWidgets
@@ -77,8 +78,26 @@ class Main(QtWidgets.QWidget, Wform):
 
             self.submit_OK = self.model.select()
             self.message(f"record added; submit value: {self.submit_OK}  errors:  {self.model.lastError().text()}")
+            self.logsingle()
         except:
             print(f"please check inputs are in range {self.model.lastError().text()} ")
+
+    def logsingle(self):
+        # log
+        logger = logging.getLogger("dev")
+        logger.setLevel(logging.INFO)
+        fileHandler = logging.FileHandler("/data/sqlite/weight_lite.log")
+        fileHandler.setLevel(logging.INFO)
+        logger.addHandler(fileHandler)
+        formatter = logging.Formatter(
+            "%(asctime)s  %(name)s  %(levelname)s: %(message)s"
+        )
+        fileHandler.setFormatter(formatter)
+        datestr = self.ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm")
+        #datestr = self.ui.dateTimeEdit.dateTime()
+        logger.info(f"single entry : {datestr} ")
+        # log
+
 
     def weightchart(self):
         modbpstats.weightline()
