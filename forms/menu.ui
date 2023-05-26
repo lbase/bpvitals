@@ -208,8 +208,8 @@
   <widget class="QPushButton" name="btnRefresh">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>100</y>
+     <x>960</x>
+     <y>120</y>
      <width>102</width>
      <height>31</height>
     </rect>
@@ -281,6 +281,32 @@
    </property>
    <property name="text">
     <string>Show Tables</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="ketonecombo">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>100</y>
+     <width>93</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="ketone_label">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>140</y>
+     <width>76</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ketone&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

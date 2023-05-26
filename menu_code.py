@@ -44,8 +44,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
             # ======================= ui setup ======================= #
             # ======================================================== #
         self.setWindowTitle(self.mytable)
-        self.ui.sugarCombo.addItems(str(i) for i in range(50, 201, 1))
+        self.ui.sugarCombo.addItems(str(i) for i in range(50, 301, 1))
         self.ui.sugarCombo.setCurrentIndex(50)
+        self.ui.ketonecombo.setCurrentText("0.1")
+        # self.ui.ketonecombo.currentIndex(0)
         self.now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(self.now)
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
@@ -85,6 +87,8 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         ),
         self.r.setValue("bsugar", self.ui.sugarCombo.currentText())
         self.r.setValue("comment", self.ui.txtComment.toPlainText())
+        #ketone
+        self.r.setValue("ketone", float(self.ui.ketonecombo.currentText()))
         self.submit_OK = self.model.insertRecord(-1, self.r)
         self.model.submit()
         self.model.select()
