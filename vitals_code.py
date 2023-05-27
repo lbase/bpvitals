@@ -74,6 +74,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
         r.setValue("bpdia", self.ui.cmbdiastolic.currentText())
         r.setValue("bphr", self.ui.cmbheartrate.currentText())
         r.setValue("bpsugar", self.ui.cmbsugar.currentText())
+        r.setValue("ketone", "0.1")
         r.setValue("bpoxy", self.ui.cmboxy.currentText())
         r.setValue("bpcomment", self.ui.lncomment.toPlainText())
         self.model.insertRecord(-1, r)
