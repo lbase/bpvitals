@@ -58,6 +58,9 @@ class Main(QtWidgets.QWidget, Ui_Form):
         now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(now)
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
+        # add ketone
+        ketoneitems = ["0.1", "1"]
+        self.ui.cmbketone.addItems(ketoneitems)
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
@@ -74,14 +77,15 @@ class Main(QtWidgets.QWidget, Ui_Form):
         r.setValue("bpdia", self.ui.cmbdiastolic.currentText())
         r.setValue("bphr", self.ui.cmbheartrate.currentText())
         r.setValue("bpsugar", self.ui.cmbsugar.currentText())
-        r.setValue("ketone", "0.1")
+        r.setValue("ketone", float(self.ui.cmbketone.currentText()))
         r.setValue("bpoxy", self.ui.cmboxy.currentText())
         r.setValue("bpcomment", self.ui.lncomment.toPlainText())
         self.model.insertRecord(-1, r)
         self.model.submit()
-        ic(self.model.lastError().text())
+        self.ui.txt_msg.setPlainText(ic(self.model.lastError().text()))
         self.submit_OK = self.model.select()
         debug(self.model.submit())
+        self.ui.txt_msg.setPlainText(self.ui.txt_msg.toPlainText() + "record should be inserted")
         if self.submit_OK:
             self.ui.lblInsert.setText("Rec Inserted")
 
