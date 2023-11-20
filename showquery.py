@@ -23,8 +23,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.model.setTable(table_name)
         self.ui.tb1.setModel(self.model)
         self.model.setSort(0, Qt.DescendingOrder)
+        self.model.setHeaderData(1, Qt.Horizontal ,"Date")
+        self.model.setHeaderData(2, Qt.Horizontal ,"Systolic")
+        self.model.setHeaderData(3, Qt.Horizontal ,"Diastolic")
+        self.model.setHeaderData(4, Qt.Horizontal ,"HR")
+        self.model.setHeaderData(5, Qt.Horizontal ,"Sugar")
+        self.model.setHeaderData(6, Qt.Horizontal ,"Ketone")
+        self.model.setHeaderData(7, Qt.Horizontal ,"Oxy")
+        self.model.setHeaderData(8, Qt.Horizontal ,"Comment")
+        
         # table sizing
         # self.ui.tb1.maximumViewportSize()
+        # hide id
+        self.ui.tb1.setColumnHidden(0,True)
+        # change headers
+        
         self.ui.tb1.resizeColumnsToContents()
         self.ui.tb1.setColumnWidth(1, 160)
 
