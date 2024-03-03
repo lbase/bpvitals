@@ -55,4 +55,10 @@ Use **weight_lite.py for csv import**
 
 qfatty regular table and fatty test table
 
+**Feb 14 2024** 
+last comit:
+added headers to model for show bp hide col 0
+added requirements.txt
+
+
 
