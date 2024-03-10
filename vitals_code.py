@@ -59,7 +59,7 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.ui.dateTimeEdit.setDateTime(now)
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
         # add ketone
-        ketoneitems = ["0.1", "1"]
+        ketoneitems = ["0.01", "0.2",  "0.4"]
         self.ui.cmbketone.addItems(ketoneitems)
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
