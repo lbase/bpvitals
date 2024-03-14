@@ -60,5 +60,7 @@ last comit:
 added headers to model for show bp hide col 0
 added requirements.txt
 
+**Monday, March 11, 2024 1:16:19 PM EDT**
+changed default ketone entry to 0.01
 
 
