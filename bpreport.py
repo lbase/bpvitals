@@ -1,23 +1,14 @@
 #! /usr/bin/env python3
-import dateutil
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
-from sqlalchemy import select
-from sqlalchemy.dialects.sqlite import DATETIME as DT
 from sqlalchemy.orm import sessionmaker
 import matplotlib.pyplot as plt
-# import seaborn as sb
 from matplotlib import cbook, dates
-from icecream import ic
-#from matplotlib.ticker import Formatter
-import mplcursors
 from reportlab.pdfgen.canvas import Canvas
-from reportlab.platypus import SimpleDocTemplate, Table, Paragraph
-from reportlab.platypus import TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, Paragraph, TableStyle
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.styles import getSampleStyleSheet
 from sqlalchemy.orm import sessionmaker
