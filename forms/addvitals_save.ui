@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/resource.qrc">
+    <normaloff>:/ico/bp.png</normaloff>:/ico/bp.png</iconset>
+  </property>
+  <widget class="QPushButton" name="btnInsert">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>430</y>
+     <width>84</width>
+     <height>39</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;Insert</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>121</x>
+     <y>11</y>
+     <width>341</width>
+     <height>452</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="lbltime">
+      <property name="text">
+       <string>Date Time</string>
+      </property>
+      <property name="buddy">
+       <cstring>dateTimeEdit</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QDateTimeEdit" name="dateTimeEdit">
+      <property name="dateTime">
+       <datetime>
+        <hour>12</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>2021</year>
+        <month>5</month>
+        <day>27</day>
+       </datetime>
+      </property>
+      <property name="date">
+       <date>
+        <year>2021</year>
+        <month>5</month>
+        <day>27</day>
+       </date>
+      </property>
+      <property name="time">
+       <time>
+        <hour>12</hour>
+        <minute>0</minute>
+        <second>0</second>
+       </time>
+      </property>
+      <property name="displayFormat">
+       <string>M/d/yy HH:mm</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="timeSpec">
+       <enum>Qt::LocalTime</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="syslabel">
+      <property name="text">
+       <string>Systolic</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbsystolic</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="cmbsystolic">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="lbldiastolic">
+      <property name="text">
+       <string>Diastolic</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbdiastolic</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="cmbdiastolic">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="lblheartrate">
+      <property name="text">
+       <string>Heart rate</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbheartrate</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QComboBox" name="cmbheartrate">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="lblsugar">
+      <property name="text">
+       <string>Sugar</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmbsugar</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QComboBox" name="cmbsugar">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="lbloxy">
+      <property name="text">
+       <string>O2</string>
+      </property>
+      <property name="buddy">
+       <cstring>cmboxy</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QComboBox" name="cmboxy">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="lblcomment">
+      <property name="text">
+       <string>Comment</string>
+      </property>
+      <property name="buddy">
+       <cstring>lncomment</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPlainTextEdit" name="lncomment"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="btnExit">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>430</y>
+     <width>105</width>
+     <height>39</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblInsert">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>320</y>
+     <width>131</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Insert Only</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnbpgraph">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>60</y>
+     <width>102</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BP Graph</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnsugar8">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>120</y>
+     <width>102</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sugar 8</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnsugar48">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>190</y>
+     <width>102</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sugar 48</string>
+   </property>
+  </widget>
+  <zorder>btnInsert</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>btnExit</zorder>
+  <zorder>btnbpgraph</zorder>
+  <zorder>btnsugar8</zorder>
+  <zorder>btnsugar48</zorder>
+  <zorder>lblInsert</zorder>
+ </widget>
+ <tabstops>
+  <tabstop>dateTimeEdit</tabstop>
+  <tabstop>cmbsystolic</tabstop>
+  <tabstop>cmbdiastolic</tabstop>
+  <tabstop>cmbheartrate</tabstop>
+  <tabstop>cmbsugar</tabstop>
+  <tabstop>cmboxy</tabstop>
+  <tabstop>lncomment</tabstop>
+  <tabstop>btnInsert</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../res/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
