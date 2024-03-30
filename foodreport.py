@@ -37,10 +37,13 @@ GRIDF_STYLE = TableStyle(
     ]
 )
 
-
+# regular query
 foodinfo = (
     "SELECT fdate, fnotes FROM foodnotes where fdate > (SELECT date('now','-30 day'))"
 )
+#diarrhea query
+#foodinfo = ("SELECT fdate, fnotes FROM foodnotes where fdate > (SELECT date('now','-30 day')) AND fnotes LIKE '%diarrhea%' ")
+
 fooddf = pd.read_sql_query(
     foodinfo,
     myconn,
