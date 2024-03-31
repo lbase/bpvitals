@@ -7,7 +7,7 @@ from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox, QApplication, QMainWindow
 from devtools import debug
-from birdseye import eye
+# from birdseye import eye
 #from sqlalchemy.orm import sessionmaker
 #from utils.lclutils import Sqlpg
 from forms.showtables import Ui_ShowTables
