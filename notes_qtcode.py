@@ -36,9 +36,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.db.open()
-        debug(self.ok)
-        ###
-
+        debug(self.ok) 
 
 
         # ---------------------------------------------------------------------------- #
@@ -145,6 +143,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         del self.dbnotes
         self.db.close()
         del self.db
+        # rfile edit April fool
         QSqlDatabase.removeDatabase(self.conn_rec)
         QSqlDatabase.removeDatabase(self.conn_name)
         debug(QSqlDatabase.connectionNames())
