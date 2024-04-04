@@ -15,7 +15,7 @@ from showquery import MainWindow as queryWin
 from weight_code import Main as Wtentry
 from notes_qtcode import Main as notes
 from showtabs_code import MainWindow as showtabs
-
+import numpy as np
 
 class Main(QtWidgets.QWidget, Ui_Menu):
     def __init__(self, object, mytable="qtsugar"):
@@ -48,6 +48,10 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.setWindowTitle(self.mytable)
         self.ui.sugarCombo.addItems(str(i) for i in range(50, 301, 1))
         self.ui.sugarCombo.setCurrentIndex(50)
+        ketoneval = np.linspace(0,4,44)
+        # debug(ketoneval)
+        self.ui.ketonecombo.addItems(str(round(k,1)) for k in ketoneval)
+        #self.ui.ketonecombo.addItems(str(k) for k in range(1, 4, 1))
         self.ui.ketonecombo.setCurrentText("0.01")
         # self.ui.ketonecombo.currentIndex(0)
         self.now = QDateTime.currentDateTime()
