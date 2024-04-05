@@ -9,6 +9,8 @@ from devtools import debug
 from forms.addvitals import Ui_Form
 # from utils.lclutils import Sqlpg
 from graphs import modbpstats
+import numpy as np
+
 
 
 class Main(QtWidgets.QWidget, Ui_Form):
@@ -59,8 +61,10 @@ class Main(QtWidgets.QWidget, Ui_Form):
         self.ui.dateTimeEdit.setDateTime(now)
         self.ui.dateTimeEdit.setDisplayFormat("yyyy-MM-dd HH:mm")
         # add ketone
-        ketoneitems = ["0.01", "0.2",  "0.4"]
-        self.ui.cmbketone.addItems(ketoneitems)
+        ketoneval = np.linspace(0,4,44)
+        # debug(ketoneval)
+        self.ui.cmbketone.addItems(str(round(k,1)) for k in ketoneval)
+        self.ui.cmbketone.setCurrentText("0.01")
 
         self.ui.btnInsert.clicked.connect(self.recinsert)
         self.ui.btnExit.clicked.connect(self.exitfunc)
