@@ -1,10 +1,7 @@
 bpvitals blood pressure database using sqlite
 
-These forms now use both databases:
+These forms now use only use local sqlite DB
 
-[postgresql](http://flatboy/adminer/adminerstart.php?pgsql=flatboy&username=rfile&db=rfile&ns=public&select=vsigns_bp)
-
-and sqlite:
 
 [sqlite file](file:///data/sqlite/vitals.db)
 
@@ -63,4 +60,6 @@ added requirements.txt
 **Monday, March 11, 2024 1:16:19 PM EDT**
 changed default ketone entry to 0.01
 
-
+**Friday, April 5, 2024 3:32:09 PM EDT**
+merged report_work into main after adding values to ketone combo boxes.
+created new branch more_rep from main   Onward
