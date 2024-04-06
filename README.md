@@ -63,3 +63,4 @@ changed default ketone entry to 0.01
 **Friday, April 5, 2024 3:32:09 PM EDT**
 merged report_work into main after adding values to ketone combo boxes.
 created new branch more_rep from main   Onward
+also deleted tables in database that were no longer in use.
