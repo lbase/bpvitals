@@ -135,3 +135,11 @@ vitals/
 /vsigns.db
 /.py~
 /.idea/
+# rfile additions on 4-6-24
+*.pdf
+forms/stash
+.eric7project
+*.sql
+*.db
+*.epj
+/.project
