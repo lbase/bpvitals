@@ -68,7 +68,7 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.ui.tblVfast.setColumnHidden(2, True)
         self.ui.tblVfast.setColumnHidden(3, True)
         self.ui.tblVfast.resizeColumnToContents(4)
-        # self.ui.tblVfast.resizeRowsToContents()
+        self.ui.tblVfast.resizeRowsToContents()
         self.ui.tblVfast.setColumnWidth(1, 160)
         debug(self.dbt.lastError().text())
         # self.dbt.close()
