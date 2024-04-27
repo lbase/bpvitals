@@ -19,18 +19,18 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         super().__init__()
         self.ui = Ui_ShowTables()
         self.ui.setupUi(self)
-        self.tblconn_name = 'tblshowqry'
-        self.dbt = QSqlDatabase.addDatabase("QSQLITE", self.tblconn_name)
-        self.dbt.setDatabaseName("/data/sqlite/vitals.db")
-        self.ok = self.dbt.open()
-        self.ui.actionExit.triggered.connect(self.myExit)  # myExit
+        
         self.fillTables()
 
 
     def fillTables(self):
         debug(QSqlDatabase.connectionNames())
-
-        debug(QSqlDatabase.connectionNames())
+   
+        self.tblconn_name = 'tblshowqry'
+        self.dbt = QSqlDatabase.addDatabase("QSQLITE", self.tblconn_name)
+        self.dbt.setDatabaseName("/data/sqlite/vitals.db")
+        self.ok = self.dbt.open()
+        self.ui.actionExit.triggered.connect(self.myExit)  # myExit
 
         self.bpmodel = QSqlTableModel(db=self.dbt)
         self.bpmodel.setTable('vsigns_bp')
