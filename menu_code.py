@@ -46,7 +46,7 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.setWindowTitle(self.mytable)
         self.ui.sugarCombo.addItems(str(i) for i in range(50, 301, 1))
         self.ui.sugarCombo.setCurrentIndex(50)
-        self.ui.ketonecombo.setCurrentText("0.1")
+        self.ui.ketonecombo.setCurrentText("0.01")
         # self.ui.ketonecombo.currentIndex(0)
         self.now = QDateTime.currentDateTime()
         self.ui.dateTimeEdit.setDateTime(self.now)

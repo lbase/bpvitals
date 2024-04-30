@@ -103,6 +103,9 @@ class Main(QtWidgets.QWidget, Ui_Comment):
 
         self.updatedata = QSqlQuery(self.query, self.dbnotes)
         self.upok = self.updatedata.exec()
+     # debug for update problem
+        #debug(self.upok)
+        #debug(self.query)
         if self.upok :
             self.ui.lblRecord2.setText(f"update rec {self.table_name}")
         else:
