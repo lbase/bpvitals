@@ -64,3 +64,9 @@ changed default ketone entry to 0.01
 merged report_work into main after adding values to ketone combo boxes.
 created new branch more_rep from main   Onward
 also deleted tables in database that were no longer in use.
+
+
+**Tuesday, May 7, 2024 10:29:49 AM EDT**
+made new branch called dataclass base off of more_rep branch. Will try 
+using dataclases and sqlalchemy orms classes to access database
+can always go back to more_rep
