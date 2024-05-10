@@ -32,11 +32,11 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.okdbnotes = self.dbnotes.open()
         debug(self.okdbnotes)
         ### table
-        self.conn_rec = "bprec"
+        """ self.conn_rec = "bprec"
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.db.open()
-        debug(self.ok) 
+        debug(self.ok)  """
 
 
         # ---------------------------------------------------------------------------- #
@@ -81,7 +81,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.foodid = self.fnotes.value('foodid')
         self.fnotes.finish()
         # table
-        self.model = QSqlTableModel(db=self.db)
+        # self.model = QSqlTableModel(db=self.db)
+        self.model = QSqlTableModel(db=self.dbnotes)
         self.model.setTable("vsigns_bp")
         self.model.setFilter("bpid = (select max(bpid) from vsigns_bp)")
         self.model.select()
@@ -141,10 +142,10 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         del self.model
         self.dbnotes.close()
         del self.dbnotes
-        self.db.close()
-        del self.db
+        # self.db.close()
+        # del self.db
         # rfile edit April fool
-        QSqlDatabase.removeDatabase(self.conn_rec)
+        # QSqlDatabase.removeDatabase(self.conn_rec)
         QSqlDatabase.removeDatabase(self.conn_name)
         debug(QSqlDatabase.connectionNames())
 

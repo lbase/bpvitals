@@ -1,7 +1,7 @@
 import sys
 from icecream import ic
 
-# import sqlalchemy as dbsql
+import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker
 
 # from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery, QSqlQueryModel
@@ -170,6 +170,35 @@ class Lite_Sql:
         self.mysession = sessionmaker(bind=self.eng)
         self.mysess = self.mysession()
         return self.mysess
+    
+    def fnotes_table(self,tablename):
+        self.tablename = tablename
+        metadata = sa.MetaData()
+        notes_table = sa.Table(
+            tablename,
+            metadata,
+            sa.Column('foodid', sa.Integer, primary_key=True, autoincrement=True ),
+            sa.Column('fdate', sa.String ),
+            sa.Column('fnotes'),
+            sa.Column('fnotes', sa.String),
+            sa.Column('sugarid', sa.Integer),
+            sa.Column('bpid',sa.Integer),
+        )
+
+    def qtsugar_table(self):
+        metadata = sa.MetaData
+        qtsugar = sa.Table(
+            'qtsugar',
+            metadata,
+            sa.Column('bsid' , sa.Integer, autoincrement=True, primary_key=True ),
+            sa.Column('bsdate' , sa.String),
+            sa.Column('bsugar', sa.Integer),
+            sa.Column('ketone', sa.Numeric, default=0.01),
+            sa.Column('comment', sa.String),
+            
+                    )
+        
+        
 
 
 class BP_Settings:
@@ -177,9 +206,11 @@ class BP_Settings:
         super(BP_Settings, self).__init__()
 
 
-@dataclass
+""" @dataclass
 class foodnotes:
+    foodid: int()
     fdate: str
     fnotes: str
     sugarid: int
     bpid: int
+ """

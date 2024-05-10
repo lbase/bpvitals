@@ -27,3 +27,27 @@ can always go back to more_rep
 **Tuesday, May 7, 2024 8:21:16 PM EDT**
 merged more_rep branch to main branch then pushed main 
 could probably delete more_rep branch
+```
+{showtabs_code.py:27 MainWindow.fillTables
+    QSqlDatabase.connectionNames(): 
+    [
+        'dbshowqry',
+        'sugcode',
+    ] (list) len=2
+    
+showtabs_code.py:73 MainWindow.fillTables
+
+    self.dbt.lastError().text(): '' (str) len=0
+    
+ic| self.model.lastError().text(): 'database is locked Unable to fetch row'
+
+vitals_code.py:91 Main.recinsert
+
+    self.model.submit(): True (bool)
+}
+```
+**Thursday, May 9, 2024 5:01:19 PM EDT**
+started making database table setup with sql alchemy in lcl_utils
+
+spent a fair amount of time playin with the database to get the default value for ketone changed
+
