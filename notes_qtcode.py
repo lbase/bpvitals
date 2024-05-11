@@ -22,7 +22,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.ui.setupUi(self)
 
         # ---------------------------------------------------------------- #
-        #            database connection                                   #
+        #            database connection                 
+        #          rfile changes to use sqlalchemy 4-12-24                 #     
         # ---------------------------------------------------------------- #
         # https://realpython.com/python-pyqt-database/#running-sql-queries-with-pyqt
         # queries
@@ -31,13 +32,8 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.dbnotes.setDatabaseName("/data/sqlite/vitals.db")
         self.okdbnotes = self.dbnotes.open()
         debug(self.okdbnotes)
-        ### table
-        """ self.conn_rec = "bprec"
-        self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
-        self.db.setDatabaseName("/data/sqlite/vitals.db")
-        self.ok = self.db.open()
-        debug(self.ok)  """
-
+        ### table - bprec connection not needed 
+        
 
         # ---------------------------------------------------------------------------- #
         #              table name in window title so I can tell what table              #
@@ -142,10 +138,6 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         del self.model
         self.dbnotes.close()
         del self.dbnotes
-        # self.db.close()
-        # del self.db
-        # rfile edit April fool
-        # QSqlDatabase.removeDatabase(self.conn_rec)
         QSqlDatabase.removeDatabase(self.conn_name)
         debug(QSqlDatabase.connectionNames())
 
