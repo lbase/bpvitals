@@ -169,4 +169,3 @@ else:
     main = Main(sys.argv)
     main.show()
     sys.exit(app.exec_())
-    

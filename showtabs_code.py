@@ -103,11 +103,18 @@ class MainWindow(QMainWindow, Ui_ShowTables):
     def myExit(self):
         self.closeDB()
         self.close()
-
+        
+    def exitfunc(self):
+        self.sdb.close()
+        self.model.database().close()
+        if self.sdb.isOpen():
+            self.sdb.removeDatabase(self.conn_name)
+        self.close()    
 
     # close connections on close window for no connection errors
 def closeEvent(self):
     print('close event func triggered')
+    self.exitfunc()
     debug(self.closeEvent())
     self.closeDB()
     self.close()

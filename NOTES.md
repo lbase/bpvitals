@@ -51,3 +51,17 @@ started making database table setup with sql alchemy in lcl_utils
 
 spent a fair amount of time playin with the database to get the default value for ketone changed
 
+**Tuesday, May 14, 2024 10:29:49 AM EDT**close event func triggered
+```
+{
+showtabs_code.py:27 MainWindow.fillTables
+    QSqlDatabase.connectionNames(): [
+        'notes',
+        'sugcode',
+        'tblshowqry',
+    ] (list) len=3
+QSqlDatabasePrivate::removeDatabase: connection 'tblshowqry' is still in use, all queries will cease to work.
+QSqlDatabasePrivate::addDatabase: duplicate connection name 'tblshowqry', old connection removed.
+}
+```
+
