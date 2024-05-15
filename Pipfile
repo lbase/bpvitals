@@ -98,6 +98,7 @@ devtools = "*"
 birdseye = "*"
 reportlab = "==4.0.8"
 pyarrow = "*"
+debug = "*"
 
 [dev-packages]
 black = "*"
