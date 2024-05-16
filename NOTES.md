@@ -64,4 +64,7 @@ QSqlDatabasePrivate::removeDatabase: connection 'tblshowqry' is still in use, al
 QSqlDatabasePrivate::addDatabase: duplicate connection name 'tblshowqry', old connection removed.
 }
 ```
+**Wednesday, May 15, 2024 10:46:16 AM EDT**
+checked out more_rep and merged dataclass to it then pushed
+check out dataclass branch to work some more on it
 
