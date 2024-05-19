@@ -68,3 +68,11 @@ QSqlDatabasePrivate::addDatabase: duplicate connection name 'tblshowqry', old co
 checked out more_rep and merged dataclass to it then pushed
 check out dataclass branch to work some more on it
 
+**Sunday, May 19, 2024 12:29:30 PM EDT**
+this branch is moe about cleanup than adding dataclass or other database stuff
+Been cleaning up connections that I get errors on not being closed.
+Just did add close connection in fillTables  showtabs_code.py
+showtabs_code now has try statement in fillTables
+
+
+
