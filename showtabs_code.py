@@ -25,13 +25,12 @@ class MainWindow(QMainWindow, Ui_ShowTables):
 
     def fillTables(self):
         debug(QSqlDatabase.connectionNames())
-   
+     
         self.tblconn_name = 'tblshowqry'
         self.dbt = QSqlDatabase.addDatabase("QSQLITE", self.tblconn_name)
         self.dbt.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.dbt.open()
         self.ui.actionExit.triggered.connect(self.myExit)  # myExit
-
         self.bpmodel = QSqlTableModel(db=self.dbt)
         self.bpmodel.setTable('vsigns_bp')
         self.bpfilter = "bpid >= ((select max(bpid) from vsigns_bp) - 16)"
@@ -71,7 +70,7 @@ class MainWindow(QMainWindow, Ui_ShowTables):
         self.ui.tblVfast.resizeRowsToContents()
         self.ui.tblVfast.setColumnWidth(1, 160)
         debug(self.dbt.lastError().text())
-        # self.dbt.close()
+        self.dbt.close()
 
     def closeMe(self):
         self.dbt.close()
