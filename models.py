@@ -1,10 +1,20 @@
 ## rfile add Thursday, May 16, 2024 12:41:04 PM EDT
 ## https://realpython.com/python-sqlite-sqlalchemy/#working-with-sqlalchemy-and-python-objects
-
+## 5-20-24 added sqlmodel
+from typing import Optional
+from sqlmodel import Field, SQLModel
 from sqlalchemy import Column, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy as sa
+
+
+class qt_sugar(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    secret_name: str
+    age: Optional[int] = None
+
 Base = declarative_base()
 
 

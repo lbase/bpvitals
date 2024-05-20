@@ -99,6 +99,7 @@ birdseye = "*"
 reportlab = "==4.0.8"
 pyarrow = "*"
 debug = "*"
+sqlmodel = "*"
 
 [dev-packages]
 black = "*"
