@@ -2,18 +2,27 @@
 ## https://realpython.com/python-sqlite-sqlalchemy/#working-with-sqlalchemy-and-python-objects
 ## 5-20-24 added sqlmodel
 from typing import Optional
-from sqlmodel import Field, SQLModel
+from decimal import Decimal
+from sqlmodel import Field, Session, SQLModel, create_engine, select
 from sqlalchemy import Column, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy as sa
 
 
-class qt_sugar(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
+class SugarTable(SQLModel, table=True):
+    bsid: Optional[int] = Field(default=None, primary_key=True)
+    bsdate: str
+    bsugar: int
+    ketone: Decimal = Field(default=0.01, max_digits=5, decimal_places=2)
+    comment : str
+class Hero(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
     secret_name: str
-    age: Optional[int] = None
+    age: int | None = Field(default=None, index=True)
+    money: Decimal = Field(default=0, max_digits=5, decimal_places=3)
+        
 
 Base = declarative_base()
 

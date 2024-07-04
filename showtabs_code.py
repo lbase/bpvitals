@@ -46,7 +46,9 @@ class MainWindow(QMainWindow, Ui_ShowTables):
             # foodnotes
             self.foodmodel = QSqlTableModel(db=self.dbt)
             self.foodmodel.setTable('foodnotes')
-            self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 16)')
+            # self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 16)')
+            self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 20)')
+            
             self.foodmodel.setSort(0,Qt.DescendingOrder)
             self.foodmodel.select()
             self.ui.tblVfood.setModel(self.foodmodel)

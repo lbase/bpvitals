@@ -9,6 +9,7 @@ from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from devtools import debug
+from models import Hero, SugarTable
 from forms.menu import Ui_Menu
 from graphs import modbpstats
 from vitals_code import Main as vitals
@@ -87,6 +88,9 @@ class Main(QtWidgets.QWidget, Ui_Menu):
         self.model.select()
         msg = f"mytable: {self.mytable} connections: {QSqlDatabase.connectionNames()}"
         self.message(msg)
+        self.st = Hero()
+        debug(self.st)
+
 
     def recinsert(self):
         self.r = self.model.record()
