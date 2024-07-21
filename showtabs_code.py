@@ -47,8 +47,9 @@ class MainWindow(QMainWindow, Ui_ShowTables):
             self.foodmodel = QSqlTableModel(db=self.dbt)
             self.foodmodel.setTable('foodnotes')
             # self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 16)')
-            self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 20)')
-            
+            # still not sure why changing number makes different records show up - 
+            # self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 7)')
+            self.foodmodel.setFilter('foodid >= (select (max(foodid) -8) from foodnotes ) ')             
             self.foodmodel.setSort(0,Qt.DescendingOrder)
             self.foodmodel.select()
             self.ui.tblVfood.setModel(self.foodmodel)
@@ -61,6 +62,7 @@ class MainWindow(QMainWindow, Ui_ShowTables):
             #################################################
             self.fastmodel = QSqlTableModel(db=self.dbt)
             self.fastmodel.setTable('fastnotes')
+            # self.fastmodel.setFilter('foodid >= ((select max(foodid) from fastnotes) - 16)')
             self.fastmodel.setFilter('foodid >= ((select max(foodid) from fastnotes) - 16)')
             self.fastmodel.setSort(0, Qt.DescendingOrder)
             self.fastmodel.select()

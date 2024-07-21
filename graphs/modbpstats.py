@@ -44,7 +44,7 @@ def days7():
 
 def bp7days():
     # blood pressure data 7 days
-    bpsevendays = "SELECT bpdate ,bpsys AS systolic, bpdia AS diastolic, bphr AS pulse from  vsigns_bp where bpdate > (SELECT date('now','-7 day'))"
+    bpsevendays = "SELECT bpdate ,bpsys AS systolic, bpdia AS diastolic, bphr AS pulse from  vsigns_bp where bpdate > (SELECT date('now','-14 day'))"
     bp7days = pd.read_sql_query(bpsevendays, myconn, parse_dates="bpdate")
     # bar chart blood pressure
     x = np.arange(len(bp7days))  # the label locations
@@ -61,7 +61,7 @@ def bp7days():
     ax.axhline(y=80, color="#8F5600")
     # Add some text for labels, title and custom x-axis tick labels, etc.
     ax.set_ylabel("120/80 = perfect")
-    ax.set_title("Blood press 7 days")
+    ax.set_title("Blood press 14 days")
     ax.set_xticks(x)
     ax.set_xticklabels(bp7days.bpdate, rotation=60, fontsize=6)
     ax.legend()
