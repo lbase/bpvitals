@@ -48,9 +48,10 @@ class MainWindow(QMainWindow, Ui_ShowTables):
             self.foodmodel.setTable('foodnotes')
             # self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 16)')
             # still not sure why changing number makes different records show up - 
-            # self.foodmodel.setFilter('foodid >= ((select max(foodid) from foodnotes) - 7)')
-            self.foodmodel.setFilter('foodid >= (select (max(foodid) - 8) from foodnotes ) ')             
-            # self.foodmodel.setSort(0 , Qt.DescendingOrder)
+            # self.foodmodel.setFilter('foodid >= (select (max(foodid) - 8) from foodnotes ) ')
+            self.foodmodel.setFilter('foodid >= (select (max(foodid) - 8) from foodnotes) ')
+            # sort not working returns odd number
+            #self.foodmodel.setSort(0 , Qt.DescendingOrder)
             self.foodmodel.select()
             self.ui.tblVfood.setModel(self.foodmodel)
             self.ui.tblVfood.setColumnHidden(0, True)
