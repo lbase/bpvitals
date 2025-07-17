@@ -32,7 +32,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.dbnotes.setDatabaseName("/data/sqlite/vitals.db")
         self.okdbnotes = self.dbnotes.open()
         # debug(self.okdbnotes)
-        # rfile 7-17-25
+        # rfile 7-17-25 notes
         ### table - bprec connection not needed 
         
 
