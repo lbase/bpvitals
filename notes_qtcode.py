@@ -31,7 +31,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.dbnotes = QSqlDatabase.addDatabase("QSQLITE", self.conn_name)
         self.dbnotes.setDatabaseName("/data/sqlite/vitals.db")
         self.okdbnotes = self.dbnotes.open()
-        debug(self.okdbnotes)
+        # debug(self.okdbnotes)
         ### table - bprec connection not needed 
         
 
