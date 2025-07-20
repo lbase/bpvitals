@@ -36,7 +36,7 @@ class Main(QtWidgets.QWidget, Ui_Comment):
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.conn_rec)
         self.db.setDatabaseName("/data/sqlite/vitals.db")
         self.ok = self.db.open()
-        #debug(self.ok)
+        #   debug(self.ok)
 
 
         # ---------------------------------------------------------------------------- #
